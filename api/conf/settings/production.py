@@ -3,6 +3,10 @@ import configparser
 import requests
 
 from .base import *
+import environ
+
+env = environ.Env()
+env.read_env(str(os.path.join(BASE_DIR, ".env")))
 
 
 CAMEL_STORE_VERSION = '1.0.0'
@@ -19,8 +23,6 @@ SHOP_NAME = 'WineAndDine'         # 店铺名
 DATABASES = {
     "default": env.db("DATABASE_URL"),
 }
-DATABASES["default"]["ATOMIC_REQUESTS"] = True
-
 
 DEBUG = env.bool("DJANGO_DEBUG", False)
 
