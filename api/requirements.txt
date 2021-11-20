@@ -35,6 +35,7 @@ optionaldict==0.1.1
 Pillow==7.0.0
 pipenv==2018.11.26
 psycopg2-binary==2.8.4
+psycopg2==2.8.6
 pycryptodome==3.9.4
 python-dateutil==2.8.1
 pytz==2019.3
