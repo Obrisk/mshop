@@ -1,11 +1,4 @@
 
-#-e git+https://github.com/gzqichang/camel-store-api.git@dafaa669bac3e2575d9ba7f43ec1e62fe1ca21fc#egg=qapi&subdirectory=../../api/packages/qapi
-#-e git+https://github.com/gzqichang/camel-store-api.git@dafaa669bac3e2575d9ba7f43ec1e62fe1ca21fc#egg=qcache&subdirectory=../../api/packages/qcache
-
-#-e git+https://github.com/gzqichang/camel-store-api.git@dafaa669bac3e2575d9ba7f43ec1e62fe1ca21fc#egg=qsmstoken&subdirectory=../../api/packages/qsmstoken
-#-e git+https://github.com/gzqichang/camel-store-api.git@dafaa669bac3e2575d9ba7f43ec1e62fe1ca21fc#egg=quser&subdirectory=../../api/packages/quser
-
-
 aliyun-python-sdk-core==2.13.13
 aliyun-python-sdk-core-v3==2.13.11
 aliyun-python-sdk-dysmsapi==1.0.0
@@ -17,12 +10,12 @@ coreapi==2.3.3
 coreschema==0.0.4
 defusedxml==0.6.0
 distlib==0.3.0
-Django==2.2.9
+Django==2.2.0
 django-cors-headers==3.2.1
 django-filter==2.2.0
 django-middleware-global-request==0.1.2
 django-ranged-response==0.2.0
-django-simple-captcha==0.5.12
+django-simple-captcha==0.5.6
 djangorestframework==3.11.0
 djangorestframework-xml==1.4.0
 et-xmlfile==1.0.1
@@ -63,3 +56,18 @@ zipp==2.2.0
 environ>=1.0    #https://files.pythonhosted.org/packages/29/e4/6f448fcce1649a1f0f265e20bd88b7c8ff36e265657604b920240045928b/environ-1.0.tar.gz
 psycopg2>=2.7.7  # https://github.com/psycopg/psycopg2
 django-environ>=0.4.4  # https://github.com/joke2k/django-environ
+
+
+#Installing local packages
+#-e git+https://github.com/gzqichang/camel-store-api.git@dafaa669bac3e2575d9ba7f43ec1e62fe1ca21fc#egg=qapi&subdirectory=../../api/packages/qapi
+#-e git+https://github.com/gzqichang/camel-store-api.git@dafaa669bac3e2575d9ba7f43ec1e62fe1ca21fc#egg=qcache&subdirectory=../../api/packages/qcache
+
+#-e git+https://github.com/gzqichang/camel-store-api.git@dafaa669bac3e2575d9ba7f43ec1e62fe1ca21fc#egg=qsmstoken&subdirectory=../../api/packages/qsmstoken
+#-e git+https://github.com/gzqichang/camel-store-api.git@dafaa669bac3e2575d9ba7f43ec1e62fe1ca21fc#egg=quser&subdirectory=../../api/packages/quser
+
+-e packages/qapi
+-e packages/qcache
+-e packages/qsmstoken
+-e packages/quser
+
+
