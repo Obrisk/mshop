@@ -164,10 +164,10 @@ REST_FRAMEWORK = {
 #后台管理配置
 IS_CAPTCHA_ENABLE = True
 DEFAULT_ADMIN_PASSWORD = 'awegawefawgaw'  # 默认的管理员密码
-USER_MODEL_VERBOSE_NAME = '管理员'  # 重写 Django get_user_model() 的 verbose_name 和 verbose_name_plural
-USER_MODEL_VERBOSE_NAME_PLURAL = '管理员'
-GROUP_MODEL_VERBOSE_NAME = '角色'  # 重写 Django auth.models.Group 的 verbose_name 和 verbose_name_plural
-GROUP_MODEL_VERBOSE_NAME_PLURAL = '角色'
+USER_MODEL_VERBOSE_NAME = 'Administrator'  # 重写 Django get_user_model() 的 verbose_name 和 verbose_name_plural
+USER_MODEL_VERBOSE_NAME_PLURAL = 'Administrator'
+GROUP_MODEL_VERBOSE_NAME = 'Role'  # 重写 Django auth.models.Group 的 verbose_name 和 verbose_name_plural
+GROUP_MODEL_VERBOSE_NAME_PLURAL = 'Role'
 USER_JUST_ONE_GROUP = True  # 限定一个用户只能有一个角色
 
 # 可用于后台用户编辑的权限
@@ -202,10 +202,10 @@ EDITABLE_PERMISSIONS = (
 )
 
 PERMISSION_ACTIONS = {
-    'reset': '重置',
+    'reset': 'Reset',
 }
 
-# 给 admin 用户添加自定义权限
+# Add custom permissions to the admin user
 USER_CUSTOM_PERMISSIONS = [
 ]
 
