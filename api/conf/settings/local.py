@@ -2,18 +2,15 @@ import os, configparser
 
 from .base import *
 
+
 SECRET_KEY = ''
 
 DEBUG = False
 
 CAMEL_STORE_VERSION = '3.8.1'
-SHOP_NAME = 'WineAndDine'         # 店铺名
+SHOP_NAME = '骆驼小店'         # 店铺名
 
-
-
-
-
-
+ALLOWED_HOSTS = ['*', ]
 AUTH_PASSWORD_VALIDATORS = []
 
 INSTALLED_APPS += [
