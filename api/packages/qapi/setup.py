@@ -8,7 +8,7 @@ setup(
     exclude_package_data={'': ['*.pyc']},
     include_package_data=True,
     install_requires=[
-        'django',
+        'django==2.2',
         'djangorestframework',
         'django-filter',
     ],

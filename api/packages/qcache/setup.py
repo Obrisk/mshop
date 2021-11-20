@@ -6,6 +6,7 @@ setup(
     packages=['qcache'],
     include_package_data=True,
     install_requires=[
+        'django==2.2',
         'djangorestframework',
     ],
 )
