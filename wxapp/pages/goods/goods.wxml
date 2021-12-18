@@ -33,7 +33,7 @@
         <view class='r'>
             <view bindtap="shareTo" class='share'>
                 <image class='icon' src='/images/icon/share.png'></image>
-                <view class='text'>分享</view>
+                <view class='text'>Share</view>
             </view>
         </view>
     </view>
@@ -45,8 +45,8 @@
             </view>
         </view>
         <view class="r">
-            <view class='stock'>库存{{goods.goods_number}}</view>
-            <view class='sales'>已售{{goods.sell_volume}}份</view>
+            <view class='stock'>In stock {{goods.goods_number}}</view>
+            <view class='sales'>Sold {{goods.sell_volume}}</view>
         </view>
     </view>
     <view class='section-nav' bindtap="switchAttrPop">
@@ -54,7 +54,7 @@
         <view class="arrow"></view>
     </view>
     <view class='details-wrap'>
-        <view class="title">商品详情</view>
+        <view class="title">Product Details</view>
         <!-- <ad unit-id="adunit-2d961509e15e91d7" ad-type="grid" grid-opacity="0.8" grid-count="5" ad-theme="white"></ad> -->
         <view class="show">
             <view class='details-image-wrap'>
@@ -76,13 +76,13 @@
                     <view class='price-range' wx:if="{{priceChecked == false}}">
                         <!-- todo 原价不等于0的时候要补充 -->
                         <view class='retail-price'>
-                            <view class='p-title'>零售价：</view>
+                            <view class='p-title'>Retail price：</view>
                             <view class='g-price'>{{goods.retail_price}}元</view>
                         </view>
                     </view>
                     <view class='price-range' wx:elif="{{priceChecked == true}}">
                         <view class='retail-price'>
-                            <view class='p-title'>零售价：</view>
+                            <view class='p-title'>Retail Price：</view>
                             <view class='g-price'>{{checkedSpecPrice}}元</view>
                         </view>
                     </view>
@@ -97,11 +97,11 @@
                     </view>
                 </view>
                 <view class="number-item">
-                    <view class="name">库存</view>
+                    <view class="name">In stock</view>
                     <view class='stock-num'>{{goodsNumber}}</view>
                 </view>
                 <view class="number-item">
-                    <view class="name">数量 ({{goods.goods_unit}})</view>
+                    <view class="name">Quantity ({{goods.goods_unit}})</view>
                     <view class="selnum">
                         <button class="cut" bindtap="cutNumber">-</button>
                         <input value="{{number}}" class="number" type="number" cursor-spacing="100" bindblur="inputNumber" />
@@ -117,35 +117,35 @@
                 <form report-submit="true">
                     <button bindtap='goIndexPage' formType="submit" class='index-btn' hover-class="none">
                         <image class='icon' src='/images/nav/icon-index-b.png'></image>
-                        <view class='icon-text'>主页</view>
+                        <view class='icon-text'>Home</view>
                     </button>
                 </form>
             </view>
             <button class='left-icon contact-button' session-from='{"nickName":"{{userInfo.nickname}}","avatarUrl":"{{userInfo.avatar}}"}' open-type="contact" show-message-card="true" hover-class="none">
                 <image class='icon' src='/images/icon/chat.png'></image>
-                <view class='icon-text'>客服</view>
+                <view class='icon-text'>Contact</view>
             </button>
             <view class="left-icon" bindtap='openCartPage'>
                 <text class="cart-count">{{cartGoodsCount}}</text>
                 <image class='icon' src='/images/nav/icon-cart-b.png'></image>
-                <view class='icon-text'>购物车</view>
+                <view class='icon-text'>Cart</view>
             </view>
         </view>
         <block wx:if="{{goods.goods_number > 0 && goods.is_on_sale == 1}}">
             <block wx:if="{{goodsNumber > 0}}">
-                <view class="to-cart-btn" bindtap='addToCart'>加入购物车</view>
-                <view class="to-pay-btn" bindtap='fastToCart'>立即购买</view>
+                <view class="to-cart-btn" bindtap='addToCart'>Add to Cart</view>
+                <view class="to-pay-btn" bindtap='fastToCart'>Buy Now</view>
 
             </block>
             <block wx:if="{{goodsNumber <= 0 }}">
-                <view class="cart-empty">商品已售罄</view>
+                <view class="cart-empty">Items sold</view>
             </block>
         </block>
         <block wx:elif="{{goods.goods_number <= 0}}">
-            <view class="cart-empty">商品已售罄</view>
+            <view class="cart-empty">Items sold</view>
         </block>
         <block wx:elif="{{goods.is_on_sale == 0}}">
-            <view class="cart-empty">商品已下架</view>
+            <view class="cart-empty">Out of stock</view>
         </block>
     </view>
     <view class="dialog {{ showShareDialog ? 'dialog_show' : '' }}">
@@ -156,20 +156,20 @@
                     <view class="share-block">
                         <button class='block share-btn' hover-class="none" open-type='share'>
                             <image class="img" src="/images/icon/weixin.png"></image>
-                            <view class="text">发给好友/发到微信群</view>
+                            <view class="text">Share with friends</view>
                         </button>
                         <view class="block" catchtap="createShareImage">
                             <image class="img" src="/images/icon/pyq.png"></image>
-                            <view class="text">保存分享图发朋友圈</view>
+                            <view class="text">Save and share to Moments</view>
                         </view>
                     </view>
                 </view>
             </view>
-            <view class="cancel" bindtap="hideDialog">取消</view>
+            <view class="cancel" bindtap="hideDialog">Cancel</view>
         </view>
     </view>
 </view>
 <view class="loading" style="height:{{sysHeight}}px" wx:else>
     <image class="img" src="/images/icon/loading.gif"></image>
-    <view class="text">海风吹啊吹</view>
+    <view class="text">Wine and dine with me</view>
 </view>
