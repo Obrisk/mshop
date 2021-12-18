@@ -58,7 +58,7 @@ Page({
         let info = wx.getStorageSync('userInfo');
         return {
             title: 'WineAndDine',
-            desc: '开源微信小程序商城',
+            desc: 'Buy the best quality wine',
             path: '/pages/index/index?id=' + info.id
         }
     },
