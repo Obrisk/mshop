@@ -7,7 +7,7 @@
     </view>
     <view class="search" bindtap="goSearch">
         <image class="icon" src="/images/icon/search.png"></image>
-        <text class="txt">搜索,发现更多好物</text>
+        <text class="txt">Search here...</text>
     </view>
     <view class='banner-wrap' wx:if="{{show_banner && banner.length > 0}}">
         <swiper class="banner" indicator-dots="true" autoplay="{{autoplay}}" interval="3000" duration="1000"   >
