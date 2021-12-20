@@ -2,8 +2,8 @@
     <div class="content-page">
         <div class="content-nav">
             <el-breadcrumb class="breadcrumb" separator="/">
-                <el-breadcrumb-item :to="{ name: 'ad' }">广告列表</el-breadcrumb-item>
-                <el-breadcrumb-item>{{infoForm.id ? '编辑广告' : '添加广告'}}</el-breadcrumb-item>
+                <el-breadcrumb-item :to="{ name: 'ad' }">Advertisement列表</el-breadcrumb-item>
+                <el-breadcrumb-item>{{infoForm.id ? '编辑Advertisement' : '添加Advertisement'}}</el-breadcrumb-item>
             </el-breadcrumb>
             <div class="operation-nav">
                 <!--<el-button type="primary" @click="test" icon="arrow-left">test</el-button>-->
@@ -13,7 +13,7 @@
         <div class="content-main">
             <div class="form-table-box">
                 <el-form ref="infoForm" :rules="infoRules" :model="infoForm" label-width="120px">
-					<el-form-item label="广告图片" prop="image_url" v-if="infoForm.image_url" class="image-uploader-diy new-height">
+					<el-form-item label="Advertisement图片" prop="image_url" v-if="infoForm.image_url" class="image-uploader-diy new-height">
 						<div class="index-image">
 							<el-image :preview-src-list="previewList" v-if="infoForm.image_url" :src="infoForm.image_url" @click="previewIndexImg"
 							 class="image-show" fit="cover"></el-image>
@@ -22,7 +22,7 @@
 							</div>
 						</div>
 					</el-form-item>
-					<el-form-item label="广告图片" prop="image_url" v-if="!infoForm.image_url">
+					<el-form-item label="Advertisement图片" prop="image_url" v-if="!infoForm.image_url">
 						<el-upload name="file" ref="upload" class="upload-demo" :action="qiniuZone" :on-success="handleSuccess"
 						 :before-upload="getQiniuToken" :auto-upload="true" list-type="picture-card" :data="picData" :http-request="uploadIndexImg">
 							<el-button size="small" type="primary">点击上传</el-button>
@@ -35,7 +35,7 @@
                             <el-radio :label="1">链接</el-radio>
                         </el-radio-group>
                     </el-form-item>
-                    <el-form-item label="广告链接" prop="link" v-if="infoForm.link_type == 1">
+                    <el-form-item label="Advertisement链接" prop="link" v-if="infoForm.link_type == 1">
                         <el-input class="link-input" v-model="infoForm.link"></el-input>
                     </el-form-item>
                     <el-form-item label="商品id" prop="link" v-if="infoForm.link_type == 0">
@@ -77,7 +77,7 @@
                     <el-form-item label="排序" prop="sort_order">
                         <el-input-number v-model="infoForm.sort_order" :min="1" :max="999"></el-input-number>
                     </el-form-item>
-                    <el-form-item label="广告启用">
+                    <el-form-item label="Advertisement启用">
                         <el-switch active-value="1" inactive-value="0" v-model="infoForm.enabled"></el-switch>
                     </el-form-item>
                     <el-form-item>
@@ -111,7 +111,7 @@
                 },
                 infoRules: {
                     image_url: [
-                        {required: true, message: '请输入广告图片', trigger: 'blur'},
+                        {required: true, message: '请输入Advertisement图片', trigger: 'blur'},
                     ],
                     end_time: [
                         {required: true, message: '请选择时间', trigger: 'blur'},
@@ -243,7 +243,7 @@
                             } else if (response.data.errno === 100) {
                                 this.$message({
                                     type: 'error',
-                                    message: '该商品已经有广告关联'
+                                    message: '该商品已经有Advertisement关联'
                                 })
                             }
                             else {
@@ -262,7 +262,7 @@
                 if (this.infoForm.id <= 0) {
                     return false
                 }
-                //加载广告详情
+                //加载Advertisement详情
                 let that = this
                 this.axios.get('ad/info', {
                     params: {

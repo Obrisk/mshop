@@ -56,7 +56,7 @@
                     <div class="num" v-else>{{this.dataInfo.orderMoney}}元</div>
                 </div>
                 <div class="block">
-                    <div class="text">加入购物车:</div>
+                    <div class="text">加入Cart:</div>
                     <div class="num" v-if="this.dataInfo.cartSum == null">0件</div>
                     <div class="num" v-else>{{this.dataInfo.cartSum}}件</div>
 
@@ -65,7 +65,7 @@
             <el-tabs v-model="activeName" @tab-click="handleClick">
                 <el-tab-pane label="订单" name="first"></el-tab-pane>
                 <el-tab-pane label="地址管理" name="second"></el-tab-pane>
-                <el-tab-pane label="购物车" name="third"></el-tab-pane>
+                <el-tab-pane label="Cart" name="third"></el-tab-pane>
                 <el-tab-pane label="足迹" name="fourth"></el-tab-pane>
             </el-tabs>
             <div class="form-table-box" v-if="this.pIndex == 0">

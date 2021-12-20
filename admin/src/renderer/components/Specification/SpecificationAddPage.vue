@@ -2,7 +2,7 @@
     <div class="content-page">
         <div class="content-nav">
             <el-breadcrumb class="breadcrumb" separator="/">
-                <el-breadcrumb-item :to="{ name: 'nature' }">商品设置</el-breadcrumb-item>
+                <el-breadcrumb-item :to="{ name: 'nature' }">Settings</el-breadcrumb-item>
                 <el-breadcrumb-item>{{infoForm.id ? '编辑型号' : '添加型号'}}</el-breadcrumb-item>
             </el-breadcrumb>
             <div class="operation-nav">

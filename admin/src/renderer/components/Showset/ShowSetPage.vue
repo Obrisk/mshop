@@ -3,7 +3,7 @@
         <div class="content-nav">
             <el-breadcrumb class="breadcrumb" separator="/">
 
-                <el-breadcrumb-item>显示设置</el-breadcrumb-item>
+                <el-breadcrumb-item>Display</el-breadcrumb-item>
             </el-breadcrumb>
             <div class="operation-nav">
                 <el-button type="primary" @click="onSubmitInfo">确定保存</el-button>
@@ -12,7 +12,7 @@
         <div class="content-main">
             <div class="form-table-box">
                 <el-form ref="infoForm" :model="infoForm" label-width="120px">
-                    <el-form-item label="广告" prop="type">
+                    <el-form-item label="Advertisement" prop="type">
                         <el-radio-group v-model="infoForm.banner">
                             <el-radio :label="1">显示</el-radio>
                             <el-radio :label="0">不显示</el-radio>
@@ -24,7 +24,7 @@
                             <el-radio :label="0">不显示</el-radio>
                         </el-radio-group>
                     </el-form-item>
-                    <el-form-item label="广告下的图标">
+                    <el-form-item label="Advertisement下的图标">
                         <el-radio-group v-model="infoForm.channel">
                             <el-radio :label="1">显示</el-radio>
                             <el-radio :label="0">不显示</el-radio>

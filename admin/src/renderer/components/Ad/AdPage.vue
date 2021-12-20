@@ -2,11 +2,11 @@
 	<div class="content-page">
 		<div class="content-nav">
 			<el-breadcrumb class="breadcrumb" separator="/">
-				<el-breadcrumb-item>广告列表</el-breadcrumb-item>
+				<el-breadcrumb-item>Advertisement列表</el-breadcrumb-item>
 			</el-breadcrumb>
 			<div class="operation-nav">
 				<router-link to="/dashboard/ad/add">
-					<el-button type="primary" icon="plus">添加广告</el-button>
+					<el-button type="primary" icon="plus">添加Advertisement</el-button>
 				</router-link>
 			</div>
 		</div>
@@ -14,7 +14,7 @@
 			<div class="form-table-box">
 				<el-table :data="tableData" style="width: 100%" border stripe>
 					<el-table-column prop="id" label="ID" width="70px"></el-table-column>
-                    <el-table-column prop="image_url" label="广告">
+                    <el-table-column prop="image_url" label="Advertisement">
                         <template scope="scope">
                             <img  :src="scope.row.image_url" alt="" style="width: 90px;height: 50px">
                         </template>

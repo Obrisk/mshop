@@ -2,7 +2,7 @@
 	<div class="content-page">
 		<div class="content-nav">
 			<el-breadcrumb class="breadcrumb" separator="/">
-				<el-breadcrumb-item>订单列表</el-breadcrumb-item>
+				<el-breadcrumb-item>Orders</el-breadcrumb-item>
 			</el-breadcrumb>
 		</div>
 		<div class="content-main">

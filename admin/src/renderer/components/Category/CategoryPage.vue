@@ -2,8 +2,8 @@
     <div class="content-page">
         <div class="content-nav">
             <el-breadcrumb class="breadcrumb" separator="/">
-                <el-breadcrumb-item :to="{ path: '/dashboard/nature' }">商品设置</el-breadcrumb-item>
-                <el-breadcrumb-item>商品分类</el-breadcrumb-item>
+                <el-breadcrumb-item :to="{ path: '/dashboard/nature' }">Settings</el-breadcrumb-item>
+                <el-breadcrumb-item>Categories</el-breadcrumb-item>
             </el-breadcrumb>
             <div class="operation-nav">
                 <router-link to="/dashboard/category/add">

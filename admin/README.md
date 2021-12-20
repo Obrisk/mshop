@@ -35,11 +35,11 @@ https://www.bilibili.com/video/av89568075
 
 <img width="900" src="http://git.hiolabs.com/github/express2.jpg"/>
 
-+ 商品管理
++ Products
 
 <img width="900" src="http://git.hiolabs.com/github/goods.jpg"/>
 
-+ 购物车
++ Cart
 
 <img width="900" src="http://git.hiolabs.com/github/cart.jpg"/>
 
@@ -94,10 +94,10 @@ npm run build:web 或者 sudo npm run build:web
 
 ### 功能列表
 + 订单管理：查看，修改订单价格，发货，生成电子面单，修改订单状态
-+ 商品管理：添加、修改、删除商品，添加商品分类
-+ 购物车：可以看到用户加入购物车的情况
-+ 用户列表：用户的一些使用踪迹
-+ 店铺设置：广告列表，公告管理，运费模板（可以根据地区设置相应的运费），管理员
++ Products：添加、修改、删除商品，添加Categories
++ Cart：可以看到用户加入Cart的情况
++ Users：用户的一些使用踪迹
++ Shop Settings：Advertisement列表，公告管理，运费模板（可以根据地区设置相应的运费），管理员
 
 ### 最近更新 
 - 新增生成分享图的功能

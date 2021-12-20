@@ -2,7 +2,7 @@
 	<div class="content-page">
 		<div class="content-nav">
 			<el-breadcrumb class="breadcrumb" separator="/">
-				<el-breadcrumb-item :to="{ name: 'goods' }">商品管理</el-breadcrumb-item>
+				<el-breadcrumb-item :to="{ name: 'goods' }">Products</el-breadcrumb-item>
 				<el-breadcrumb-item>{{infoForm.id ? '编辑商品' : '添加商品'}}</el-breadcrumb-item>
 			</el-breadcrumb>
 			<div class="operation-nav">
@@ -14,7 +14,7 @@
 		<div class="content-main">
 			<div class="form-table-box">
 				<el-form ref="infoForm" :rules="infoRules" :model="infoForm" label-width="120px">
-					<el-form-item label="商品分类">
+					<el-form-item label="Categories">
 						<el-select class="el-select-class" v-model="cateId" placeholder="选择型号分类">
 							<el-option v-for="item in cateOptions" :key="item.value" :label="item.label" :value="item.value">
 							</el-option>

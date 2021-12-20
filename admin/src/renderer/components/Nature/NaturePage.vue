@@ -2,13 +2,13 @@
     <div class="content-page">
         <div class="content-nav">
             <el-breadcrumb class="breadcrumb" separator="/">
-                <el-breadcrumb-item>商品设置</el-breadcrumb-item>
+                <el-breadcrumb-item>Settings</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
         <div class="content-main">
             <el-tabs v-model="activeName" @tab-click="handleClick">
-                <el-tab-pane label="商品分类" name="first"></el-tab-pane>
-                <el-tab-pane label="商品型号" name="second"></el-tab-pane>
+                <el-tab-pane label="Categories" name="first"></el-tab-pane>
+                <el-tab-pane label="Specification" name="second"></el-tab-pane>
             </el-tabs>
             <div class="form-table-box">
                 <div class="btn-wrap">

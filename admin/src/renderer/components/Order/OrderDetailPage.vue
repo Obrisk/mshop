@@ -196,7 +196,7 @@
                 <el-form-item label="商品名:" label-width="120px">
                     <label>{{goodsData.goods_name}}</label>
                 </el-form-item>
-                <el-form-item label="商品型号:" label-width="120px">
+                <el-form-item label="Specification:" label-width="120px">
                     <label>{{goodsData.goods_specifition_name_value}}</label>
                 </el-form-item>
                 <el-form-item label="售价:" label-width="120px">

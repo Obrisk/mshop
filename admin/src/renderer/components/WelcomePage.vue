@@ -2,7 +2,7 @@
     <div class="content-page">
         <div class="content-nav">
             <el-breadcrumb class="breadcrumb" separator="/">
-                <el-breadcrumb-item>后台主页</el-breadcrumb-item>
+                <el-breadcrumb-item>Homepage</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
         <div class="content-main clearfix">
@@ -90,7 +90,7 @@
                             <span style="line-height: 36px;">下单</span>
                         </div>
                         <div class="text item">
-                            <span>加入购物车</span>
+                            <span>加入Cart</span>
                             <h3 style="float: right;">{{mainInfo.addCart}}</h3>
                         </div>
                         <div class="text item">
