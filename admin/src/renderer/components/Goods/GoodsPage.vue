@@ -2,7 +2,7 @@
     <div class="content-page">
         <div class="content-nav">
             <el-breadcrumb class="breadcrumb" separator="/">
-                <el-breadcrumb-item>商品列表</el-breadcrumb-item>
+                <el-breadcrumb-item>Product List</el-breadcrumb-item>
             </el-breadcrumb>
             <div class="operation-nav">
                 <router-link to="/dashboard/goods/add">

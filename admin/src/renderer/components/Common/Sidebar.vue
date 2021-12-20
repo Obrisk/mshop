@@ -21,7 +21,7 @@
 					</template>
 					<el-menu-item index="/dashboard/goods">
 						<i class="fa fa-circle"></i>
-						<span>商品列表</span>
+						<span>Product List</span>
 					</el-menu-item>
 					<el-menu-item index="/dashboard/nature">
 						<i class="fa fa-circle"></i>
