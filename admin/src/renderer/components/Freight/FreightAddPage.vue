@@ -3,7 +3,7 @@
         <div class="content-nav">
             <el-breadcrumb class="breadcrumb" separator="/">
                 <el-breadcrumb-item :to="{ name: 'freight' }">运费模板</el-breadcrumb-item>
-                <el-breadcrumb-item>{{infoForm.id ? '编辑模板' : '添加模板'}}</el-breadcrumb-item>
+                <el-breadcrumb-item>{{infoForm.id ? 'Edit模板' : 'Add New模板'}}</el-breadcrumb-item>
             </el-breadcrumb>
             <div class="operation-nav">
                 <el-button type="primary" @click="goBackPage" icon="arrow-left">返回列表</el-button>
@@ -173,7 +173,7 @@
                                 <el-table-column label="操作" width="160">
                                     <template scope="scope">
                                         <el-button size="mini" type="primary" plain
-                                                   @click="handleRowEdit(scope.$index, scope.row)">编辑地区
+                                                   @click="handleRowEdit(scope.$index, scope.row)">Edit地区
                                         </el-button>
                                         <el-button
                                                 @click.native.prevent="deleteRow(scope.$index, tableData)"
@@ -186,7 +186,7 @@
                             </el-table>
                         </div>
                         <div class="add-btn">
-                            <el-button type="text" @click="add_template">+添加指定地区运费</el-button>
+                            <el-button type="text" @click="add_template">+Add New指定地区运费</el-button>
                             <el-form-item>
                                 <el-button v-if="infoForm.id" type="danger" class="float-right" @click="onSaveTemplate">
                                     保存模板
@@ -478,13 +478,13 @@
                     if (response.data.errno === 0) {
                         that.$message({
                             type: 'success',
-                            message: '添加成功'
+                            message: 'Add New成功'
                         });
                         that.$router.go(-1);
                     } else {
                         that.$message({
                             type: 'error',
-                            message: '添加失败'
+                            message: 'Add New失败'
                         })
                     }
                 })
@@ -492,9 +492,9 @@
 
             deleteRow(index, rows) {
 
-                this.$confirm('确定要删除?', '提示', {
+                this.$confirm('确定要Delete?', '提示', {
                     confirmButtonText: '确定',
-                    cancelButtonText: '取消',
+                    cancelButtonText: 'Cancel',
                     type: 'warning'
                 }).then(() => {
                     rows.splice(index, 1);
@@ -503,7 +503,7 @@
                     //     if (response.data.errno === 0) {
                     //         this.$message({
                     //             type: 'success',
-                    //             message: '删除成功!'
+                    //             message: 'Delete成功!'
                     //         });
                     //
                     //         this.getList();

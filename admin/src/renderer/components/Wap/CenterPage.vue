@@ -16,7 +16,7 @@
         <div class="header clearfix">
             <el-card class="box-card card-red">
 
-                <div class="text item">商品</div>
+                <div class="text item">Product</div>
 
             </el-card>
             <el-card class="box-card card-green">
@@ -33,7 +33,7 @@
                             <img :src="scope.row.list_pic_url" alt="" style="width: 60px;height: 60px">
                         </template>
                     </el-table-column>
-                    <el-table-column prop="name" label="商品名称">
+                    <el-table-column prop="name" label="Product名称">
                     </el-table-column>
                     <el-table-column prop="retail_price" label="售价" width="90" sortable>
                         <template scope="scope">
@@ -71,9 +71,9 @@
         methods: {
 
             logout() {
-                this.$confirm('是否要退出?', '提示', {
+                this.$confirm('是否要Exit?', '提示', {
                     confirmButtonText: '确定',
-                    cancelButtonText: '取消',
+                    cancelButtonText: 'Cancel',
                     type: 'warning',
                     center: true
                 }).then(() => {

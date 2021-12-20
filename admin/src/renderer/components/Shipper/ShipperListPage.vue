@@ -6,7 +6,7 @@
 				<el-breadcrumb-item>快递列表</el-breadcrumb-item>
 			</el-breadcrumb>
 			<div class="operation-nav">
-				<el-button plain type="primary" @click="addShipper" icon="arrow-left">添加快递</el-button>
+				<el-button plain type="primary" @click="addShipper" icon="arrow-left">Add New快递</el-button>
 				<el-button @click="goBackPage" icon="arrow-left">返回</el-button>
 			</div>
 		</div>
@@ -29,9 +29,9 @@
 					</el-table-column>
 					<el-table-column prop="code" label="代号" width="220">
 					</el-table-column>
-					<el-table-column prop="sort_order" label="排序" width="220">
+					<el-table-column prop="sort_order" label="Sort" width="220">
 					    <template scope="scope">
-					        <el-input-number class="sort-width" size="mini" :min="1" :max="100" controls-position="right" v-model="scope.row.sort_order" placeholder="排序" @blur="submitSort(scope.$index, scope.row)" @change="submitSort(scope.$index, scope.row)"></el-input-number>
+					        <el-input-number class="sort-width" size="mini" :min="1" :max="100" controls-position="right" v-model="scope.row.sort_order" placeholder="Sort" @blur="submitSort(scope.$index, scope.row)" @change="submitSort(scope.$index, scope.row)"></el-input-number>
 					    </template>
 					</el-table-column>
 					<el-table-column label="使用" width="80">
@@ -46,8 +46,8 @@
 					</el-table-column>
 					<el-table-column label="操作">
 						<template scope="scope">
-							<el-button size="small" @click="handleRowEdit(scope.$index, scope.row)">编辑</el-button>
-							<el-button size="small" type="danger" @click="handleRowDelete(scope.$index, scope.row)">删除</el-button>
+							<el-button size="small" @click="handleRowEdit(scope.$index, scope.row)">Edit</el-button>
+							<el-button size="small" type="danger" @click="handleRowDelete(scope.$index, scope.row)">Delete</el-button>
 						</template>
 					</el-table-column>
 				</el-table>
@@ -94,9 +94,9 @@ export default {
 			this.$router.push({ name: 'shipper_add', query: { id: row.id } })
 		},
 		handleRowDelete(index, row) {
-			this.$confirm('确定要删除?', '提示', {
+			this.$confirm('确定要Delete?', '提示', {
 				confirmButtonText: '确定',
-				cancelButtonText: '取消',
+				cancelButtonText: 'Cancel',
 				type: 'warning'
 			}).then(() => {
 				this.axios.post('shipper/destory', { id: row.id }).then((response) => {
@@ -104,7 +104,7 @@ export default {
 					if (response.data.errno === 0) {
 						this.$message({
 							type: 'success',
-							message: '删除成功!'
+							message: 'Delete成功!'
 						});
 						this.getList();
 					}

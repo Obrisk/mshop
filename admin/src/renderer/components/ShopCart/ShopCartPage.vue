@@ -8,8 +8,8 @@
 		<div class="content-main">
 			<div class="filter-box">
 				<el-form :inline="true" :model="filterForm" class="demo-form-inline">
-					<el-form-item label="商品名称">
-						<el-input v-model="filterForm.name" placeholder="商品名称"></el-input>
+					<el-form-item label="Product名称">
+						<el-input v-model="filterForm.name" placeholder="Product名称"></el-input>
 					</el-form-item>
 					<el-form-item>
 						<el-button type="primary" @click="onSubmitFilter">查询</el-button>
@@ -22,18 +22,18 @@
 					</el-table-column>
 					<el-table-column prop="user_id" label="用户ID" width="80px"></el-table-column>
 					<el-table-column prop="nickname" label="用户昵称" width="100px"></el-table-column>
-					<el-table-column prop="goods_id" label="商品ID" width="100px"></el-table-column>
+					<el-table-column prop="goods_id" label="ProductID" width="100px"></el-table-column>
 					<el-table-column prop="list_pic_url" label="图片" width="70px">
 						<template scope="scope">
 							<img  :src="scope.row.list_pic_url" alt="" style="width: 50px;height: 50px">
 						</template>
 					</el-table-column>
-                    <el-table-column prop="goods_name" label="商品名称"></el-table-column>
+                    <el-table-column prop="goods_name" label="Product名称"></el-table-column>
 					<el-table-column prop="goods_specifition_name_value" label="型号"></el-table-column>
                     <el-table-column prop="number" label="数量" width="70px"></el-table-column>
                     <el-table-column prop="retail_price" label="成交价"></el-table-column>
 					<el-table-column prop="add_time" label="加入时间"></el-table-column>
-					<el-table-column prop="is_delete" label="是否删除">
+					<el-table-column prop="is_delete" label="是否Delete">
 						<template scope="scope">
 							<label>{{scope.row.is_delete == 1? '已删':''}}</label>
 						</template>

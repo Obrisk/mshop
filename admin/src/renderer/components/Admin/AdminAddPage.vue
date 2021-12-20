@@ -3,7 +3,7 @@
         <div class="content-nav">
             <el-breadcrumb class="breadcrumb" separator="/">
                 <el-breadcrumb-item :to="{ name: 'admin' }">管理员</el-breadcrumb-item>
-                <el-breadcrumb-item>{{infoForm.id ? '编辑管理员' : '添加管理员'}}</el-breadcrumb-item>
+                <el-breadcrumb-item>{{infoForm.id ? 'Edit管理员' : 'Add New管理员'}}</el-breadcrumb-item>
             </el-breadcrumb>
             <div class="operation-nav">
                 <el-button type="primary" @click="goBackPage" icon="arrow-left">返回列表</el-button>
@@ -30,8 +30,8 @@
                     </el-form-item>
                     <el-form-item>
                         <el-button v-if="infoForm.id > 0" type="primary" @click="saveAdminInfo">确定保存</el-button>
-                        <el-button v-else type="primary" @click="addAdminInfo">确定添加</el-button>
-                        <el-button @click="goBackPage">取消</el-button>
+                        <el-button v-else type="primary" @click="addAdminInfo">确定Add New</el-button>
+                        <el-button @click="goBackPage">Cancel</el-button>
                     </el-form-item>
                 </el-form>
             </div>
@@ -136,13 +136,13 @@
                             if (response.data.errno === 0) {
                                 this.$message({
                                     type: 'success',
-                                    message: '添加成功'
+                                    message: 'Add New成功'
                                 });
                                 this.$router.push({ name: 'admin'} )
                             } else {
                                 this.$message({
                                     type: 'error',
-                                    message: '添加失败'
+                                    message: 'Add New失败'
                                 })
                             }
                         })

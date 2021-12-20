@@ -6,7 +6,7 @@
             </el-breadcrumb>
             <div class="operation-nav">
                 <div style="margin-left:10px;"></div>
-                <el-button type="primary" icon="plus" @click="addNotice">添加公告</el-button>
+                <el-button type="primary" icon="plus" @click="addNotice">Add New公告</el-button>
             </div>
         </div>
         <div class="content-main">
@@ -14,24 +14,24 @@
                 <el-table :data="tableData" style="width: 100%" border stripe>
                     <el-table-column prop="id" label="ID" width="60"></el-table-column>
                     <el-table-column prop="content" label="内容"></el-table-column>
-                    <el-table-column prop="end_time" label="结束时间" width="180"></el-table-column>
+                    <el-table-column prop="end_time" label="End Date" width="180"></el-table-column>
                     <el-table-column prop="enabled" label="状态" width="110px">
                         <template scope="scope">
-                            {{ scope.row.is_delete == 0 ? '启用中' : '已到期下线' }}
+                            {{ scope.row.is_delete == 0 ? 'Turn On中' : '已到期下线' }}
                         </template>
                     </el-table-column>
                     <el-table-column label="操作" width="220px">
                         <template scope="scope">
-                            <el-button size="small" @click="handleRowEdit(scope.$index, scope.row)">编辑</el-button>
+                            <el-button size="small" @click="handleRowEdit(scope.$index, scope.row)">Edit</el-button>
                             <el-button plain size="small" type="danger"
-                                       @click="handleRowDelete(scope.$index, scope.row)">删除
+                                       @click="handleRowDelete(scope.$index, scope.row)">Delete
                             </el-button>
                         </template>
                     </el-table-column>
                 </el-table>
             </div>
         </div>
-        <el-dialog :title="is_add? '添加':'编辑'" :visible.sync="dialog">
+        <el-dialog :title="is_add? 'Add New':'Edit'" :visible.sync="dialog">
             <el-form :model="noticeData">
                 <el-form-item label="内容:" label-width="120px">
                     <el-input class="el-input" v-model="noticeData.content" auto-complete="off"
@@ -49,7 +49,7 @@
             <div slot="footer" class="dialog-footer">
                 <el-button @click="dialog = false">取 消</el-button>
                 <!--<el-button @click="test">取 消</el-button>-->
-                <el-button type="primary" @click="goNotice" v-if="is_add">确定添加</el-button>
+                <el-button type="primary" @click="goNotice" v-if="is_add">确定Add New</el-button>
                 <el-button type="primary" @click="updateNotice" v-if="!is_add">确定修改</el-button>
             </div>
         </el-dialog>
@@ -94,13 +94,13 @@
                     if (response.data.errno === 0) {
                         this.$message({
                             type: 'success',
-                            message: '添加成功!'
+                            message: 'Add New成功!'
                         });
                         this.getList();
                     } else {
                         this.$message({
                             type: 'error',
-                            message: '添加失败'
+                            message: 'Add New失败'
                         })
                     }
                 })
@@ -126,13 +126,13 @@
                     if (response.data.errno === 0) {
                         this.$message({
                             type: 'success',
-                            message: '添加成功!'
+                            message: 'Add New成功!'
                         });
                         this.getList();
                     } else {
                         this.$message({
                             type: 'error',
-                            message: '添加失败'
+                            message: 'Add New失败'
                         })
                     }
                 })
@@ -155,9 +155,9 @@
                 })
             },
             handleRowDelete(index, row) {
-                this.$confirm('确定要删除?', '提示', {
+                this.$confirm('确定要Delete?', '提示', {
                     confirmButtonText: '确定',
-                    cancelButtonText: '取消',
+                    cancelButtonText: 'Cancel',
                     type: 'warning'
                 }).then(() => {
 
@@ -166,7 +166,7 @@
                         if (response.data.errno === 0) {
                             this.$message({
                                 type: 'success',
-                                message: '删除成功!'
+                                message: 'Delete成功!'
                             });
 
                             this.getList();

@@ -94,10 +94,10 @@ npm run build:web 或者 sudo npm run build:web
 
 ### 功能列表
 + 订单管理：查看，修改订单价格，发货，生成电子面单，修改订单状态
-+ Products：添加、修改、删除商品，添加Categories
++ Products：Add New、修改、DeleteProduct，Add NewCategories
 + Cart：可以看到用户加入Cart的情况
 + Users：用户的一些使用踪迹
-+ Shop Settings：Advertisement列表，公告管理，运费模板（可以根据地区设置相应的运费），管理员
++ Shop Settings：Ads List，公告管理，运费模板（可以根据地区设置相应的运费），管理员
 
 ### 最近更新 
 - 新增生成分享图的功能

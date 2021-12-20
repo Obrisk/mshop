@@ -2,7 +2,7 @@
     <div class="wrap">
         <div class="main">
             <el-tabs class="tabs-wrap" v-model="activeName" @tab-click="handleClick">
-                <!--<el-tab-pane label="全部商品" name="first">-->
+                <!--<el-tab-pane label="全部Product" name="first">-->
                 <!--</el-tab-pane>-->
                 <el-tab-pane label="出售中" name="second"></el-tab-pane>
                 <!--<el-tab-pane label="已售完" name="third"></el-tab-pane>-->
@@ -15,7 +15,7 @@
                             <img :src="scope.row.list_pic_url" alt="" style="width: 60px;height: 60px">
                         </template>
                     </el-table-column>
-                    <el-table-column prop="name" label="商品名称">
+                    <el-table-column prop="name" label="Product名称">
                     </el-table-column>
                     <el-table-column prop="retail_price" label="售价" width="90" sortable>
                         <template scope="scope">
@@ -81,9 +81,9 @@
                 })
             },
             logout() {
-                this.$confirm('是否要退出?', '提示', {
+                this.$confirm('是否要Exit?', '提示', {
                     confirmButtonText: '确定',
-                    cancelButtonText: '取消',
+                    cancelButtonText: 'Cancel',
                     type: 'warning',
                     center: true
                 }).then(() => {

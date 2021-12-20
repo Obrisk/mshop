@@ -4,7 +4,7 @@
       <el-breadcrumb class="breadcrumb" separator="/">
         <el-breadcrumb-item :to="{ name: 'dashboard' }">首页</el-breadcrumb-item>
         <el-breadcrumb-item>数据管理</el-breadcrumb-item>
-        <el-breadcrumb-item>{{infoForm.id ? '编辑热门搜索' : '添加热门搜索'}}</el-breadcrumb-item>
+        <el-breadcrumb-item>{{infoForm.id ? 'Edit热门搜索' : 'Add New热门搜索'}}</el-breadcrumb-item>
       </el-breadcrumb>
       <div class="operation-nav">
         <el-button type="primary" @click="goBackPage" icon="arrow-left">返回列表</el-button>
@@ -14,18 +14,18 @@
       <div class="form-table-box">
         <el-form ref="infoForm" :rules="infoRules" :model="infoForm" label-width="120px">
           
-          <el-form-item label="商品ID" prop="id">
+          <el-form-item label="ProductID" prop="id">
             <el-input v-model="infoForm.id"></el-input>
           </el-form-item>
           <el-form-item label="关键词" prop="keyword">
             <el-input v-model="infoForm.keyword"></el-input>
           </el-form-item>
-          <el-form-item label="排序">
+          <el-form-item label="Sort">
             <el-input-number v-model="infoForm.sort_order" :min="1" :max="1000"></el-input-number>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="onSubmitInfo">确定保存</el-button>
-            <el-button @click="goBackPage">取消</el-button>
+            <el-button @click="goBackPage">Cancel</el-button>
           </el-form-item>
         </el-form>
       </div>

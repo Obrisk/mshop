@@ -59,7 +59,7 @@
                             <el-table-column prop="MonthCode" label="月结账号"></el-table-column>
                             <el-table-column label="操作" width="170">
                                 <template scope="scope">
-                                    <el-button size="small" @click="handleRowEdit(scope.$index, scope.row)">编辑
+                                    <el-button size="small" @click="handleRowEdit(scope.$index, scope.row)">Edit
                                     </el-button>
                                 </template>
                             </el-table-column>

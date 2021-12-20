@@ -6,7 +6,7 @@
 			</el-breadcrumb>
 			<!-- <div class="operation-nav">
 				<router-link to="/dashboard/user">
-					<el-button type="primary" icon="plus">添加管理员</el-button>
+					<el-button type="primary" icon="plus">Add New管理员</el-button>
 				</router-link>
 			</div> -->
 		</div>
@@ -19,8 +19,8 @@
 					<el-table-column prop="last_login_ip" label="登录IP" width="200"></el-table-column>
 					<el-table-column label="操作" width="180">
 						<template scope="scope">
-							<el-button size="small" @click="handleRowEdit(scope.$index, scope.row)">编辑</el-button>
-							<el-button v-if="scope.row.id != loginInfo.id" plain size="small" type="danger" @click="handleRowDelete(scope.$index, scope.row)">删除</el-button>
+							<el-button size="small" @click="handleRowEdit(scope.$index, scope.row)">Edit</el-button>
+							<el-button v-if="scope.row.id != loginInfo.id" plain size="small" type="danger" @click="handleRowDelete(scope.$index, scope.row)">Delete</el-button>
 						</template>
 					</el-table-column>
 				</el-table>
@@ -50,9 +50,9 @@ export default {
 		},
 		handleRowDelete(index, row) {
 			console.log(row);
-			this.$confirm('确定要删除?', '提示', {
+			this.$confirm('确定要Delete?', '提示', {
 				confirmButtonText: '确定',
-				cancelButtonText: '取消',
+				cancelButtonText: 'Cancel',
 				type: 'warning'
 			}).then(() => {
 				this.axios.post('admin/deleAdmin', { id: row.id }).then((response) => {
@@ -60,7 +60,7 @@ export default {
 					if (response.data.errno === 0) {
 						this.$message({
 							type: 'success',
-							message: '删除成功!'
+							message: 'Delete成功!'
 						});
 						this.getList();
 					}

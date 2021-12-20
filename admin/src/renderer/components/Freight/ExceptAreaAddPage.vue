@@ -3,7 +3,7 @@
         <div class="content-nav">
             <el-breadcrumb class="breadcrumb" separator="/">
                 <el-breadcrumb-item :to="{ name: 'freight' }">运费模板</el-breadcrumb-item>
-                <el-breadcrumb-item>{{infoForm.id ? '编辑偏远地区' : '添加偏远地区'}}</el-breadcrumb-item>
+                <el-breadcrumb-item>{{infoForm.id ? 'Edit偏远地区' : 'Add New偏远地区'}}</el-breadcrumb-item>
             </el-breadcrumb>
             <div class="operation-nav">
                 <el-button type="primary" @click="goBackPage" icon="arrow-left">返回列表</el-button>
@@ -22,19 +22,19 @@
                                 <el-table-column label="操作" width="160">
                                     <template scope="scope">
                                         <el-button size="small" type="primary" plain
-                                                   @click="handleRowEdit(scope.$index, scope.row)">编辑地区
+                                                   @click="handleRowEdit(scope.$index, scope.row)">Edit地区
                                         </el-button>
                                     </template>
                                 </el-table-column>
                             </el-table>
                         </div>
                         <!--<div class="add-btn" v-if="tableData.length == 0">-->
-                        <!--<el-button type="text" @click="add_template">+添加偏远地区</el-button>-->
+                        <!--<el-button type="text" @click="add_template">+Add New偏远地区</el-button>-->
                         <!--</div>-->
                     </el-form-item>
                     <el-form-item>
                         <el-button v-if="infoForm.id" type="primary" @click="onSaveTemplate">确定保存</el-button>
-                        <el-button v-else type="primary" @click="onAddTemplate">确定添加</el-button>
+                        <el-button v-else type="primary" @click="onAddTemplate">确定Add New</el-button>
                         <el-button @click="goBackPage">返回列表</el-button>
                         <!--<el-button @click="testCallBack">回调</el-button>-->
                     </el-form-item>
@@ -167,13 +167,13 @@
                             if (response.data.errno === 0) {
                                 this.$message({
                                     type: 'success',
-                                    message: '添加成功'
+                                    message: 'Add New成功'
                                 });
                                 this.$router.go(-1);
                             } else {
                                 this.$message({
                                     type: 'error',
-                                    message: '添加失败'
+                                    message: 'Add New失败'
                                 })
                             }
                         })

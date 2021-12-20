@@ -3,7 +3,7 @@
 		<div class="content-nav">
 			<el-breadcrumb class="breadcrumb" separator="/">
 				<el-breadcrumb-item :to="{ name: 'goods' }">Products</el-breadcrumb-item>
-				<el-breadcrumb-item>{{infoForm.id ? '编辑商品' : '添加商品'}}</el-breadcrumb-item>
+				<el-breadcrumb-item>{{infoForm.id ? 'EditProduct' : 'Add NewProduct'}}</el-breadcrumb-item>
 			</el-breadcrumb>
 			<div class="operation-nav">
 				<!-- <el-button type="primary" @click="test">测试</el-button> -->
@@ -20,7 +20,7 @@
 							</el-option>
 						</el-select>
 					</el-form-item>
-					<el-form-item label="商品图片" prop="list_pic_url" v-if="infoForm.list_pic_url" class="image-uploader-diy new-height">
+					<el-form-item label="Product图片" prop="list_pic_url" v-if="infoForm.list_pic_url" class="image-uploader-diy new-height">
 						<div class="index-image">
 							<el-image :preview-src-list="previewList" v-if="infoForm.list_pic_url" :src="infoForm.list_pic_url" @click="previewIndexImg"
 							 class="image-show" fit="cover"></el-image>
@@ -29,14 +29,14 @@
 							</div>
 						</div>
 					</el-form-item>
-					<el-form-item label="商品图片" prop="list_pic_url" v-if="!infoForm.list_pic_url">
+					<el-form-item label="Product图片" prop="list_pic_url" v-if="!infoForm.list_pic_url">
 						<el-upload name="file" ref="upload" class="upload-demo" :action="qiniuZone" :on-success="handleSuccess"
 						 :before-upload="indexImgBefore" :auto-upload="true" list-type="picture-card" :data="picData" :http-request="uploadIndexImg">
 							<el-button size="small" type="primary">点击上传</el-button>
 							<div slot="tip" class="el-upload__tip">只能上传jpg/png文件</div>
 						</el-upload>
 					</el-form-item>
-					<el-form-item label="商品轮播图" prop="goods_sn">
+					<el-form-item label="Product轮播图" prop="goods_sn">
 						<draggable v-model="gallery_list" draggable=".gallery-item" class="drag-wrap">
 							<div v-for="(element, index) in gallery_list" class="gallery-item" v-if="element.is_delete == 0">
 								<el-image :preview-src-list="previewList" @click="previewImg(index)" style="width: 148px; height: 148px;margin:0 10px 10px 0;"
@@ -52,14 +52,14 @@
 							</el-upload>
 						</draggable>
 					</el-form-item>
-					<el-form-item label="商品名称" prop="name">
+					<el-form-item label="Product名称" prop="name">
 						<el-input v-model="infoForm.name"></el-input>
 					</el-form-item>
-					<el-form-item label="商品简介" prop="goods_brief">
+					<el-form-item label="Product简介" prop="goods_brief">
 						<el-input type="textarea" v-model="infoForm.goods_brief" :rows="3"></el-input>
 						<div class="form-tip"></div>
 					</el-form-item>
-					<el-form-item label="商品单位" prop="goods_unit">
+					<el-form-item label="Product单位" prop="goods_unit">
 						<el-input v-model="infoForm.goods_unit"></el-input>
 						<div class="form-tip">如：件、包、袋</div>
 					</el-form-item>
@@ -75,9 +75,9 @@
 						</div>
 						<div class="spec-wrap">
 							<el-table :data="specData" stripe style="width: 100%">
-								<el-table-column prop="goods_sn" label="商品SKU" width="140">
+								<el-table-column prop="goods_sn" label="ProductSKU" width="140">
 									<template scope="scope">
-										<el-input @blur="checkSkuOnly(scope.$index, scope.row)" size="mini" v-model="scope.row.goods_sn" placeholder="商品SKU"></el-input>
+										<el-input @blur="checkSkuOnly(scope.$index, scope.row)" size="mini" v-model="scope.row.goods_sn" placeholder="ProductSKU"></el-input>
 									</template>
 								</el-table-column>
 								<el-table-column prop="goods_aka" label="快递单上的简称" width="160">
@@ -131,13 +131,13 @@
 							</el-option>
 						</el-select>
 					</el-form-item>
-					<el-form-item label="排序" prop="sort_order">
+					<el-form-item label="Sort" prop="sort_order">
 						<el-input-number :mini="1" :max="100" v-model="infoForm.sort_order"></el-input-number>
 					</el-form-item>
 					<el-form-item label=" ">
 						<el-switch active-text="上架" inactive-text="下架" active-value="1" inactive-value="0" v-model="infoForm.is_on_sale"></el-switch>
 					</el-form-item>
-					<el-form-item label="商品详情" prop="goods_desc">
+					<el-form-item label="Product详情" prop="goods_desc">
 						<div class="edit_container">
 							<quill-editor v-model="infoForm.goods_desc" ref="myTextEditor" class="editer" :options="editorOption" @blur="onEditorBlur($event)"
 							 @ready="onEditorReady($event)">
@@ -154,7 +154,7 @@
 					<el-form-item>
 						<el-button type="primary" @click="onSubmitInfo">确定保存</el-button>
 						<el-button @click="goBackPage">返回列表</el-button>
-						<el-button type="danger" class="float-right" @click="onCopyGood" v-if="infoForm.id > 0">复制商品</el-button>
+						<el-button type="danger" class="float-right" @click="onCopyGood" v-if="infoForm.id > 0">复制Product</el-button>
 					</el-form-item>
 				</el-form>
 			</div>
@@ -175,7 +175,7 @@
 		quillEditor
 	} from 'vue-quill-editor'
 	import ElForm from "../../../../node_modules/element-ui/packages/form/src/form.vue";
-	import ElFormItem from "../../../../node_modules/element-ui/packages/form/src/form-item.vue"; //调用富文本编辑器
+	import ElFormItem from "../../../../node_modules/element-ui/packages/form/src/form-item.vue"; //调用富文本Edit器
 	const toolbarOptions = [
 		['bold', 'italic', 'underline', 'strike'],
 		['blockquote'],
@@ -256,7 +256,7 @@
 					}, ],
 					list_pic_url: [{
 						required: true,
-						message: '请选择商品图片',
+						message: '请选择Product图片',
 						trigger: 'blur'
 					}, ],
 				},
@@ -324,9 +324,9 @@
 			},
 			onRemoveHandler(index) {
 				let that = this;
-				that.$confirm('确定删除该图片?', '提示', {
+				that.$confirm('确定Delete该图片?', '提示', {
 						confirmButtonText: '确定',
-						cancelButtonText: '取消',
+						cancelButtonText: 'Cancel',
 						type: 'warning'
 					})
 					.then(() => {
@@ -480,9 +480,9 @@
 			},
 			delePicList() {
 				let that = this;
-				that.$confirm('确定删除该图片?', '提示', {
+				that.$confirm('确定Delete该图片?', '提示', {
 						confirmButtonText: '确定',
-						cancelButtonText: '取消',
+						cancelButtonText: 'Cancel',
 						type: 'warning'
 					})
 					.then(() => {
@@ -552,9 +552,9 @@
 				quill.setSelection(length + 1)
 			},
 			onCopyGood() {
-				this.$confirm('确定复制该商品？', '提示', {
+				this.$confirm('确定复制该Product？', '提示', {
 					confirmButtonText: '确定',
-					cancelButtonText: '取消',
+					cancelButtonText: 'Cancel',
 					type: 'warning'
 				}).then(() => {
 					this.axios.post('goods/copygoods', {
@@ -577,7 +577,7 @@
 						if (this.infoForm.list_pic_url == '' || this.infoForm.list_pic_url == null) {
 							this.$message({
 								type: 'error',
-								message: '请上传商品首图！'
+								message: '请上传Product首图！'
 							})
 							return false;
 						}
@@ -591,7 +591,7 @@
 						if (this.specData.length == 0) {
 							this.$message({
 								type: 'error',
-								message: '请添加一个规格型号'
+								message: '请Add New一个规格型号'
 							})
 							return false;
 						}
@@ -672,7 +672,7 @@
 				if (this.infoForm.id <= 0) {
 					return false
 				}
-				//加载商品详情
+				//加载Product详情
 				let that = this
 				this.axios.get('goods/info', {
 					params: {
@@ -724,7 +724,7 @@
 				let that = this;
 				$('#summernote').summernote({
 						lang: 'zh-CN',
-						placeholder: '请输入商品描述',
+						placeholder: '请输入Product描述',
 						height: 300,
 						minHeight: 300,
 						maxHeight: 400,

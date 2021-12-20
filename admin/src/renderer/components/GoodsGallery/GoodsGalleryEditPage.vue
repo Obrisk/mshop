@@ -2,7 +2,7 @@
     <div class="content-page">
         <div class="content-nav">
             <el-breadcrumb class="breadcrumb" separator="/">
-                <el-breadcrumb-item>编辑商品</el-breadcrumb-item>
+                <el-breadcrumb-item>EditProduct</el-breadcrumb-item>
                 <el-breadcrumb-item>轮播图顺序</el-breadcrumb-item>
             </el-breadcrumb>
             <div class="operation-nav">
@@ -94,7 +94,7 @@
 		data() {
 			return {
 				banner_list: [], //拖拽插件不建议直接改变父组件的传值，所以另建一个新数组
-				file_list: [], //保存开启拖拽之前排序的数组
+				file_list: [], //保存开启拖拽之前Sort的数组
 				drag_open: false, //拖拽开启开关,
 				infoForm: {}
 			}
@@ -170,7 +170,7 @@
 				this.file_list = JSON.parse(JSON.stringify(this.banner_list)); //数组深拷贝
 				this.drag_open = true;
 			},
-			// 取消拖拽
+			// Cancel拖拽
 			cancle() {
 				this.banner_list = this.file_list;
 				this.drag_open = false;

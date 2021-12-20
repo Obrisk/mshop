@@ -8,7 +8,7 @@
 			</el-breadcrumb>
 			<div class="operation-nav">
 				<router-link to="/dashboard/keywords/add">
-					<el-button type="primary" icon="plus">添加热门搜索</el-button>
+					<el-button type="primary" icon="plus">Add New热门搜索</el-button>
 				</router-link>
 			</div>
 		</div>
@@ -35,12 +35,12 @@
 					</el-table-column>
                     <el-table-column prop="is_show" label="is_show">
 					</el-table-column>
-                    <el-table-column prop="sort_order" label="排序" width="80">
+                    <el-table-column prop="sort_order" label="Sort" width="80">
 					</el-table-column>
 					<el-table-column label="操作" width="140">
 						<template scope="scope">
-							<el-button size="small" @click="handleRowEdit(scope.$index, scope.row)">编辑</el-button>
-							<el-button size="small" type="danger" @click="handleRowDelete(scope.$index, scope.row)">删除</el-button>
+							<el-button size="small" @click="handleRowEdit(scope.$index, scope.row)">Edit</el-button>
+							<el-button size="small" type="danger" @click="handleRowDelete(scope.$index, scope.row)">Delete</el-button>
 						</template>
 					</el-table-column>
 				</el-table>
@@ -79,9 +79,9 @@ export default {
 		},
 		handleRowDelete(index, row) {
 
-			this.$confirm('确定要删除?', '提示', {
+			this.$confirm('确定要Delete?', '提示', {
 				confirmButtonText: '确定',
-				cancelButtonText: '取消',
+				cancelButtonText: 'Cancel',
 				type: 'warning'
 			}).then(() => {
 
@@ -90,7 +90,7 @@ export default {
 					if (response.data.errno === 0) {
 						this.$message({
 							type: 'success',
-							message: '删除成功!'
+							message: 'Delete成功!'
 						});
 
 						this.getList();

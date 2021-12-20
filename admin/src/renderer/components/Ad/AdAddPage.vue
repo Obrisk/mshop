@@ -2,8 +2,8 @@
     <div class="content-page">
         <div class="content-nav">
             <el-breadcrumb class="breadcrumb" separator="/">
-                <el-breadcrumb-item :to="{ name: 'ad' }">Advertisement列表</el-breadcrumb-item>
-                <el-breadcrumb-item>{{infoForm.id ? '编辑Advertisement' : '添加Advertisement'}}</el-breadcrumb-item>
+                <el-breadcrumb-item :to="{ name: 'ad' }">Ads List</el-breadcrumb-item>
+                <el-breadcrumb-item>{{infoForm.id ? 'EditAds' : 'Add NewAds'}}</el-breadcrumb-item>
             </el-breadcrumb>
             <div class="operation-nav">
                 <!--<el-button type="primary" @click="test" icon="arrow-left">test</el-button>-->
@@ -13,7 +13,7 @@
         <div class="content-main">
             <div class="form-table-box">
                 <el-form ref="infoForm" :rules="infoRules" :model="infoForm" label-width="120px">
-					<el-form-item label="Advertisement图片" prop="image_url" v-if="infoForm.image_url" class="image-uploader-diy new-height">
+					<el-form-item label="Ads图片" prop="image_url" v-if="infoForm.image_url" class="image-uploader-diy new-height">
 						<div class="index-image">
 							<el-image :preview-src-list="previewList" v-if="infoForm.image_url" :src="infoForm.image_url" @click="previewIndexImg"
 							 class="image-show" fit="cover"></el-image>
@@ -22,23 +22,23 @@
 							</div>
 						</div>
 					</el-form-item>
-					<el-form-item label="Advertisement图片" prop="image_url" v-if="!infoForm.image_url">
+					<el-form-item label="Ads图片" prop="image_url" v-if="!infoForm.image_url">
 						<el-upload name="file" ref="upload" class="upload-demo" :action="qiniuZone" :on-success="handleSuccess"
 						 :before-upload="getQiniuToken" :auto-upload="true" list-type="picture-card" :data="picData" :http-request="uploadIndexImg">
 							<el-button size="small" type="primary">点击上传</el-button>
 							<div slot="tip" class="el-upload__tip">只能上传jpg/png文件</div>
 						</el-upload>
 					</el-form-item>
-                    <el-form-item label="商品类型">
+                    <el-form-item label="Product Type">
                         <el-radio-group v-model="infoForm.link_type">
-                            <el-radio :label="0">商品id</el-radio>
+                            <el-radio :label="0">Productid</el-radio>
                             <el-radio :label="1">链接</el-radio>
                         </el-radio-group>
                     </el-form-item>
-                    <el-form-item label="Advertisement链接" prop="link" v-if="infoForm.link_type == 1">
+                    <el-form-item label="Ads链接" prop="link" v-if="infoForm.link_type == 1">
                         <el-input class="link-input" v-model="infoForm.link"></el-input>
                     </el-form-item>
-                    <el-form-item label="商品id" prop="link" v-if="infoForm.link_type == 0">
+                    <el-form-item label="Productid" prop="link" v-if="infoForm.link_type == 0">
                         <el-input class="id-input" v-model="infoForm.goods_id"></el-input>
                         <el-popover
                                 placement="right"
@@ -46,12 +46,12 @@
                         >
                             <el-table :data="chooseRelateGoods" stripe style="width: 100%">
                                 <el-table-column prop="id" label="id" width="100"></el-table-column>
-                                <el-table-column prop="list_pic_url" label="商品图片" width="120">
+                                <el-table-column prop="list_pic_url" label="Product图片" width="120">
                                     <template scope="scope">
                                         <img :src="scope.row.list_pic_url" alt="" style="width: 40px;height: 40px">
                                     </template>
                                 </el-table-column>
-                                <el-table-column prop="name" label="商品名称" width="300px"></el-table-column>
+                                <el-table-column prop="name" label="Product名称" width="300px"></el-table-column>
                                 <el-table-column label="操作">
                                     <template scope="scope">
                                         <el-button
@@ -62,10 +62,10 @@
                                     </template>
                                 </el-table-column>
                             </el-table>
-                            <el-button slot="reference" type="primary" @click="relateGoodsClick">添加关联商品</el-button>
+                            <el-button slot="reference" type="primary" @click="relateGoodsClick">Add New关联Product</el-button>
                         </el-popover>
                     </el-form-item>
-                    <el-form-item label="结束时间" prop="end_time">
+                    <el-form-item label="End Date" prop="end_time">
                         <el-date-picker
                                 v-model="infoForm.end_time"
                                 type="datetime"
@@ -74,15 +74,15 @@
                             >
                         </el-date-picker>
                     </el-form-item>
-                    <el-form-item label="排序" prop="sort_order">
+                    <el-form-item label="Sort" prop="sort_order">
                         <el-input-number v-model="infoForm.sort_order" :min="1" :max="999"></el-input-number>
                     </el-form-item>
-                    <el-form-item label="Advertisement启用">
+                    <el-form-item label="AdsTurn On">
                         <el-switch active-value="1" inactive-value="0" v-model="infoForm.enabled"></el-switch>
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="onSubmitInfo">确定保存</el-button>
-                        <el-button @click="goBackPage">取消</el-button>
+                        <el-button @click="goBackPage">Cancel</el-button>
                     </el-form-item>
                 </el-form>
             </div>
@@ -111,7 +111,7 @@
                 },
                 infoRules: {
                     image_url: [
-                        {required: true, message: '请输入Advertisement图片', trigger: 'blur'},
+                        {required: true, message: '请输入Ads图片', trigger: 'blur'},
                     ],
                     end_time: [
                         {required: true, message: '请选择时间', trigger: 'blur'},
@@ -135,9 +135,9 @@
 			},
 			delePicList() {
 				let that = this;
-				that.$confirm('确定删除该图片?', '提示', {
+				that.$confirm('确定Delete该图片?', '提示', {
 						confirmButtonText: '确定',
-						cancelButtonText: '取消',
+						cancelButtonText: 'Cancel',
 						type: 'warning'
 					})
 					.then(() => {
@@ -217,7 +217,7 @@
                     if(this.infoForm.goods_id == 0 ){
                         this.$message({
                             type: 'error',
-                            message: '请选择商品'
+                            message: '请选择Product'
                         });
                         return false;
                     }
@@ -243,7 +243,7 @@
                             } else if (response.data.errno === 100) {
                                 this.$message({
                                     type: 'error',
-                                    message: '该商品已经有Advertisement关联'
+                                    message: '该Product已经有Ads关联'
                                 })
                             }
                             else {
@@ -262,7 +262,7 @@
                 if (this.infoForm.id <= 0) {
                     return false
                 }
-                //加载Advertisement详情
+                //加载Ads详情
                 let that = this
                 this.axios.get('ad/info', {
                     params: {

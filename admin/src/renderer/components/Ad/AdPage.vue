@@ -2,11 +2,11 @@
 	<div class="content-page">
 		<div class="content-nav">
 			<el-breadcrumb class="breadcrumb" separator="/">
-				<el-breadcrumb-item>Advertisement列表</el-breadcrumb-item>
+				<el-breadcrumb-item>Ads List</el-breadcrumb-item>
 			</el-breadcrumb>
 			<div class="operation-nav">
 				<router-link to="/dashboard/ad/add">
-					<el-button type="primary" icon="plus">添加Advertisement</el-button>
+					<el-button type="primary" icon="plus">Add NewAds</el-button>
 				</router-link>
 			</div>
 		</div>
@@ -14,21 +14,21 @@
 			<div class="form-table-box">
 				<el-table :data="tableData" style="width: 100%" border stripe>
 					<el-table-column prop="id" label="ID" width="70px"></el-table-column>
-                    <el-table-column prop="image_url" label="Advertisement">
+                    <el-table-column prop="image_url" label="Ads">
                         <template scope="scope">
                             <img  :src="scope.row.image_url" alt="" style="width: 90px;height: 50px">
                         </template>
 					</el-table-column>
-					<el-table-column prop="goods_id" label="关联商品"></el-table-column>
-					<el-table-column prop="end_time" label="结束时间"></el-table-column>
-					<el-table-column prop="sort_order" label="排序" width="100" sortable>
+					<el-table-column prop="goods_id" label="关联Product"></el-table-column>
+					<el-table-column prop="end_time" label="End Date"></el-table-column>
+					<el-table-column prop="sort_order" label="Sort" width="100" sortable>
 						<template scope="scope">
-							<el-input v-model="scope.row.sort_order" placeholder="排序" @blur="submitSort(scope.$index, scope.row)"></el-input>
+							<el-input v-model="scope.row.sort_order" placeholder="Sort" @blur="submitSort(scope.$index, scope.row)"></el-input>
 						</template>
 					</el-table-column>
                     <el-table-column prop="enabled" label="状态" width="80px">
                         <template scope="scope">
-                            {{ scope.row.enabled == 1 ? '启用' : '禁用' }}
+                            {{ scope.row.enabled == 1 ? 'Turn On' : '禁用' }}
                         </template>
 					</el-table-column>
 					<el-table-column label="开启状态" width="80">
@@ -43,8 +43,8 @@
 					</el-table-column>
 					<el-table-column label="操作" width="170">
 						<template scope="scope">
-							<el-button size="small" @click="handleRowEdit(scope.$index, scope.row)">编辑</el-button>
-							<el-button size="small" type="danger" @click="handleRowDelete(scope.$index, scope.row)">删除</el-button>
+							<el-button size="small" @click="handleRowEdit(scope.$index, scope.row)">Edit</el-button>
+							<el-button size="small" type="danger" @click="handleRowDelete(scope.$index, scope.row)">Delete</el-button>
 						</template>
 					</el-table-column>
 				</el-table>
@@ -100,9 +100,9 @@ export default {
 		},
 		handleRowDelete(index, row) {
 
-			this.$confirm('确定要删除?', '提示', {
+			this.$confirm('确定要Delete?', '提示', {
 				confirmButtonText: '确定',
-				cancelButtonText: '取消',
+				cancelButtonText: 'Cancel',
 				type: 'warning'
 			}).then(() => {
 
@@ -111,7 +111,7 @@ export default {
 					if (response.data.errno === 0) {
 						this.$message({
 							type: 'success',
-							message: '删除成功!'
+							message: 'Delete成功!'
 						});
 
 						this.getList();

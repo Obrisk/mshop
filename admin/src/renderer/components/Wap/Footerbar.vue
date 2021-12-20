@@ -4,7 +4,7 @@
                  :router="true">
             <el-menu-item class="btn-footer" index="/wap">
                 <i class="fa fa-cube"></i>
-                <span>商品</span>
+                <span>Product</span>
             </el-menu-item>
             <el-menu-item class="btn-footer" index="/wap/order">
                 <i class="fa fa-inbox"></i>
@@ -13,7 +13,7 @@
             </el-menu-item>
             <el-menu-item class="btn-footer" index="" @click="logout">
                 <i class="fa fa-sign-out"></i>
-                <span>退出</span>
+                <span>Exit</span>
 
             </el-menu-item>
         </el-menu>
@@ -33,9 +33,9 @@
         },
         methods: {
             logout() {
-                this.$confirm('是否要退出?', '提示', {
+                this.$confirm('是否要Exit?', '提示', {
                     confirmButtonText: '确定',
-                    cancelButtonText: '取消',
+                    cancelButtonText: 'Cancel',
                     type: 'warning',
                     center: true
                 }).then(() => {

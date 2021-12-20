@@ -27,7 +27,7 @@
                 <el-card class="box-card card-green">
                     <router-link class="link-color" :to="{ path: '/dashboard/goods' }">
                         <h1>{{infoData.goodsOnsale}}</h1>
-                        <div class="text item">上架中的商品</div>
+                        <div class="text item">上架中的Product</div>
                     </router-link>
                 </el-card>
                 <el-card class="box-card card-black">

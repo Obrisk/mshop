@@ -12,7 +12,7 @@
         <div class="content-main">
             <div class="form-table-box">
                 <el-form ref="infoForm" :model="infoForm" label-width="120px">
-                    <el-form-item label="Advertisement" prop="type">
+                    <el-form-item label="Ads" prop="type">
                         <el-radio-group v-model="infoForm.banner">
                             <el-radio :label="1">显示</el-radio>
                             <el-radio :label="0">不显示</el-radio>
@@ -24,14 +24,14 @@
                             <el-radio :label="0">不显示</el-radio>
                         </el-radio-group>
                     </el-form-item>
-                    <el-form-item label="Advertisement下的图标">
+                    <el-form-item label="Ads下的Icon">
                         <el-radio-group v-model="infoForm.channel">
                             <el-radio :label="1">显示</el-radio>
                             <el-radio :label="0">不显示</el-radio>
                         </el-radio-group>
-                        <div class="form-tip">那几个图标</div>
+                        <div class="form-tip">那几个Icon</div>
                     </el-form-item>
-                    <el-form-item label="首页分类图片或文字">
+                    <el-form-item label="首页Product Photo或文字">
                         <el-radio-group v-model="infoForm.index_banner_img">
                             <el-radio :label="1">图片</el-radio>
                             <el-radio :label="0">文字</el-radio>
@@ -39,7 +39,7 @@
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="onSubmitInfo">确定保存</el-button>
-                        <el-button @click="goBackPage">取消</el-button>
+                        <el-button @click="goBackPage">Cancel</el-button>
                     </el-form-item>
                 </el-form>
             </div>

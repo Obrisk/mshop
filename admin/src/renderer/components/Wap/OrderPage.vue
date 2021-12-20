@@ -29,7 +29,7 @@
                             <div class="in1">
                                 <div class="status-text">{{item.order_status_text}}{{item.is_fake ? '--假的订单' : ''}}
                                 </div>
-                                <div class="goods-num">共{{item.goodsCount}}件商品</div>
+                                <div class="goods-num">共{{item.goodsCount}}件Product</div>
                             </div>
                             <div class="add-time">{{item.add_time}}</div>
                         </div>

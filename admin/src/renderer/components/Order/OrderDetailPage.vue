@@ -4,7 +4,7 @@
             <el-breadcrumb class="breadcrumb" separator="/">
                 <!--<el-breadcrumb-item :to="{ name: 'dashboard' }">首页</el-breadcrumb-item>-->
                 <el-breadcrumb-item :to="{ name: 'order' }">订单管理</el-breadcrumb-item>
-                <el-breadcrumb-item>{{infoForm.order_sn ? '订单详情' : '添加订单'}}</el-breadcrumb-item>
+                <el-breadcrumb-item>{{infoForm.order_sn ? '订单详情' : 'Add New订单'}}</el-breadcrumb-item>
             </el-breadcrumb>
             <div class="operation-nav">
                 <el-button type="primary" @click="goBackPage" size="small" icon="arrow-left">返回列表</el-button>
@@ -38,20 +38,20 @@
                             <el-table-column prop="postscript" label="买家备注" width="300"></el-table-column>
                             <el-table-column label="操作">
                                 <template scope="scope">
-                                    <el-button size="small" @click="addressEdit(scope.$index, scope.row)">编辑
+                                    <el-button size="small" @click="addressEdit(scope.$index, scope.row)">Edit
                                     </el-button>
                                 </template>
                             </el-table-column>
                         </el-table>
                         <div class="content-title marginTop">货物信息：</div>
                         <el-table :data="infoForm.goodsList" style="width: 100%" border stripe>
-                            <el-table-column prop="goods_sn" label="商品SKU" width="120"></el-table-column>
-                            <el-table-column prop="list_pic_url" label="商品图" width="120">list_pic_url
+                            <el-table-column prop="goods_sn" label="ProductSKU" width="120"></el-table-column>
+                            <el-table-column prop="list_pic_url" label="Product图" width="120">list_pic_url
                                 <template scope="scope">
                                     <img :src="scope.row.list_pic_url" alt="" style="width: 60px;height: 60px">
                                 </template>
                             </el-table-column>
-                            <el-table-column prop="goods_name" label="商品名"></el-table-column>
+                            <el-table-column prop="goods_name" label="Product名"></el-table-column>
                             <el-table-column prop="goods_specifition_name_value" label="型号"
                                              width="100"></el-table-column>
                             <el-table-column prop="retail_price" label="售价" width="100"></el-table-column>
@@ -63,10 +63,10 @@
                             </el-table-column>
                             <el-table-column label="操作">
                                 <template scope="scope">
-                                    <el-button size="small" @click="goodsListEdit(scope.$index, scope.row)">编辑
+                                    <el-button size="small" @click="goodsListEdit(scope.$index, scope.row)">Edit
                                     </el-button>
                                     <el-button size="small" type="danger"
-                                               @click="handleRowDelete(scope.$index, scope.row)">删除
+                                               @click="handleRowDelete(scope.$index, scope.row)">Delete
                                     </el-button>
                                 </template>
                             </el-table-column>
@@ -183,17 +183,17 @@
                 <el-button type="primary" @click="saveAddress">确 定</el-button>
             </div>
         </el-dialog>
-        <el-dialog title="修改商品" :visible.sync="dialogGoodsListVisible">
+        <el-dialog title="修改Product" :visible.sync="dialogGoodsListVisible">
             <el-form :model="goodsData">
                 <el-form-item label="id:" label-width="120px">
                     <label>{{goodsData.goods_id}}</label>
                 </el-form-item>
-                <el-form-item label="商品图:" label-width="120px">
+                <el-form-item label="Product图:" label-width="120px">
                     <template scope="scope">
                         <img :src="goodsData.list_pic_url" alt="" style="width: 60px;height: 60px">
                     </template>
                 </el-form-item>
-                <el-form-item label="商品名:" label-width="120px">
+                <el-form-item label="Product名:" label-width="120px">
                     <label>{{goodsData.goods_name}}</label>
                 </el-form-item>
                 <el-form-item label="Specification:" label-width="120px">
@@ -288,7 +288,7 @@
                 },
                 infoRules: {
 //                    goods_sn: [
-//                        {required: true, message: '请输入商品编号', trigger: 'blur'},
+//                        {required: true, message: '请输入Product编号', trigger: 'blur'},
 //                    ],
                     user_id: [
                         {required: true, message: '请输入名称', trigger: 'blur'},
@@ -297,7 +297,7 @@
                         {required: true, message: '请输入简介', trigger: 'blur'},
                     ],
                     order_status: [
-                        {required: true, message: '请选择商品图片', trigger: 'blur'},
+                        {required: true, message: '请选择Product图片', trigger: 'blur'},
                     ],
                 },
                 options: [],
@@ -356,16 +356,16 @@
             handleRowDelete(index, row) {
                 this.goodsData = row;
                 this.goodsData.order_id = this.infoForm.id;
-                this.$confirm('确定要删除?', '提示', {
+                this.$confirm('确定要Delete?', '提示', {
                     confirmButtonText: '确定',
-                    cancelButtonText: '取消',
+                    cancelButtonText: 'Cancel',
                     type: 'warning'
                 }).then(() => {
                     this.axios.post('order/goodsListDelete', this.goodsData).then((response) => {
                         if (response.data.errno === 0) {
                             this.$message({
                                 type: 'success',
-                                message: '删除成功!'
+                                message: 'Delete成功!'
                             });
                             this.$router.go(-1);
                         }
@@ -375,7 +375,7 @@
                 }).catch(() => {
 //                    this.$message({
 //                        type: 'info',
-//                        message: '已取消删除'
+//                        message: '已CancelDelete'
 //                    });
                 });
             },

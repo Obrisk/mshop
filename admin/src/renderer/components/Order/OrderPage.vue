@@ -42,7 +42,7 @@
 								<div class="order-id">订单号：{{item.order_sn}}</div>
 							</div>
 							<div class="right">
-								<div class="goods-num">共{{item.goodsCount}}件商品</div>
+								<div class="goods-num">共{{item.goodsCount}}件Product</div>
 								<div v-if="item.change_price!= item.actual_price" class="price-change">
 									改价前{{item.change_price}}元
 								</div>
@@ -538,9 +538,9 @@
 					<h2>¥{{orderInfo.change_price}}</h2>
 				</el-form-item>
 
-				<el-form-item label="修改商品价格:">
+				<el-form-item label="修改Product价格:">
 					<el-input-number @change="goodsPriceChange" :min="0" :max="99999999" v-model="orderInfo.goods_price" auto-complete="off"
-					 placeholder="请输入商品价格"></el-input-number>
+					 placeholder="请输入Product价格"></el-input-number>
 				</el-form-item>
 				<el-form-item label="修改快递价格:">
 					<el-input-number @change="freightPriceChange" :min="0" :max="99999999" v-model="orderInfo.freight_price"
@@ -830,9 +830,9 @@
 			},
 			handleRowDelete(index, row) {
 
-				this.$confirm('确定要删除?', '提示', {
+				this.$confirm('确定要Delete?', '提示', {
 					confirmButtonText: '确定',
-					cancelButtonText: '取消',
+					cancelButtonText: 'Cancel',
 					type: 'warning'
 				}).then(() => {
 
@@ -843,7 +843,7 @@
 						if (response.data.errno === 0) {
 							this.$message({
 								type: 'success',
-								message: '删除成功!'
+								message: 'Delete成功!'
 							});
 							this.getList();
 						}

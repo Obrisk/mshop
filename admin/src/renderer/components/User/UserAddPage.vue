@@ -78,7 +78,7 @@
                         <div v-if="item.change_price!= item.actual_price" class="price-change">
                             改价前{{item.change_price}}元
                         </div>
-                        <div class="goods-num">共{{item.goodsCount}}件商品</div>
+                        <div class="goods-num">共{{item.goodsCount}}件Product</div>
                     </div>
                     <div class="content-wrap clearfix">
 
@@ -126,25 +126,25 @@
                             <div class="f1" style="width: 600px;">{{item.full_region}}</div>
                         </div>
                         <div class="r">
-                            <el-button size="small" @click="addressEdit(item)">编辑</el-button>
+                            <el-button size="small" @click="addressEdit(item)">Edit</el-button>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="form-table-box" v-if="this.pIndex == 2">
                 <el-table :data="cartData" style="width: 100%" border stripe>
-                    <el-table-column prop="goods_id" label="商品ID" width="100px"></el-table-column>
+                    <el-table-column prop="goods_id" label="ProductID" width="100px"></el-table-column>
                     <el-table-column prop="list_pic_url" label="图片" width="70px">
                         <template scope="scope">
                             <img :src="scope.row.list_pic_url" alt="" style="width: 50px;height: 50px">
                         </template>
                     </el-table-column>
-                    <el-table-column prop="goods_name" label="商品名称"></el-table-column>
+                    <el-table-column prop="goods_name" label="Product名称"></el-table-column>
                     <el-table-column prop="goods_specifition_name_value" label="型号"></el-table-column>
                     <el-table-column prop="number" label="数量" width="70px"></el-table-column>
                     <el-table-column prop="retail_price" label="成交价"></el-table-column>
                     <el-table-column prop="add_time" label="加入时间"></el-table-column>
-                    <el-table-column prop="is_delete" label="是否删除">
+                    <el-table-column prop="is_delete" label="是否Delete">
                         <template scope="scope">
                             <label>{{scope.row.is_delete == 1? '已删':''}}</label>
                         </template>
@@ -153,13 +153,13 @@
             </div>
             <div class="form-table-box" v-if="this.pIndex == 3">
                 <el-table :data="footData" style="width: 100%" stripe>
-                    <el-table-column prop="id" label="商品ID" width="100px"></el-table-column>
+                    <el-table-column prop="id" label="ProductID" width="100px"></el-table-column>
                     <el-table-column prop="list_pic_url" label="图片" width="70px">
                         <template scope="scope">
                             <img :src="scope.row.list_pic_url" alt="" style="width: 50px;height: 50px">
                         </template>
                     </el-table-column>
-                    <el-table-column prop="name" label="商品名称"></el-table-column>
+                    <el-table-column prop="name" label="Product名称"></el-table-column>
                 </el-table>
             </div>
             <div class="page-box">

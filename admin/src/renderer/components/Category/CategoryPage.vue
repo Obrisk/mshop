@@ -7,21 +7,21 @@
             </el-breadcrumb>
             <div class="operation-nav">
                 <router-link to="/dashboard/category/add">
-                    <el-button type="primary" icon="plus">添加分类</el-button>
+                    <el-button type="primary" icon="plus">Add New分类</el-button>
                 </router-link>
             </div>
         </div>
         <div class="content-main">
             <div class="form-table-box">
                 <el-table :data="tableData" style="width: 100%" border stripe>
-                    <el-table-column prop="name" label="分类名称">
+                    <el-table-column prop="name" label="Category Name">
                         <template scope="scope">
                             <div v-if="scope.row.level==1" class="bg-gray">{{scope.row.name}}</div>
                             <div v-if="scope.row.level==2" class="bg-left">{{scope.row.name}}</div>
                             <!-- {{ scope.row.level == 2 ? '　' : '' }} {{scope.row.name}} -->
                         </template>
                     </el-table-column>
-                    <el-table-column label="图标显示" width="80">
+                    <el-table-column label="Icon显示" width="80">
                         <template scope="scope">
                             <el-switch
                                     v-model="scope.row.is_channel"
@@ -52,16 +52,16 @@
                         </template>
                     </el-table-column>
 
-                    <el-table-column prop="sort_order" label="排序" width="100" sortable>
+                    <el-table-column prop="sort_order" label="Sort" width="100" sortable>
                         <template scope="scope">
-                            <el-input v-model="scope.row.sort_order" placeholder="排序" @blur="submitSort(scope.$index, scope.row)"></el-input>
+                            <el-input v-model="scope.row.sort_order" placeholder="Sort" @blur="submitSort(scope.$index, scope.row)"></el-input>
                         </template>
                     </el-table-column>
 
                     <el-table-column label="操作" width="300">
                         <template scope="scope">
-                            <el-button size="small" @click="handleRowEdit(scope.$index, scope.row)">编辑</el-button>
-                            <el-button size="small" type="danger" @click="handleRowDelete(scope.$index, scope.row)">删除
+                            <el-button size="small" @click="handleRowEdit(scope.$index, scope.row)">Edit</el-button>
+                            <el-button size="small" type="danger" @click="handleRowDelete(scope.$index, scope.row)">Delete
                             </el-button>
                         </template>
                     </el-table-column>
@@ -123,9 +123,9 @@
                 this.$router.push({name: 'category_add', query: {id: row.id}})
             },
             handleRowDelete(index, row) {
-                this.$confirm('确定要删除?', '提示', {
+                this.$confirm('确定要Delete?', '提示', {
                     confirmButtonText: '确定',
-                    cancelButtonText: '取消',
+                    cancelButtonText: 'Cancel',
                     type: 'warning'
                 }).then(() => {
 
@@ -134,7 +134,7 @@
                         if (response.data.errno === 0) {
                             this.$message({
                                 type: 'success',
-                                message: '删除成功!'
+                                message: 'Delete成功!'
                             });
 
                             this.getList();
@@ -142,7 +142,7 @@
                         else {
                             this.$message({
                                 type: 'error',
-                                message: '删除失败，该分类有子分类!'
+                                message: 'Delete失败，该分类有子分类!'
                             });
 
                         }

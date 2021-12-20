@@ -6,7 +6,7 @@
             </el-breadcrumb>
             <div class="operation-nav">
                 <router-link to="/dashboard/goods/add">
-                    <el-button type="primary" icon="plus" size="small">添加商品</el-button>
+                    <el-button type="primary" icon="plus" size="small">Add NewProduct</el-button>
                 </router-link>
             </div>
         </div>
@@ -14,15 +14,15 @@
             <div class="block">
 				<span class="wrapper">
 					<el-button :plain="true" type="primary" :class="activeClass == 1 ? 'active' : '' "
-							   @click="sortOrder(1)" size="small">按销量排序</el-button>
+							   @click="sortOrder(1)" size="small">按销量Sort</el-button>
 					<el-button :plain="true" type="primary" :class="activeClass == 2 ? 'active' : '' "
-							   @click="sortOrder(2)" size="small">按售价排序</el-button>
+							   @click="sortOrder(2)" size="small">按售价Sort</el-button>
 					<el-button :plain="true" type="primary" :class="activeClass == 3 ? 'active' : '' "
-							   @click="sortOrder(3)" size="small">按库存排序</el-button>
+							   @click="sortOrder(3)" size="small">按库存Sort</el-button>
 				</span>
             </div>
             <el-tabs v-model="activeName" @tab-click="handleClick">
-                <el-tab-pane label="全部商品" name="first">
+                <el-tab-pane label="全部Product" name="first">
 
                 </el-tab-pane>
                 <el-tab-pane label="出售中" name="second"></el-tab-pane>
@@ -31,8 +31,8 @@
             </el-tabs>
             <div class="filter-box">
                 <el-form :inline="true" :model="filterForm" class="form-inline">
-                    <el-form-item label="商品名称">
-                        <el-input size="small" v-model="filterForm.name" placeholder="商品名称"></el-input>
+                    <el-form-item label="Product名称">
+                        <el-input size="small" v-model="filterForm.name" placeholder="Product名称"></el-input>
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" size="small" @click="onSubmitFilter">查询</el-button>
@@ -47,10 +47,10 @@
                         <template slot-scope="props">
                             <el-table :data="props.row.product" style="width: 100%" stripe>
                                 <el-table-column prop="id" label="id" width="60"></el-table-column>
-                                <el-table-column prop="goods_sn" label="商品SKU" width="140">
+                                <el-table-column prop="goods_sn" label="ProductSKU" width="140">
                                     <template scope="scope">
                                         <el-input @blur="checkSkuOnly(scope.$index, scope.row)" size="mini"
-                                                  v-model="scope.row.goods_sn" placeholder="商品SKU"></el-input>
+                                                  v-model="scope.row.goods_sn" placeholder="ProductSKU"></el-input>
                                     </template>
                                 </el-table-column>
                                 <el-table-column prop="goods_aka" label="快递单上的简称" width="160">
@@ -110,15 +110,15 @@
                         </template>
                     </el-table-column>
                     <el-table-column prop="id" label="ID" width="120"></el-table-column>
-                    <el-table-column prop="list_pic_url" label="商品图片" width="80">
+                    <el-table-column prop="list_pic_url" label="Product图片" width="80">
                         <template scope="scope">
                             <img :src="scope.row.list_pic_url" alt="" style="width: 40px;height: 40px">
                         </template>
                     </el-table-column>
-                    <el-table-column prop="name" label="商品名称"></el-table-column>
-                    <el-table-column prop="sort_order" label="排序" width="140" sortable>
+                    <el-table-column prop="name" label="Product名称"></el-table-column>
+                    <el-table-column prop="sort_order" label="Sort" width="140" sortable>
                         <template scope="scope">
-                            <el-input-number class="sort-width" size="mini" :min="1" :max="100" controls-position="right" v-model="scope.row.sort_order" placeholder="排序" @blur="submitSort(scope.$index, scope.row)" @change="submitSort(scope.$index, scope.row)"></el-input-number>
+                            <el-input-number class="sort-width" size="mini" :min="1" :max="100" controls-position="right" v-model="scope.row.sort_order" placeholder="Sort" @blur="submitSort(scope.$index, scope.row)" @change="submitSort(scope.$index, scope.row)"></el-input-number>
                         </template>
                     </el-table-column>
                     <el-table-column prop="sell_volume" label="销量" width="80" sortable></el-table-column>
@@ -146,8 +146,8 @@
                     </el-table-column>
                     <el-table-column label="操作">
                         <template scope="scope">
-                            <el-button size="small" @click="handleRowEdit(scope.$index, scope.row)">编辑</el-button>
-                            <el-button size="small" plain type="danger" @click="handleRowDelete(scope.$index, scope.row)">删除
+                            <el-button size="small" @click="handleRowEdit(scope.$index, scope.row)">Edit</el-button>
+                            <el-button size="small" plain type="danger" @click="handleRowDelete(scope.$index, scope.row)">Delete
                             </el-button>
                         </template>
                     </el-table-column>
@@ -202,7 +202,7 @@
             stockSyc(){
                 this.$confirm('确定要同步库存?', '提示', {
                     confirmButtonText: '确定',
-                    cancelButtonText: '取消',
+                    cancelButtonText: 'Cancel',
                     type: 'warning'
                 }).then(() => {
                     this.axios.post('crontab/updateStockByHand').then((response) => {
@@ -342,9 +342,9 @@
             },
             handleRowDelete(index, row) {
 
-                this.$confirm('确定要删除?', '提示', {
+                this.$confirm('确定要Delete?', '提示', {
                     confirmButtonText: '确定',
-                    cancelButtonText: '取消',
+                    cancelButtonText: 'Cancel',
                     type: 'warning'
                 }).then(() => {
                 let that = this;
@@ -352,7 +352,7 @@
                     if (response.data.errno === 0) {
                         that.$message({
                             type: 'success',
-                            message: '删除成功!'
+                            message: 'Delete成功!'
                         });
                         let pIndex = localStorage.getItem('pIndex');
                         console.log(pIndex);
@@ -373,7 +373,7 @@
                 }).catch(() => {
 //                    this.$message({
 //                        type: 'info',
-//                        message: '已取消删除'
+//                        message: '已CancelDelete'
 //                    });
                 });
             },

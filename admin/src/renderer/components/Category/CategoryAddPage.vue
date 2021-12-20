@@ -3,7 +3,7 @@
         <div class="content-nav">
             <el-breadcrumb class="breadcrumb" separator="/">
                 <el-breadcrumb-item :to="{ name: 'nature' }">Settings</el-breadcrumb-item>
-                <el-breadcrumb-item>{{infoForm.id ? '编辑分类' : '添加分类'}}</el-breadcrumb-item>
+                <el-breadcrumb-item>{{infoForm.id ? 'Edit分类' : 'Add New分类'}}</el-breadcrumb-item>
             </el-breadcrumb>
             <div class="operation-nav">
                 <el-button type="primary" @click="goBackPage" icon="arrow-left">返回列表</el-button>
@@ -18,14 +18,14 @@
                                        :value="item.id"></el-option>
                         </el-select>
                     </el-form-item> -->
-                    <el-form-item label="分类名称" prop="name">
+                    <el-form-item label="Category Name" prop="name">
                         <el-input v-model="infoForm.name"></el-input>
                     </el-form-item>
-                    <el-form-item label="简短介绍">
+                    <el-form-item label="Short Details">
                         <el-input type="textarea" v-model="infoForm.front_name" :rows="1"></el-input>
                         <div class="form-tip"></div>
                     </el-form-item>
-                    <el-form-item label="分类图片" prop="img_url" v-if="infoForm.parent_id == 0">
+                    <el-form-item label="Product Photo" prop="img_url" v-if="infoForm.parent_id == 0">
                         <img v-if="infoForm.img_url" :src="infoForm.img_url" class="image-show">
                         <el-upload
                                 class="upload-demo"
@@ -40,12 +40,12 @@
                         >
                             <el-button v-if="!infoForm.img_url" size="small" type="primary">点击上传</el-button>
                         </el-upload>
-                        <div class="form-tip">图片尺寸：顶级分类为690*自定义, 只能上传jpg/png文件</div>
+                        <div class="form-tip">图片尺寸：Image size Max size is 690 Weight and Custom Height, 只能上传jpg/png文件</div>
                     </el-form-item>
-                    <el-form-item label="分类图片高度" prop="name" v-if="infoForm.parent_id == 0">
+                    <el-form-item label="Product Photo高度" prop="name" v-if="infoForm.parent_id == 0">
                         <el-input v-model="infoForm.p_height"></el-input>
                     </el-form-item>
-                    <el-form-item label="图标" prop="icon_url" v-if="infoForm.parent_id == 0">
+                    <el-form-item label="Icon" prop="icon_url" v-if="infoForm.parent_id == 0">
                         <img v-if="infoForm.icon_url" :src="infoForm.icon_url" class="image-show">
                         <el-upload
                                 class="upload-demo"
@@ -61,14 +61,14 @@
                             <el-button v-if="!infoForm.icon_url" size="small" type="primary">点击上传</el-button>
                         </el-upload>
 
-                        <div class="form-tip">图片尺寸：图标250*250, 只能上传jpg/png文件</div>
+                        <div class="form-tip">图片尺寸：Icon250*250, 只能上传jpg/png文件</div>
                     </el-form-item>
-                    <el-form-item label="排序">
+                    <el-form-item label="Sort">
                         <el-input-number v-model="infoForm.sort_order" :min="1" :max="1000"></el-input-number>
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="onSubmitInfo">确定保存</el-button>
-                        <el-button @click="goBackPage">取消</el-button>
+                        <el-button @click="goBackPage">Cancel</el-button>
                     </el-form-item>
                 </el-form>
             </div>
@@ -111,10 +111,10 @@
                         {required: true, message: '请输入简介', trigger: 'blur'},
                     ],
                     img_url: [
-                        {required: true, message: '请选择分类图片', trigger: 'blur'},
+                        {required: true, message: '请选择Product Photo', trigger: 'blur'},
                     ],
                     icon_url: [
-                        {required: true, message: '请选择分类图标', trigger: 'blur'},
+                        {required: true, message: '请选择分类Icon', trigger: 'blur'},
                     ],
                 },
                 picData: {
@@ -134,10 +134,10 @@
                 })
             },
             beforeBannerRemove(file, fileList) {
-                return this.$confirm(`确定移除该图？删除后将无法找回`);
+                return this.$confirm(`确定移除该图？Delete后将无法找回`);
             },
             beforeIconRemove(file, fileList) {
-                return this.$confirm(`确定移除图标？删除后将无法找回`);
+                return this.$confirm(`确定移除Icon？Delete后将无法找回`);
             },
             bannerRemove(file, fileList) {
                 this.infoForm.img_url = '';
@@ -145,7 +145,7 @@
                 this.axios.post('category/deleteBannerImage', {id: id}).then((response) => {
                     this.$message({
                         type: 'success',
-                        message: '删除成功'
+                        message: 'Delete成功'
                     });
                 });
             },
@@ -155,7 +155,7 @@
                 this.axios.post('category/deleteIconImage', {id: id}).then((response) => {
                     this.$message({
                         type: 'success',
-                        message: '删除成功'
+                        message: 'Delete成功'
                     });
                 });
             },
@@ -218,7 +218,7 @@
                     };
                     this.fileList.push(data);
                     let iconData = {
-                        name: '图标',
+                        name: 'Icon',
                         url: resInfo.icon_url
                     };
                     this.fileList2.push(iconData);

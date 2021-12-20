@@ -6,7 +6,7 @@
                 <el-breadcrumb-item>偏远地区</el-breadcrumb-item>
             </el-breadcrumb>
             <div class="operation-nav">
-                <el-button type="primary" plain @click="addExceptArea" icon="arrow-left">添加偏远地区</el-button>
+                <el-button type="primary" plain @click="addExceptArea" icon="arrow-left">Add New偏远地区</el-button>
                 <el-button type="primary" @click="goBackPage" icon="arrow-left">返回</el-button>
             </div>
         </div>
@@ -21,12 +21,12 @@
                         <el-table-column label="操作" width="200">
                             <template scope="scope">
                                 <el-button type="primary" size="small" plain
-                                           @click="handleRowEdit(scope.$index, scope.row)">编辑
+                                           @click="handleRowEdit(scope.$index, scope.row)">Edit
                                 </el-button>
                                 <el-button size="small"
                                            @click="handleRowDelete(scope.$index, scope.row)"
                                            type="danger" plain>
-                                    删除
+                                    Delete
                                 </el-button>
                             </template>
                         </el-table-column>
@@ -64,9 +64,9 @@
                 this.$router.push({ name: 'except_area_add', query: { id: row.id } })
             },
             handleRowDelete(index, row) {
-                this.$confirm('确定要删除?', '提示', {
+                this.$confirm('确定要Delete?', '提示', {
                     confirmButtonText: '确定',
-                    cancelButtonText: '取消',
+                    cancelButtonText: 'Cancel',
                     type: 'warning'
                 }).then(() => {
                     this.axios.post('shipper/exceptAreaDelete', {id: row.id}).then((response) => {
@@ -74,7 +74,7 @@
                         if (response.data.errno === 0) {
                             this.$message({
                                 type: 'success',
-                                message: '删除成功!'
+                                message: 'Delete成功!'
                             });
                             this.getInfo();
                         }

@@ -16,9 +16,9 @@
         },
         methods: {
             logout() {
-                this.$confirm('是否要退出?', '提示', {
+                this.$confirm('是否要Exit?', '提示', {
                     confirmButtonText: '确定',
-                    cancelButtonText: '取消',
+                    cancelButtonText: 'Cancel',
                     type: 'warning'
                 }).then(() => {
                     localStorage.clear();

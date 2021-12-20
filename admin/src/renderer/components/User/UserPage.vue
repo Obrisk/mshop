@@ -44,8 +44,8 @@
 					</el-table-column>
 					<el-table-column label="操作">
 						<template scope="scope">
-							<el-button size="small" @click="handleRowEdit(scope.$index, scope.row)">编辑</el-button>
-							<!-- <el-button plain size="small" type="danger" @click="handleRowDelete(scope.$index, scope.row)">删除</el-button> -->
+							<el-button size="small" @click="handleRowEdit(scope.$index, scope.row)">Edit</el-button>
+							<!-- <el-button plain size="small" type="danger" @click="handleRowDelete(scope.$index, scope.row)">Delete</el-button> -->
 						</template>
 					</el-table-column>
 				</el-table>
@@ -90,9 +90,9 @@ export default {
 		},
 		handleRowDelete(index, row) {
 
-			this.$confirm('确定要删除?', '提示', {
+			this.$confirm('确定要Delete?', '提示', {
 				confirmButtonText: '确定',
-				cancelButtonText: '取消',
+				cancelButtonText: 'Cancel',
 				type: 'warning'
 			}).then(() => {
 
@@ -101,7 +101,7 @@ export default {
 					if (response.data.errno === 0) {
 						this.$message({
 							type: 'success',
-							message: '删除成功!'
+							message: 'Delete成功!'
 						});
 
 						this.getList();

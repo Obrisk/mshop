@@ -3,7 +3,7 @@
         <div class="content-nav">
             <el-breadcrumb class="breadcrumb" separator="/">
                 <el-breadcrumb-item :to="{ name: 'nature' }">Settings</el-breadcrumb-item>
-                <el-breadcrumb-item>{{infoForm.id ? '编辑型号' : '添加型号'}}</el-breadcrumb-item>
+                <el-breadcrumb-item>{{infoForm.id ? 'Edit型号' : 'Add New型号'}}</el-breadcrumb-item>
             </el-breadcrumb>
             <div class="operation-nav">
                 <el-button type="primary" @click="goBackPage" icon="arrow-left">返回列表</el-button>
@@ -12,17 +12,17 @@
         <div class="content-main">
             <div class="form-table-box">
                 <el-form ref="infoForm" :rules="infoRules" :model="infoForm" label-width="120px">
-                    <el-form-item label="分类名称" prop="name">
+                    <el-form-item label="Category Name" prop="name">
                         <el-input v-model="infoForm.name"></el-input>
                     </el-form-item>
-                    <el-form-item label="排序">
+                    <el-form-item label="Sort">
                         <el-input-number v-model="infoForm.sort_order" :min="1" :max="1000"></el-input-number>
                     </el-form-item>
                     <el-form-item>
                         <el-button v-if="infoForm.id > 0" type="primary" @click="updateSpec">确定保存</el-button>
-                        <el-button v-else type="primary" @click="addSpec">确定添加</el-button>
-                        <el-button v-if="infoForm.id > 0" type="danger" @click="specDelete">删除</el-button>
-                        <el-button @click="goBackPage">取消</el-button>
+                        <el-button v-else type="primary" @click="addSpec">确定Add New</el-button>
+                        <el-button v-if="infoForm.id > 0" type="danger" @click="specDelete">Delete</el-button>
+                        <el-button @click="goBackPage">Cancel</el-button>
                     </el-form-item>
                 </el-form>
             </div>
@@ -59,13 +59,13 @@
                             if (response.data.errno === 0) {
                                 this.$message({
                                     type: 'success',
-                                    message: '添加成功!'
+                                    message: 'Add New成功!'
                                 });
                                 this.$router.go(-1);
                             } else {
                                 this.$message({
                                     type: 'error',
-                                    message: '添加失败'
+                                    message: 'Add New失败'
                                 })
                             }
                         })
@@ -102,9 +102,9 @@
                 });
             },
             specDelete(index, row) {
-                this.$confirm('确定要删除?', '提示', {
+                this.$confirm('确定要Delete?', '提示', {
                     confirmButtonText: '确定',
-                    cancelButtonText: '取消',
+                    cancelButtonText: 'Cancel',
                     type: 'warning'
                 }).then(() => {
                     this.axios.post('specification/delete', {id: row.id}).then((response) => {
@@ -112,14 +112,14 @@
                         if (response.data.errno === 0) {
                             this.$message({
                                 type: 'success',
-                                message: '删除成功!'
+                                message: 'Delete成功!'
                             });
                             this.$router.go(-1);
                         }
                         else {
                             this.$message({
                                 type: 'error',
-                                message: '删除失败，该型号下有商品!'
+                                message: 'Delete失败，该型号下有Product!'
                             });
                         }
                     })

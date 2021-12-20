@@ -47,7 +47,7 @@
 					</el-menu-item>
 					<el-menu-item index="/dashboard/ad">
 						<i class="fa fa-circle"></i>
-						<span>Advertisement列表</span>
+						<span>Ads List</span>
 					</el-menu-item>
 					<el-menu-item index="/dashboard/notice">
 						<i class="fa fa-circle"></i>
@@ -68,7 +68,7 @@
 				</el-submenu>
 				<el-menu-item @click="logout">
 					<i class="fa fa-large fa-sign-out"></i>
-					<span>退出</span>
+					<span>Exit</span>
 				</el-menu-item>
 			</el-menu>
 		</div>
@@ -92,9 +92,9 @@
                 console.log(key, keyPath);
             },
             logout() {
-                this.$confirm('是否要退出?', '提示', {
+                this.$confirm('是否要Exit?', '提示', {
                     confirmButtonText: '确定',
-                    cancelButtonText: '取消',
+                    cancelButtonText: 'Cancel',
                     type: 'warning'
                 }).then(() => {
                     localStorage.clear();
