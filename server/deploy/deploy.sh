@@ -34,11 +34,12 @@ sudo npm install nrm -g
 
 nrm use taobao
 
-sudo npm install pm2@latest -g
+sudo npm install pm2@latest node-gyp -g
 
-sudo npm i
+npm install
 
 pm2 startOrGracefulReload ~/mshop/server/pm2.json
+#This will start on localhost:8360
 
 pm2 startup systemd
 
@@ -46,12 +47,23 @@ $(!! 2>&1 >/dev/null | grep 'sudo env')
 
 
 #sudo mysql
+#
+#create a user 
+#CREATE USER 'user'@'localhost' IDENTIFIED BY 'password';
 #CREATE DATABASE $3 CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
+# GRANT ALL PRIVILEGES ON *.* TO 'user'@'localhost' WITH GRANT OPTION;
+# FLUSH PRIVILEGES;
 
-sudo mysql -u username -p $3 < /home/ubuntu/server/hiolabsDB.sql
+
+sudo mysql -u user -p $3 < /home/ubuntu/server/hiolabsDB.sql
 
 sudo cp ~/livejs/nginx.conf /etc/nginx/sites-available/$4
+
+sudo ln -s /etc/nginx/sites-available/$4 /etc/nginx/sites-enabled
+
+sudo rm /etc/nginx/sites-enabled/default
+
 
 sudo nginx -t && sudo systemctl restart nginx
 
