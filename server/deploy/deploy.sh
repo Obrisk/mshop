@@ -6,7 +6,9 @@ sudo bash nodesource_setup.sh
 
 sudo apt install -y nodejs
 
-sudo apt install -y build-essential
+sudo apt install -y build-essential mysql-server nginx
+
+
 
 
 sudo update-alternatives --set editor /usr/bin/vim.basic
@@ -34,10 +36,27 @@ nrm use taobao
 
 sudo npm install pm2@latest -g
 
+sudo npm i
+
 pm2 startOrGracefulReload ~/mshop/server/pm2.json
 
 pm2 startup systemd
 
 $(!! 2>&1 >/dev/null | grep 'sudo env')
 
+
+#sudo mysql
+#CREATE DATABASE $3 CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+
+sudo mysql -u username -p $3 < /home/ubuntu/server/hiolabsDB.sql
+
+sudo cp ~/livejs/nginx.conf /etc/nginx/sites-available/$4
+
+sudo nginx -t && sudo systemctl restart nginx
+
+
+sudo apt-get update
+sudo apt-get install python3-certbot-nginx -y
+sudo certbot --noninteractive --agree-tos -d $4.$5 -d www.$4.$5 --register-unsafely-without-email --nginx
 
