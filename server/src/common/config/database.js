@@ -1,5 +1,5 @@
 const mysql = require('think-model-mysql');
-require('dotenv').config({ path: './dev.env' })
+require('dotenv').config({ path: './prod.env' })
 
 module.exports = {
     handle: mysql,

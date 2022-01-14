@@ -1,17 +1,17 @@
 // default config
 //
 
-require('dotenv').config({ path: './dev.env' })
+require('dotenv').config({ path: './prod.env' })
 
 
 module.exports = {
     default_module: 'api',
     weixin: {
-        appid: 'wx7af111110000000', // 小程序 appid
-        secret: 'cb8e5adce569f9bddce5b8123123e1115aaddce505', // 小程序密钥
-        mch_id: '15988888888', // 商户帐号ID
-        partner_key: 'asdasdasdasdasdasdasd', // 微信支付密钥
-        notify_url: 'https://www.您的域名.com/api/pay/notify' // 微信支付异步通知
+        appid: process.env.WX_APPID, // 小程序 appid
+        secret: process.env.WX_SECRET, // 小程序密钥
+        mch_id: process.env.WX_MCHID, // 商户帐号ID
+        partner_key: process.env.WX_PARTNERKEY, // 微信支付密钥
+        notify_url: process.env.WX_NOTIFYURL // 微信支付异步通知
     },
     express: {
         // 已废弃，之后考虑改回来，做成和阿里云的物流查询可以切换，方便大家的使用
