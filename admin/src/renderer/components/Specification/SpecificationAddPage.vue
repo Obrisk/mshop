@@ -3,10 +3,10 @@
         <div class="content-nav">
             <el-breadcrumb class="breadcrumb" separator="/">
                 <el-breadcrumb-item :to="{ name: 'nature' }">Settings</el-breadcrumb-item>
-                <el-breadcrumb-item>{{infoForm.id ? 'Edit型号' : 'Add New型号'}}</el-breadcrumb-item>
+                <el-breadcrumb-item>{{infoForm.id ? 'Edit Specification' : 'New Specification'}}</el-breadcrumb-item>
             </el-breadcrumb>
             <div class="operation-nav">
-                <el-button type="primary" @click="goBackPage" icon="arrow-left">返回列表</el-button>
+                <el-button type="primary" @click="goBackPage" icon="arrow-left">Back</el-button>
             </div>
         </div>
         <div class="content-main">
@@ -19,8 +19,8 @@
                         <el-input-number v-model="infoForm.sort_order" :min="1" :max="1000"></el-input-number>
                     </el-form-item>
                     <el-form-item>
-                        <el-button v-if="infoForm.id > 0" type="primary" @click="updateSpec">确定保存</el-button>
-                        <el-button v-else type="primary" @click="addSpec">确定Add New</el-button>
+                        <el-button v-if="infoForm.id > 0" type="primary" @click="updateSpec">Submit</el-button>
+                        <el-button v-else type="primary" @click="addSpec">Create Specification</el-button>
                         <el-button v-if="infoForm.id > 0" type="danger" @click="specDelete">Delete</el-button>
                         <el-button @click="goBackPage">Cancel</el-button>
                     </el-form-item>
@@ -42,7 +42,7 @@
                 },
                 infoRules:{
                     name: [
-                        {required: true, message: '请输入名称', trigger: 'blur'},
+                        {required: true, message: 'Please enter the Name', trigger: 'blur'},
                     ]
                 }
             }
@@ -59,13 +59,13 @@
                             if (response.data.errno === 0) {
                                 this.$message({
                                     type: 'success',
-                                    message: 'Add New成功!'
+                                    message: 'Added New Specification!'
                                 });
                                 this.$router.go(-1);
                             } else {
                                 this.$message({
                                     type: 'error',
-                                    message: 'Add New失败'
+                                    message: 'Failed to create Specification, try later'
                                 })
                             }
                         })
@@ -86,13 +86,13 @@
                             if (response.data.errno === 0) {
                                 this.$message({
                                     type: 'success',
-                                    message: '保存成功!'
+                                    message: 'Updated Successfully'
                                 });
                                 this.$router.go(-1);
                             } else {
                                 this.$message({
                                     type: 'error',
-                                    message: '保存失败'
+                                    message: 'Failed to update, try later'
                                 })
                             }
                         })
@@ -102,8 +102,8 @@
                 });
             },
             specDelete(index, row) {
-                this.$confirm('确定要Delete?', '提示', {
-                    confirmButtonText: '确定',
+                this.$confirm('Are you sure you want to Delete?', '提示', {
+                    confirmButtonText: 'Confirm',
                     cancelButtonText: 'Cancel',
                     type: 'warning'
                 }).then(() => {
@@ -112,14 +112,14 @@
                         if (response.data.errno === 0) {
                             this.$message({
                                 type: 'success',
-                                message: 'Delete成功!'
+                                message: 'Deleted Successfully'
                             });
                             this.$router.go(-1);
                         }
                         else {
                             this.$message({
                                 type: 'error',
-                                message: 'Delete失败，该型号下有Product!'
+                                message: 'Failed to Delete, try later!'
                             });
                         }
                     })

@@ -7,7 +7,7 @@
             </el-breadcrumb>
             <div class="operation-nav">
                 <router-link to="/dashboard/category/add">
-                    <el-button type="primary" icon="plus">Add New分类</el-button>
+                    <el-button type="primary" icon="plus">Add New Category</el-button>
                 </router-link>
             </div>
         </div>
@@ -21,7 +21,7 @@
                             <!-- {{ scope.row.level == 2 ? '　' : '' }} {{scope.row.name}} -->
                         </template>
                     </el-table-column>
-                    <el-table-column label="Icon显示" width="80">
+                    <el-table-column label="Display Icon" width="120">
                         <template scope="scope">
                             <el-switch
                                     v-model="scope.row.is_channel"
@@ -31,7 +31,7 @@
                             </el-switch>
                         </template>
                     </el-table-column>
-                    <el-table-column label="首页显示" width="80">
+                    <el-table-column label="Home List" width="120">
                         <template scope="scope">
                             <el-switch
                                     v-model="scope.row.is_show"
@@ -41,7 +41,7 @@
                             </el-switch>
                         </template>
                     </el-table-column>
-                    <el-table-column label="全部产品页面显示" width="140">
+                    <el-table-column label="Products List" width="140">
                         <template scope="scope">
                             <el-switch
                                     v-model="scope.row.is_category"
@@ -58,7 +58,7 @@
                         </template>
                     </el-table-column>
 
-                    <el-table-column label="操作" width="300">
+                    <el-table-column label="Action" width="300">
                         <template scope="scope">
                             <el-button size="small" @click="handleRowEdit(scope.$index, scope.row)">Edit</el-button>
                             <el-button size="small" type="danger" @click="handleRowDelete(scope.$index, scope.row)">Delete
@@ -123,8 +123,8 @@
                 this.$router.push({name: 'category_add', query: {id: row.id}})
             },
             handleRowDelete(index, row) {
-                this.$confirm('确定要Delete?', '提示', {
-                    confirmButtonText: '确定',
+                this.$confirm('Are you sure you want to Delete?', '提示', {
+                    confirmButtonText: 'Confirm',
                     cancelButtonText: 'Cancel',
                     type: 'warning'
                 }).then(() => {
@@ -134,7 +134,7 @@
                         if (response.data.errno === 0) {
                             this.$message({
                                 type: 'success',
-                                message: 'Delete成功!'
+                                message: 'Successfully Deleted'
                             });
 
                             this.getList();
@@ -142,7 +142,7 @@
                         else {
                             this.$message({
                                 type: 'error',
-                                message: 'Delete失败，该分类有子分类!'
+                                message: 'Sorry, category cannot be deleted!'
                             });
 
                         }

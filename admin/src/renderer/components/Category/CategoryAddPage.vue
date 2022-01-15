@@ -3,10 +3,10 @@
         <div class="content-nav">
             <el-breadcrumb class="breadcrumb" separator="/">
                 <el-breadcrumb-item :to="{ name: 'nature' }">Settings</el-breadcrumb-item>
-                <el-breadcrumb-item>{{infoForm.id ? 'Edit分类' : 'Add New分类'}}</el-breadcrumb-item>
+                <el-breadcrumb-item>{{infoForm.id ? 'Edit Category' : 'New Category'}}</el-breadcrumb-item>
             </el-breadcrumb>
             <div class="operation-nav">
-                <el-button type="primary" @click="goBackPage" icon="arrow-left">返回列表</el-button>
+                <el-button type="primary" @click="goBackPage" icon="arrow-left">Back</el-button>
             </div>
         </div>
         <div class="content-main">
@@ -38,11 +38,11 @@
                                 :data="picData"
                                 :before-upload="getQiniuToken"
                         >
-                            <el-button v-if="!infoForm.img_url" size="small" type="primary">点击上传</el-button>
+                            <el-button v-if="!infoForm.img_url" size="small" type="primary">Choose Image</el-button>
                         </el-upload>
-                        <div class="form-tip">图片尺寸：Image size Max size is 690 Weight and Custom Height, 只能上传jpg/png文件</div>
+                        <div class="form-tip">Image size Max size is 690, Supports png/jpg</div>
                     </el-form-item>
-                    <el-form-item label="Product Photo高度" prop="name" v-if="infoForm.parent_id == 0">
+                    <el-form-item label="Photo Height" prop="name" v-if="infoForm.parent_id == 0">
                         <el-input v-model="infoForm.p_height"></el-input>
                     </el-form-item>
                     <el-form-item label="Icon" prop="icon_url" v-if="infoForm.parent_id == 0">
@@ -58,16 +58,16 @@
                                 :on-success="handleUploadIconSuccess"
                                 :before-upload="getQiniuToken"
                         >
-                            <el-button v-if="!infoForm.icon_url" size="small" type="primary">点击上传</el-button>
+                            <el-button v-if="!infoForm.icon_url" size="small" type="primary">Choose Image</el-button>
                         </el-upload>
 
-                        <div class="form-tip">图片尺寸：Icon250*250, 只能上传jpg/png文件</div>
+                        <div class="form-tip">Icon size 250*250, supports jpg/png</div>
                     </el-form-item>
                     <el-form-item label="Sort">
                         <el-input-number v-model="infoForm.sort_order" :min="1" :max="1000"></el-input-number>
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary" @click="onSubmitInfo">确定保存</el-button>
+                        <el-button type="primary" @click="onSubmitInfo">Submit</el-button>
                         <el-button @click="goBackPage">Cancel</el-button>
                     </el-form-item>
                 </el-form>
@@ -105,16 +105,16 @@
                 },
                 infoRules: {
                     name: [
-                        {required: true, message: '请输入名称', trigger: 'blur'},
+                        {required: true, message: 'Name is required', trigger: 'blur'},
                     ],
                     front_name: [
-                        {required: true, message: '请输入简介', trigger: 'blur'},
+                        {required: true, message: 'Introduction is required', trigger: 'blur'},
                     ],
                     img_url: [
-                        {required: true, message: '请选择Product Photo', trigger: 'blur'},
+                        {required: true, message: 'Photo is required', trigger: 'blur'},
                     ],
                     icon_url: [
-                        {required: true, message: '请选择分类Icon', trigger: 'blur'},
+                        {required: true, message: 'Icon is required', trigger: 'blur'},
                     ],
                 },
                 picData: {
@@ -128,16 +128,15 @@
                 let that = this
                 this.axios.post('index/getQiniuToken').then((response) => {
                     let resInfo = response.data.data;
-                    console.log(resInfo);
                     that.picData.token = resInfo.token;
                     that.url = resInfo.url;
                 })
             },
             beforeBannerRemove(file, fileList) {
-                return this.$confirm(`确定移除该图？Delete后将无法找回`);
+                return this.$confirm(`Are you sure you want to completely remove this image?`);
             },
             beforeIconRemove(file, fileList) {
-                return this.$confirm(`确定移除Icon？Delete后将无法找回`);
+                return this.$confirm(`Are you sure you want to completely remove this icon?`);
             },
             bannerRemove(file, fileList) {
                 this.infoForm.img_url = '';
@@ -145,7 +144,7 @@
                 this.axios.post('category/deleteBannerImage', {id: id}).then((response) => {
                     this.$message({
                         type: 'success',
-                        message: 'Delete成功'
+                        message: 'Deleted Successfully'
                     });
                 });
             },
@@ -155,7 +154,7 @@
                 this.axios.post('category/deleteIconImage', {id: id}).then((response) => {
                     this.$message({
                         type: 'success',
-                        message: 'Delete成功'
+                        message: 'Deleted Successfully'
                     });
                 });
             },
@@ -164,20 +163,19 @@
             },
             onSubmitInfo() {
                 this.infoForm.level = this.infoForm.parent_id == 0 ? 'L1' : 'L2';
-                console.log(this.infoForm.level);
                 this.$refs['infoForm'].validate((valid) => {
                     if (valid) {
                         this.axios.post('category/store', this.infoForm).then((response) => {
                             if (response.data.errno === 0) {
                                 this.$message({
                                     type: 'success',
-                                    message: '保存成功'
+                                    message: 'Uploaded successfully'
                                 });
                                 this.$router.go(-1)
                             } else {
                                 this.$message({
                                     type: 'error',
-                                    message: '保存失败'
+                                    message: 'Failed to create'
                                 })
                             }
                         })

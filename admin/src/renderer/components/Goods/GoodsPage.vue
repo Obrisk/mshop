@@ -75,10 +75,10 @@
                                                   placeholder="零售"></el-input>
                                     </template>
                                 </el-table-column>
-                                <el-table-column prop="goods_weight" label="重量(KG)" width="90">
+                                <el-table-column prop="goods_weight" label="Weight(KG)" width="90">
                                     <template scope="scope">
                                         <el-input size="mini" v-model="scope.row.goods_weight"
-                                                  placeholder="重量"></el-input>
+                                                  placeholder="Weight"></el-input>
                                     </template>
                                 </el-table-column>
                                 <el-table-column prop="goods_number" label="库存" width="90">

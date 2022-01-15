@@ -13,10 +13,10 @@
             <div class="form-table-box">
                 <div class="btn-wrap">
                     <router-link v-if="pIndex == 0" to="/dashboard/category/add">
-                        <el-button plain type="primary" icon="plus">Add New分类</el-button>
+                        <el-button plain type="primary" icon="plus">New Category</el-button>
                     </router-link>
                     <router-link v-if="pIndex == 1" to="/dashboard/specification/detail">
-                        <el-button plain type="primary" icon="plus">Add New型号</el-button>
+                        <el-button plain type="primary" icon="plus">New specification</el-button>
                     </router-link>
                 </div>
                 <el-table v-if="pIndex == 0" :data="categoryData" style="width: 100%" border stripe>
@@ -27,7 +27,7 @@
                             <!-- {{ scope.row.level == 2 ? '　' : '' }} {{scope.row.name}} -->
                         </template>
                     </el-table-column>
-                    <el-table-column label="Icon显示" width="80">
+                    <el-table-column label="Show Icon" width="120">
                         <template scope="scope">
                             <el-switch
                                     v-model="scope.row.is_channel"
@@ -37,7 +37,7 @@
                             </el-switch>
                         </template>
                     </el-table-column>
-                    <el-table-column label="首页显示" width="80">
+                    <el-table-column label="Homepage Display" width="150">
                         <template scope="scope">
                             <el-switch
                                     v-model="scope.row.is_show"
@@ -47,7 +47,7 @@
                             </el-switch>
                         </template>
                     </el-table-column>
-                    <el-table-column label="全部产品页面显示" width="140">
+                    <el-table-column label="Product Display" width="150">
                         <template scope="scope">
                             <el-switch
                                     v-model="scope.row.is_category"
@@ -64,7 +64,7 @@
                         </template>
                     </el-table-column>
 
-                    <el-table-column label="操作" width="300">
+                    <el-table-column label="Action" width="300">
                         <template scope="scope">
                             <el-button size="small" @click="handleRowEdit(scope.$index, scope.row)">Edit</el-button>
                             <el-button size="small" type="danger" @click="handleRowDelete(scope.$index, scope.row)">Delete
@@ -75,11 +75,11 @@
                 <el-table v-if="pIndex == 1" :data="specData" style="width: 100%" border stripe>
                     <el-table-column prop="id" label="ID" width="100">
                     </el-table-column>
-                    <el-table-column prop="name" label="型号名">
+                    <el-table-column prop="name" label="Details">
                     </el-table-column>
                     <el-table-column prop="sort_order" label="Sort" width="200">
                     </el-table-column>
-                    <el-table-column label="操作" width="160">
+                    <el-table-column label="Action" width="160">
                         <template scope="scope">
                             <el-button size="small" @click="specEdit(scope.$index, scope.row)">Edit</el-button>
                             <el-button size="small" type="danger" @click="specDelete(scope.$index, scope.row)">Delete
@@ -160,8 +160,8 @@
                 this.$router.push({name: 'specification_detail', query: {id: row.id}})
             },
             specDelete(index, row) {
-                this.$confirm('确定要Delete?', '提示', {
-                    confirmButtonText: '确定',
+                this.$confirm('Confirm Delete?', 'Prompt', {
+                    confirmButtonText: 'Confirm',
                     cancelButtonText: 'Cancel',
                     type: 'warning'
                 }).then(() => {
@@ -170,22 +170,22 @@
                         if (response.data.errno === 0) {
                             this.$message({
                                 type: 'success',
-                                message: 'Delete成功!'
+                                message: 'Deleted Successfully!'
                             });
                             this.getSpecList();
                         }
                         else {
                             this.$message({
                                 type: 'error',
-                                message: 'Delete失败，该型号下有Product!'
+                                message: 'Sorry the item cannot be deleted, try later!'
                             });
                         }
                     })
                 });
             },
             handleRowDelete(index, row) {
-                this.$confirm('确定要Delete?', '提示', {
-                    confirmButtonText: '确定',
+                this.$confirm('Confirm Delete?', 'Prompt', {
+                    confirmButtonText: 'Confirm',
                     cancelButtonText: 'Cancel',
                     type: 'warning'
                 }).then(() => {
@@ -194,7 +194,7 @@
                         if (response.data.errno === 0) {
                             this.$message({
                                 type: 'success',
-                                message: 'Delete成功!'
+                                message: 'Deleted Successfully'
                             });
 
                             this.getList();
@@ -202,7 +202,7 @@
                         else {
                             this.$message({
                                 type: 'error',
-                                message: 'Delete失败，该分类有子分类!'
+                                message: 'Sorry the item cannot be deleted, try later!'
                             });
 
                         }

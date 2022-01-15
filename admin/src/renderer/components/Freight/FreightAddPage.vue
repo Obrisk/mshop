@@ -22,7 +22,7 @@
                     <el-form-item label="快递收费方式">
                         <el-radio-group v-model="infoForm.freight_type">
                             <el-radio :label="0">按件计费</el-radio>
-                            <el-radio :label="1">按重量计费</el-radio>
+                            <el-radio :label="1">按Weight计费</el-radio>
                         </el-radio-group>
                     </el-form-item>
 

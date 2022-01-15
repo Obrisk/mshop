@@ -7,7 +7,7 @@
         </div>
         <div class="content-main clearfix">
             <div class="notice">
-                <div class="l">Welcome to WineAndDine Admin Dashboard，You can make changes，The shop will be updated in a few minutes</div>
+                <div class="l">Welcome to WineAndDine Admin Dashboard How are you today?</div>
                 <div class="r" v-if="resetVision">
                     <label>重置倒计时：</label>
                     <countdown class="count" endTime="" :callback="callback" endText="已经结束了"></countdown>
