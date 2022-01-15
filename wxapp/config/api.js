@@ -1,6 +1,5 @@
-const ApiRootUrl = 'http://localhost:8360/api/';
-// const ApiRootUrl = 'http://192.168.0.108:8360/api/';
-//const ApiRootUrl = 'https://www.guxiaoling.com:8466/api/';
+//const ApiRootUrl = 'http://localhost:8360/api/';
+const ApiRootUrl = 'https://wine-and-dine.cn/api/';
 
 module.exports = {
     // 登录
