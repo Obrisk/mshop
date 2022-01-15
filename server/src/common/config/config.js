@@ -10,7 +10,7 @@ module.exports = {
         appid: process.env.WX_APPID, // 小程序 appid
         secret: process.env.WX_SECRET, // 小程序密钥
         mch_id: process.env.WX_MCHID, // 商户帐号ID
-        partner_key: process.env.WX_PARTNERKEY, // 微信支付密钥
+        partner_key: process.env.WX_APIKEY, // 微信支付密钥
         notify_url: process.env.WX_NOTIFYURL // 微信支付异步通知
     },
     express: {
