@@ -3,7 +3,7 @@
         <div class="content-nav">
             <el-breadcrumb class="breadcrumb" separator="/">
                 <el-breadcrumb-item :to="{ name: 'nature' }">Settings</el-breadcrumb-item>
-                <el-breadcrumb-item>{{infoForm.id ? 'Edit Specification' : 'New Specification'}}</el-breadcrumb-item>
+                <el-breadcrumb-item>{{infoForm.id ? 'Edit Type' : 'New Type'}}</el-breadcrumb-item>
             </el-breadcrumb>
             <div class="operation-nav">
                 <el-button type="primary" @click="goBackPage" icon="arrow-left">Back</el-button>
@@ -20,7 +20,7 @@
                     </el-form-item>
                     <el-form-item>
                         <el-button v-if="infoForm.id > 0" type="primary" @click="updateSpec">Submit</el-button>
-                        <el-button v-else type="primary" @click="addSpec">Create Specification</el-button>
+                        <el-button v-else type="primary" @click="addSpec">Create Type</el-button>
                         <el-button v-if="infoForm.id > 0" type="danger" @click="specDelete">Delete</el-button>
                         <el-button @click="goBackPage">Cancel</el-button>
                     </el-form-item>
@@ -59,13 +59,13 @@
                             if (response.data.errno === 0) {
                                 this.$message({
                                     type: 'success',
-                                    message: 'Added New Specification!'
+                                    message: 'Added New Type'
                                 });
                                 this.$router.go(-1);
                             } else {
                                 this.$message({
                                     type: 'error',
-                                    message: 'Failed to create Specification, try later'
+                                    message: 'Failed to create Type, try later'
                                 })
                             }
                         })

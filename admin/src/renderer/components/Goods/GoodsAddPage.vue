@@ -3,24 +3,24 @@
 		<div class="content-nav">
 			<el-breadcrumb class="breadcrumb" separator="/">
 				<el-breadcrumb-item :to="{ name: 'goods' }">Products</el-breadcrumb-item>
-				<el-breadcrumb-item>{{infoForm.id ? 'EditProduct' : 'Add NewProduct'}}</el-breadcrumb-item>
+				<el-breadcrumb-item>{{infoForm.id ? 'EditProduct' : 'New Product'}}</el-breadcrumb-item>
 			</el-breadcrumb>
 			<div class="operation-nav">
 				<!-- <el-button type="primary" @click="test">测试</el-button> -->
-				<el-button type="primary" @click="onSubmitInfo">确定保存</el-button>
-				<el-button @click="goBackPage" icon="arrow-left">返回列表</el-button>
+				<el-button type="primary" @click="onSubmitInfo">Submit</el-button>
+				<el-button @click="goBackPage" icon="arrow-left">Back</el-button>
 			</div>
 		</div>
 		<div class="content-main">
 			<div class="form-table-box">
 				<el-form ref="infoForm" :rules="infoRules" :model="infoForm" label-width="120px">
 					<el-form-item label="Categories">
-						<el-select class="el-select-class" v-model="cateId" placeholder="选择型号分类">
+						<el-select class="el-select-class" v-model="cateId" placeholder="Choose Category">
 							<el-option v-for="item in cateOptions" :key="item.value" :label="item.label" :value="item.value">
 							</el-option>
 						</el-select>
 					</el-form-item>
-					<el-form-item label="Product图片" prop="list_pic_url" v-if="infoForm.list_pic_url" class="image-uploader-diy new-height">
+					<el-form-item label="Default Photo" prop="list_pic_url" v-if="infoForm.list_pic_url" class="image-uploader-diy new-height">
 						<div class="index-image">
 							<el-image :preview-src-list="previewList" v-if="infoForm.list_pic_url" :src="infoForm.list_pic_url" @click="previewIndexImg"
 							 class="image-show" fit="cover"></el-image>
@@ -29,14 +29,14 @@
 							</div>
 						</div>
 					</el-form-item>
-					<el-form-item label="Product图片" prop="list_pic_url" v-if="!infoForm.list_pic_url">
+					<el-form-item label="Photo" prop="list_pic_url" v-if="!infoForm.list_pic_url">
 						<el-upload name="file" ref="upload" class="upload-demo" :action="qiniuZone" :on-success="handleSuccess"
 						 :before-upload="indexImgBefore" :auto-upload="true" list-type="picture-card" :data="picData" :http-request="uploadIndexImg">
-							<el-button size="small" type="primary">点击上传</el-button>
-							<div slot="tip" class="el-upload__tip">只能上传jpg/png文件</div>
+							<el-button size="small" type="primary">Upload</el-button>
+							<div slot="tip" class="el-upload__tip">Only jpg/png is allowed</div>
 						</el-upload>
 					</el-form-item>
-					<el-form-item label="Product轮播图" prop="goods_sn">
+					<el-form-item label="Gallery Photos" prop="goods_sn">
 						<draggable v-model="gallery_list" draggable=".gallery-item" class="drag-wrap">
 							<div v-for="(element, index) in gallery_list" class="gallery-item" v-if="element.is_delete == 0">
 								<el-image :preview-src-list="previewList" @click="previewImg(index)" style="width: 148px; height: 148px;margin:0 10px 10px 0;"
@@ -52,50 +52,50 @@
 							</el-upload>
 						</draggable>
 					</el-form-item>
-					<el-form-item label="Product名称" prop="name">
+					<el-form-item label="Product Name" prop="name">
 						<el-input v-model="infoForm.name"></el-input>
 					</el-form-item>
-					<el-form-item label="Product简介" prop="goods_brief">
+					<el-form-item label="Short Title" prop="goods_brief">
 						<el-input type="textarea" v-model="infoForm.goods_brief" :rows="3"></el-input>
 						<div class="form-tip"></div>
 					</el-form-item>
-					<el-form-item label="Product单位" prop="goods_unit">
+					<el-form-item label="Product Unit" prop="goods_unit">
 						<el-input v-model="infoForm.goods_unit"></el-input>
-						<div class="form-tip">如：件、包、袋</div>
+						<div class="form-tip">Optional</div>
 					</el-form-item>
-					<el-form-item label="销量" prop="sell_volume">
+					<el-form-item label="Sales Volume" prop="sell_volume">
 						<el-input v-model="infoForm.sell_volume"></el-input>
 					</el-form-item>
-					<el-form-item label="型号和价格">
+					<el-form-item label="Product Type">
 						<div>
-							<el-select class="el-select-class" v-model="specValue" placeholder="选择型号分类">
+							<el-select class="el-select-class" v-model="specValue" placeholder="Product Type">
 								<el-option v-for="item in specOptionsList" :key="item.value" :label="item.label" :value="item.value">
 								</el-option>
 							</el-select>
 						</div>
 						<div class="spec-wrap">
 							<el-table :data="specData" stripe style="width: 100%">
-								<el-table-column prop="goods_sn" label="ProductSKU" width="140">
+								<el-table-column prop="goods_sn" label="Product SKU" width="140">
 									<template scope="scope">
 										<el-input @blur="checkSkuOnly(scope.$index, scope.row)" size="mini" v-model="scope.row.goods_sn" placeholder="ProductSKU"></el-input>
 									</template>
 								</el-table-column>
-								<el-table-column prop="goods_aka" label="快递单上的简称" width="160">
+								<el-table-column prop="goods_aka" label="Short Title" width="160">
 									<template scope="scope">
-										<el-input size="mini" v-model="scope.row.goods_name" placeholder="简称"></el-input>
+										<el-input size="mini" v-model="scope.row.goods_name" placeholder="Short title"></el-input>
 									</template>
 								</el-table-column>
-								<el-table-column prop="value" label="型号/规格" width="130">
+								<el-table-column prop="value" label="Volume" width="130">
 									<template scope="scope">
-										<el-input size="mini" v-model="scope.row.value" placeholder="如1斤/条"></el-input>
+										<el-input size="mini" v-model="scope.row.value" placeholder="Bottle Volume"></el-input>
 									</template>
 								</el-table-column>
-								<el-table-column prop="cost" label="成本(元)" width="100">
+								<el-table-column prop="cost" label="Price" width="100">
 									<template scope="scope">
-										<el-input size="mini" v-model="scope.row.cost" placeholder="成本"></el-input>
+										<el-input size="mini" v-model="scope.row.cost" placeholder="Price"></el-input>
 									</template>
 								</el-table-column>
-								<el-table-column prop="retail_price" label="零售(元)" width="100">
+								<el-table-column prop="retail_price" label="Retail Price" width="100">
 									<template scope="scope">
 										<el-input size="mini" v-model="scope.row.retail_price" placeholder="零售"></el-input>
 									</template>
@@ -105,28 +105,28 @@
 										<el-input size="mini" v-model="scope.row.goods_weight" placeholder="Weight"></el-input>
 									</template>
 								</el-table-column>
-								<el-table-column prop="goods_number" label="库存" width="100">
+								<el-table-column prop="goods_number" label="Stock" width="100">
 									<template scope="scope">
-										<el-input size="mini" v-model="scope.row.goods_number" placeholder="库存"></el-input>
+										<el-input size="mini" v-model="scope.row.goods_number" placeholder="Stock number"></el-input>
 									</template>
 								</el-table-column>
-								<el-table-column label="操作" width="70">
+								<el-table-column label="Action" width="70">
 									<template scope="scope">
 										<el-button size="mini" type="danger" icon="el-icon-delete" circle @click="specDelete(scope.$index, scope.row)">
 										</el-button>
 									</template>
 								</el-table-column>
 							</el-table>
-							<el-button class="marginTop20" type="primary" @click="addSpecData">新增型号</el-button>
+							<el-button class="marginTop20" type="primary" @click="addSpecData">Add Type</el-button>
 						</div>
 					</el-form-item>
-					<el-form-item label="属性设置" class="checkbox-wrap">
+					<el-form-item label="Imported" class="checkbox-wrap">
 						<el-checkbox-group v-model="infoForm.is_new" class="checkbox-list">
-							<el-checkbox label="新品" name="is_new"></el-checkbox>
+							<el-checkbox label="Yes" name="is_new"></el-checkbox>
 						</el-checkbox-group>
 					</el-form-item>
-					<el-form-item label="选择快递模板">
-						<el-select v-model="kdValue" placeholder="请选择快递" @change="kdChange">
+					<el-form-item label="Express Delivery">
+						<el-select v-model="kdValue" placeholder="Express Delivery Company" @change="kdChange">
 							<el-option v-for="item in kdOptions" :key="item.value" :label="item.label" :value="item.value">
 							</el-option>
 						</el-select>
@@ -134,10 +134,10 @@
 					<el-form-item label="Sort" prop="sort_order">
 						<el-input-number :mini="1" :max="100" v-model="infoForm.sort_order"></el-input-number>
 					</el-form-item>
-					<el-form-item label=" ">
-						<el-switch active-text="上架" inactive-text="下架" active-value="1" inactive-value="0" v-model="infoForm.is_on_sale"></el-switch>
+					<el-form-item label="Stock">
+						<el-switch active-text="Selling" inactive-text="Out of Stock" active-value="1" inactive-value="0" v-model="infoForm.is_on_sale"></el-switch>
 					</el-form-item>
-					<el-form-item label="Product详情" prop="goods_desc">
+					<el-form-item label="Description" prop="goods_desc">
 						<div class="edit_container">
 							<quill-editor v-model="infoForm.goods_desc" ref="myTextEditor" class="editer" :options="editorOption" @blur="onEditorBlur($event)"
 							 @ready="onEditorReady($event)">
@@ -152,9 +152,9 @@
 						</el-upload>
 					</el-form-item>
 					<el-form-item>
-						<el-button type="primary" @click="onSubmitInfo">确定保存</el-button>
-						<el-button @click="goBackPage">返回列表</el-button>
-						<el-button type="danger" class="float-right" @click="onCopyGood" v-if="infoForm.id > 0">复制Product</el-button>
+						<el-button type="primary" @click="onSubmitInfo">Save</el-button>
+						<el-button @click="goBackPage">Back</el-button>
+						<el-button type="danger" class="float-right" @click="onCopyGood" v-if="infoForm.id > 0">Copy Product Info</el-button>
 					</el-form-item>
 				</el-form>
 			</div>
@@ -246,24 +246,24 @@
 				infoRules: {
 					name: [{
 						required: true,
-						message: '请输入名称',
+						message: 'Please Enter Name',
 						trigger: 'blur'
 					}, ],
 					goods_brief: [{
 						required: true,
-						message: '请输入简介',
+						message: 'Please Enter Description',
 						trigger: 'blur'
 					}, ],
 					list_pic_url: [{
 						required: true,
-						message: '请选择Product图片',
+						message: 'Please Add Product Picture',
 						trigger: 'blur'
 					}, ],
 				},
 				specRules: {
 					value: [{
 						required: true,
-						message: '请输入型号名',
+						message: 'Please Enter the Product Type',
 						trigger: 'blur'
 					}, ],
 				},
@@ -324,8 +324,8 @@
 			},
 			onRemoveHandler(index) {
 				let that = this;
-				that.$confirm('确定Delete该图片?', '提示', {
-						confirmButtonText: '确定',
+				that.$confirm('Delete This Picture?', 'Prompt', {
+						confirmButtonText: 'Confirm',
 						cancelButtonText: 'Cancel',
 						type: 'warning'
 					})
@@ -380,7 +380,7 @@
 				that.previewList.push(arr[index].url);
 			},
 			beforeRemove(file, fileList) {
-				return this.$confirm(`确定移除 ${ file.name }？`);
+				return this.$confirm(`Confirm to remove ${ file.name }？`);
 			},
 			checkSkuOnly(index, row) {
 				console.log(index);
@@ -388,7 +388,7 @@
 				if (row.goods_sn == '') {
 					this.$message({
 						type: 'error',
-						message: 'SKU不能为空'
+						message: 'Produc SKU is required'
 					})
 					return false;
 				}
@@ -398,12 +398,12 @@
 					if (response.data.errno === 100) {
 						this.$message({
 							type: 'error',
-							message: '该SKU已存在！'
+							message: 'This SKU Already Exist'
 						})
 					} else {
 						this.$message({
 							type: 'success',
-							message: '该SKU可以用！'
+							message: 'SKU Updated Successfully'
 						})
 					}
 				})
@@ -480,8 +480,8 @@
 			},
 			delePicList() {
 				let that = this;
-				that.$confirm('确定Delete该图片?', '提示', {
-						confirmButtonText: '确定',
+				that.$confirm('Are you sure you want to Delete?', 'Prompt', {
+						confirmButtonText: 'Confirm',
 						cancelButtonText: 'Cancel',
 						type: 'warning'
 					})
@@ -538,7 +538,7 @@
 			uploadError() {
 				// loading动画消失
 				this.quillUpdateImg = false
-				this.$message.error('图片插入失败')
+				this.$message.error('Image Insertion Failed')
 			},
 			goBackPage() {
 				this.$router.go(-1);
@@ -552,8 +552,8 @@
 				quill.setSelection(length + 1)
 			},
 			onCopyGood() {
-				this.$confirm('确定复制该Product？', '提示', {
-					confirmButtonText: '确定',
+				this.$confirm('Are you sure you want to copy this Product?', 'Prompt', {
+					confirmButtonText: 'Confirm',
 					cancelButtonText: 'Cancel',
 					type: 'warning'
 				}).then(() => {
@@ -563,7 +563,7 @@
 						if (response.data.errno === 0) {
 							this.$message({
 								type: 'success',
-								message: '复制成功!'
+								message: 'Copy Successfully'
 							});
 							//                            this.is_has_spec = false;
 							//                            this.specData = [];
@@ -577,21 +577,21 @@
 						if (this.infoForm.list_pic_url == '' || this.infoForm.list_pic_url == null) {
 							this.$message({
 								type: 'error',
-								message: '请上传Product首图！'
+								message: 'Please Upload the Default Image of the product'
 							})
 							return false;
 						}
 						if (this.gallery_list.length == 0) {
 							this.$message({
 								type: 'error',
-								message: '请至少上传一张轮播图！'
+								message: 'Please Upload at least 1 gallery photo'
 							})
 							return false;
 						}
 						if (this.specData.length == 0) {
 							this.$message({
 								type: 'error',
-								message: '请Add New一个规格型号'
+								message: 'Please Add New Type'
 							})
 							return false;
 						}
@@ -600,7 +600,7 @@
 								'') {
 								this.$message({
 									type: 'error',
-									message: '型号和价格的值不能为空'
+									message: 'Type or Price value cannot be empty'
 								})
 								return false;
 							}
@@ -616,7 +616,7 @@
 							if (response.data.errno === 0) {
 								this.$message({
 									type: 'success',
-									message: '保存成功'
+									message: 'Saved Successfully'
 								});
 								this.infoForm.id = response.data.data;
 								this.getGalleryList();
@@ -624,7 +624,7 @@
 							} else {
 								this.$message({
 									type: 'error',
-									message: '保存失败'
+									message: 'Failed to Save'
 								})
 							}
 						})
@@ -724,7 +724,7 @@
 				let that = this;
 				$('#summernote').summernote({
 						lang: 'zh-CN',
-						placeholder: '请输入Product描述',
+						placeholder: 'Please Enter product Description',
 						height: 300,
 						minHeight: 300,
 						maxHeight: 400,

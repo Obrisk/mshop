@@ -6,7 +6,7 @@
             </el-breadcrumb>
             <div class="operation-nav">
                 <router-link to="/dashboard/goods/add">
-                    <el-button type="primary" icon="plus" size="small">Add NewProduct</el-button>
+                    <el-button type="primary" icon="plus" size="small">Add Product</el-button>
                 </router-link>
             </div>
         </div>
@@ -14,29 +14,29 @@
             <div class="block">
 				<span class="wrapper">
 					<el-button :plain="true" type="primary" :class="activeClass == 1 ? 'active' : '' "
-							   @click="sortOrder(1)" size="small">按销量Sort</el-button>
+							   @click="sortOrder(1)" size="small">Sales Sort</el-button>
 					<el-button :plain="true" type="primary" :class="activeClass == 2 ? 'active' : '' "
-							   @click="sortOrder(2)" size="small">按售价Sort</el-button>
+							   @click="sortOrder(2)" size="small">Price Sort</el-button>
 					<el-button :plain="true" type="primary" :class="activeClass == 3 ? 'active' : '' "
-							   @click="sortOrder(3)" size="small">按库存Sort</el-button>
+							   @click="sortOrder(3)" size="small">Stock Sort</el-button>
 				</span>
             </div>
             <el-tabs v-model="activeName" @tab-click="handleClick">
-                <el-tab-pane label="全部Product" name="first">
+                <el-tab-pane label="All Products" name="first">
 
                 </el-tab-pane>
-                <el-tab-pane label="出售中" name="second"></el-tab-pane>
-                <el-tab-pane label="已售完" name="third"></el-tab-pane>
-                <el-tab-pane label="已下架" name="fourth"></el-tab-pane>
+                <el-tab-pane label="Selling" name="second"></el-tab-pane>
+                <el-tab-pane label="Sold Out" name="third"></el-tab-pane>
+                <el-tab-pane label="Not Displayed" name="fourth"></el-tab-pane>
             </el-tabs>
             <div class="filter-box">
                 <el-form :inline="true" :model="filterForm" class="form-inline">
-                    <el-form-item label="Product名称">
-                        <el-input size="small" v-model="filterForm.name" placeholder="Product名称"></el-input>
+                    <el-form-item label="Product Name">
+                        <el-input size="small" v-model="filterForm.name" placeholder="Search by Name"></el-input>
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary" size="small" @click="onSubmitFilter">查询</el-button>
-                        <el-button size="small" @click="clear">清空</el-button>
+                        <el-button type="primary" size="small" @click="onSubmitFilter">Search</el-button>
+                        <el-button size="small" @click="clear">Clear</el-button>
                     </el-form-item>
                 </el-form>
                 <!--<el-button @click="expandToggle" type="primary" icon="plus" size="small">{{expand == false?'全部展开':'全部收起'}}</el-button>-->
@@ -47,47 +47,47 @@
                         <template slot-scope="props">
                             <el-table :data="props.row.product" style="width: 100%" stripe>
                                 <el-table-column prop="id" label="id" width="60"></el-table-column>
-                                <el-table-column prop="goods_sn" label="ProductSKU" width="140">
+                                <el-table-column prop="goods_sn" label="Product SKU" width="140">
                                     <template scope="scope">
                                         <el-input @blur="checkSkuOnly(scope.$index, scope.row)" size="mini"
                                                   v-model="scope.row.goods_sn" placeholder="ProductSKU"></el-input>
                                     </template>
                                 </el-table-column>
-                                <el-table-column prop="goods_aka" label="快递单上的简称" width="160">
+                                <el-table-column prop="goods_aka" label="Short Name" width="160">
                                     <template scope="scope">
                                         <el-input size="mini" v-model="scope.row.goods_name"
-                                                  placeholder="简称"></el-input>
+                                                  placeholder="Short Name"></el-input>
                                     </template>
                                 </el-table-column>
-                                <el-table-column prop="value" label="型号/规格" width="140">
+                                <el-table-column prop="value" label="Specification" width="140">
                                     <template scope="scope">
-                                        <el-input size="mini" v-model="scope.row.value" placeholder="如1斤/条"></el-input>
+                                        <el-input size="mini" v-model="scope.row.value" placeholder="Quantity"></el-input>
                                     </template>
                                 </el-table-column>
-                                <el-table-column prop="cost" label="成本(元)" width="90">
+                                <el-table-column prop="cost" label="Price" width="90">
                                     <template scope="scope">
-                                        <el-input size="mini" v-model="scope.row.cost" placeholder="成本"></el-input>
+                                        <el-input size="mini" v-model="scope.row.cost" placeholder="price"></el-input>
                                     </template>
                                 </el-table-column>
-                                <el-table-column prop="retail_price" label="零售(元)" width="90">
+                                <el-table-column prop="retail_price" label="Retail Price" width="100">
                                     <template scope="scope">
                                         <el-input size="mini" v-model="scope.row.retail_price"
-                                                  placeholder="零售"></el-input>
+                                                  placeholder="Retail Price"></el-input>
                                     </template>
                                 </el-table-column>
-                                <el-table-column prop="goods_weight" label="Weight(KG)" width="90">
+                                <el-table-column prop="goods_weight" label="Weight" width="90">
                                     <template scope="scope">
                                         <el-input size="mini" v-model="scope.row.goods_weight"
                                                   placeholder="Weight"></el-input>
                                     </template>
                                 </el-table-column>
-                                <el-table-column prop="goods_number" label="库存" width="90">
+                                <el-table-column prop="goods_number" label="Stock" width="90">
                                     <template scope="scope">
                                         <el-input size="mini" v-model="scope.row.goods_number"
-                                                  placeholder="库存"></el-input>
+                                                  placeholder="Stock"></el-input>
                                     </template>
                                 </el-table-column>
-                                <el-table-column label="操作" width="140">
+                                <el-table-column label="Scope" width="140">
                                     <template scope="scope">
                                         <el-button
                                                 size="mini"
@@ -110,21 +110,21 @@
                         </template>
                     </el-table-column>
                     <el-table-column prop="id" label="ID" width="120"></el-table-column>
-                    <el-table-column prop="list_pic_url" label="Product图片" width="80">
+                    <el-table-column prop="list_pic_url" label="Picture" width="80">
                         <template scope="scope">
                             <img :src="scope.row.list_pic_url" alt="" style="width: 40px;height: 40px">
                         </template>
                     </el-table-column>
-                    <el-table-column prop="name" label="Product名称"></el-table-column>
+                    <el-table-column prop="name" label="Product Name"></el-table-column>
                     <el-table-column prop="sort_order" label="Sort" width="140" sortable>
                         <template scope="scope">
                             <el-input-number class="sort-width" size="mini" :min="1" :max="100" controls-position="right" v-model="scope.row.sort_order" placeholder="Sort" @blur="submitSort(scope.$index, scope.row)" @change="submitSort(scope.$index, scope.row)"></el-input-number>
                         </template>
                     </el-table-column>
-                    <el-table-column prop="sell_volume" label="销量" width="80" sortable></el-table-column>
-                    <el-table-column prop="goods_number" label="库存" width="80" sortable>
+                    <el-table-column prop="sell_volume" label="Sold" width="80" sortable></el-table-column>
+                    <el-table-column prop="goods_number" label="In Stock" width="120" sortable>
                     </el-table-column>
-                    <el-table-column label="首页显示" width="80">
+                    <el-table-column label="Home" width="80">
                         <template scope="scope">
                             <el-switch
                                     v-model="scope.row.is_index"
@@ -134,7 +134,7 @@
                             </el-switch>
                         </template>
                     </el-table-column>
-                    <el-table-column label="上架" width="80">
+                    <el-table-column label="Selling" width="80">
                         <template scope="scope">
                             <el-switch
                                     v-model="scope.row.is_on_sale"
@@ -144,7 +144,7 @@
                             </el-switch>
                         </template>
                     </el-table-column>
-                    <el-table-column label="操作">
+                    <el-table-column label="Action">
                         <template scope="scope">
                             <el-button size="small" @click="handleRowEdit(scope.$index, scope.row)">Edit</el-button>
                             <el-button size="small" plain type="danger" @click="handleRowDelete(scope.$index, scope.row)">Delete
@@ -223,7 +223,7 @@
                     if (response.data.errno === 0) {
                         this.$message({
                             type: 'success',
-                            message: '同步成功2/2，完成'
+                            message: 'Updated Successfully'
                         });
                     }
                 })
@@ -232,7 +232,7 @@
                 if(row.goods_name == '' || row.value == '' || row.cost == '' || row.retail_price == '' || row.goods_weight == ''){
                     this.$message({
                         type: 'error',
-                        message: '值不能为空!'
+                        message: 'Value cannot be empty'
                     });
                     return false;
                 }
@@ -240,7 +240,7 @@
                     if (response.data.errno === 0) {
                         this.$message({
                             type: 'success',
-                            message: '修改成功!'
+                            message: 'Modified Successfully'
                         });
                     }
 					else if (response.data.errno === 100) {
@@ -258,7 +258,7 @@
                 if(row.goods_sn == ''){
                     this.$message({
                         type: 'error',
-                        message: 'SKU不能为空'
+                        message: 'SKU cannot be empty'
                     })
                     return false;
                 }
@@ -266,13 +266,13 @@
                     if (response.data.errno === 100) {
                         this.$message({
                             type: 'error',
-                            message: '该SKU已存在！'
+                            message: 'This SKU Already Exist'
                         })
                     }
                     else{
                         this.$message({
                             type: 'success',
-                            message: '该SKU可以用！'
+                            message: 'Updated Successfully'
                         })
                     }
                 })
@@ -288,7 +288,7 @@
                     if (response.data.errno === 0) {
                         this.$message({
                             type: 'success',
-                            message: '修改成功!'
+                            message: 'Modified Successfully'
                         });
                     }
                 })
@@ -342,8 +342,8 @@
             },
             handleRowDelete(index, row) {
 
-                this.$confirm('确定要Delete?', '提示', {
-                    confirmButtonText: '确定',
+                this.$confirm('Confirm Delete?', 'Prompt', {
+                    confirmButtonText: 'Delete',
                     cancelButtonText: 'Cancel',
                     type: 'warning'
                 }).then(() => {
@@ -352,7 +352,7 @@
                     if (response.data.errno === 0) {
                         that.$message({
                             type: 'success',
-                            message: 'Delete成功!'
+                            message: 'Deleted Successfully'
                         });
                         let pIndex = localStorage.getItem('pIndex');
                         console.log(pIndex);

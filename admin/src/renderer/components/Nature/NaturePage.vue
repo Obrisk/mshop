@@ -8,7 +8,7 @@
         <div class="content-main">
             <el-tabs v-model="activeName" @tab-click="handleClick">
                 <el-tab-pane label="Categories" name="first"></el-tab-pane>
-                <el-tab-pane label="Specification" name="second"></el-tab-pane>
+                <el-tab-pane label="Type" name="second"></el-tab-pane>
             </el-tabs>
             <div class="form-table-box">
                 <div class="btn-wrap">
@@ -16,7 +16,7 @@
                         <el-button plain type="primary" icon="plus">New Category</el-button>
                     </router-link>
                     <router-link v-if="pIndex == 1" to="/dashboard/specification/detail">
-                        <el-button plain type="primary" icon="plus">New specification</el-button>
+                        <el-button plain type="primary" icon="plus">New Type</el-button>
                     </router-link>
                 </div>
                 <el-table v-if="pIndex == 0" :data="categoryData" style="width: 100%" border stripe>
