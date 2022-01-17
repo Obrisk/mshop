@@ -9,105 +9,109 @@
             <div class="notice">
                 <div class="l">Welcome to WineAndDine Admin Dashboard How are you today?</div>
                 <div class="r" v-if="resetVision">
-                    <label>重置倒计时：</label>
-                    <countdown class="count" endTime="" :callback="callback" endText="已经结束了"></countdown>
+                    <label>Reset Countdown：</label>
+                    <countdown class="count" endTime="" :callback="callback" endText="Ended Countdown"></countdown>
                 </div>
             </div>
-            <div class="github">
+
+            <!--div class="github">
                 <a target="_blank" href="https://github.com/iamdarcy">Visit the Website</a>
                 <div class="l">请您在github给个star。 技术交流QQ群：824781955</div>
-            </div>
+            </div-->
+
             <div class="header clearfix">
                 <el-card class="box-card card-red">
                     <router-link class="link-color" :to="{ path: '/dashboard/order' }">
                         <h1>{{infoData.orderToDelivery}}</h1>
-                        <div class="text item">待发货订单</div>
+                        <div class="text item">Pending Orders</div>
                     </router-link>
                 </el-card>
                 <el-card class="box-card card-green">
                     <router-link class="link-color" :to="{ path: '/dashboard/goods' }">
                         <h1>{{infoData.goodsOnsale}}</h1>
-                        <div class="text item">上架中的Product</div>
+                        <div class="text item">Current Products</div>
                     </router-link>
                 </el-card>
-                <el-card class="box-card card-black">
+
+                <!--el-card class="box-card card-black">
                     <router-link class="link-color"  :to="{ path: '/dashboard/user' }">
                         <h1>{{infoData.user}}</h1>
-                        <div class="text item">总用户数</div>
+                        <div class="text item">Shop Users</div>
                     </router-link>
-                </el-card>
+                </el-card-->
+
             </div>
             <div class="main">
                 <el-tabs class="o-tab" v-model="activeName2" type="card" @tab-click="handleClick">
-                    <el-tab-pane label="今天" name="first"></el-tab-pane>
-                    <el-tab-pane label="昨天" name="second"></el-tab-pane>
-                    <el-tab-pane label="最近7天" name="third"></el-tab-pane>
-                    <el-tab-pane label="最近30天" name="fourth"></el-tab-pane>
+                    <el-tab-pane label="Today" name="first"></el-tab-pane>
+                    <el-tab-pane label="Yday" name="second"></el-tab-pane>
+                    <el-tab-pane label="7 Days Ago" name="third"></el-tab-pane>
+                    <el-tab-pane label="30 Days Ago" name="fourth"></el-tab-pane>
                 </el-tabs>
                 <div class="tab-content clearfix">
                     <el-card class="box-card2">
                         <div slot="header" class="clearfix">
-                            <span style="line-height: 36px;">顾客</span>
+                            <span style="line-height: 36px;">Customer</span>
                             <el-popover
                                     placement="right"
                                     v-model="related_pop"
                             >
                                 <el-tabs class="user-tab" v-model="userTab" type="card" @tab-click="userTabClick">
-                                    <el-tab-pane label="新增" name="first"></el-tab-pane>
-                                    <el-tab-pane label="老客户" name="second"></el-tab-pane>
+                                    <el-tab-pane label="New" name="first"></el-tab-pane>
+                                    <el-tab-pane label="Old Customers" name="second"></el-tab-pane>
                                 </el-tabs>
                                 <el-table :data="userData" style="width: 100%" height="550" border stripe>
-                                    <el-table-column label="头像" width="80">
+                                    <el-table-column label="Pic" width="80">
                                         <template scope="scope">
                                             <img :src="scope.row.avatar" alt="" style="width: 50px;height: 50px">
                                         </template>
                                     </el-table-column>
-                                    <el-table-column prop="nickname" label="昵称" width="140"></el-table-column>
-                                    <el-table-column prop="gender" label="性别" width="50">
+                                    <el-table-column prop="nickname" label="Nickname" width="140"></el-table-column>
+                                    <el-table-column prop="gender" label="Gender" width="100">
                                         <template scope="scope">
-                                            {{ scope.row.gender == 2 ? '女' : '男' }}
+                                            {{ scope.row.gender == 2 ? 'Female' : 'Male' }}
                                         </template>
                                     </el-table-column>
-                                    <el-table-column prop="register_time" label="注册时间" width="170">
+                                    <el-table-column prop="register_time" label="Registered Time" width="170">
                                     </el-table-column>
-                                    <el-table-column prop="last_login_time" label="最近登录" width="170">
+                                    <el-table-column prop="last_login_time" label="Last Login" width="170">
                                     </el-table-column>
                                 </el-table>
-                                <el-button class="float-right" slot="reference" size="mini" type="primary" @click="seeClick">查看</el-button>
+                                <el-button class="float-right" slot="reference" size="mini" type="primary" @click="seeClick">Open</el-button>
                             </el-popover>
                         </div>
                         <div class="text item">
-                            <span>新增</span>
+                            <span>New</span>
                             <h3 style="float: right;">{{mainInfo.newUser}}</h3>
                         </div>
                         <div class="text item">
-                            <span>老顾客</span>
+                            <span>Old Customers</span>
                             <h3 style="float: right;">{{mainInfo.oldUser}}</h3>
                         </div>
                     </el-card>
                     <el-card class="box-card2">
                         <div slot="header" class="clearfix">
-                            <span style="line-height: 36px;">下单</span>
+                            <span style="line-height: 36px;">Place Order</span>
                         </div>
                         <div class="text item">
-                            <span>加入Cart</span>
+                            <span>Add Cart</span>
                             <h3 style="float: right;">{{mainInfo.addCart}}</h3>
                         </div>
                         <div class="text item">
-                            <span>提交订单数/金额</span>
+                            <span>Add Order No.</span>
                             <h3 style="float: right;">{{mainInfo.addOrderNum}} / {{mainInfo.addOrderSum}}</h3>
                         </div>
                     </el-card>
                     <el-card class="box-card2">
                         <div slot="header" class="clearfix">
-                            <span style="line-height: 36px;">支付</span>
+                            <span style="line-height: 36px;">Pay</span>
                         </div>
                         <div class="text item">
-                            <span>成交订单数</span>
+                            <span>Confirmed Orders</span>
                             <h3 style="float: right;">{{mainInfo.payOrderNum}}</h3>
                         </div>
                         <div class="text item">
-                            <span>成交金额</span>
+                            <span>Orders Total</span>
                             <h3 style="float: right;">{{mainInfo.payOrderSum}}</h3>
                         </div>
                     </el-card>
@@ -116,33 +120,33 @@
                 <div class="block-4 clearfix">
                     <el-card class="box-card">
                         <div class="text item">
-                            <span>客单价</span>
+                            <span>Retail Price</span>
                             <p style="float: right;">{{mainInfo.payOrderSum / mainInfo.payOrderNum | numFilter}}</p>
                         </div>
-                        <p class="tips">成交金额/成交订单数</p>
+                        <p class="tips">Transactions No.</p>
                     </el-card>
                     <el-card class="box-card">
                         <div class="text item">
-                            <span>下单转化率</span>
+                            <span>Conversion Rate</span>
                             <p style="float: right;">
                                 {{mainInfo.addOrderNum / (mainInfo.newUser + mainInfo.oldUser) | numFilter}}</p>
                         </div>
-                        <p class="tips">下单人数/访问人数</p>
+                        <p class="tips">Visitors Orders</p>
                     </el-card>
                     <el-card class="box-card">
                         <div class="text item">
-                            <span>下单-支付转化率</span>
+                            <span>Payment Conversion Rate</span>
                             <p style="float: right;">{{mainInfo.payOrderNum / mainInfo.addOrderNum | numFilter}}</p>
                         </div>
-                        <p class="tips">支付人数/下单人数</p>
+                        <p class="tips">Paying Users/Orders</p>
                     </el-card>
                     <el-card class="box-card">
                         <div class="text item">
-                            <span>支付转化率</span>
+                            <span>Payment Conversion Rate</span>
                             <p style="float: right;">
                                 {{mainInfo.payOrderNum / (mainInfo.newUser + mainInfo.oldUser) | numFilter}}</p>
                         </div>
-                        <p class="tips">支付人数/访问人数</p>
+                        <p class="tips">Paying Users/Visitors</p>
                     </el-card>
                 </div>
 
@@ -386,7 +390,4 @@
      .card-yellow .link-color{
         color: #111111;
     }
-
-
-
 </style>

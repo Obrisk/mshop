@@ -9,6 +9,7 @@
         </div>
     </div>
 </template>
+
 <script>
     export default {
         data() {
@@ -16,8 +17,8 @@
         },
         methods: {
             logout() {
-                this.$confirm('是否要Exit?', '提示', {
-                    confirmButtonText: '确定',
+                this.$confirm('Are you sure you want to Exit?', 'Prompt', {
+                    confirmButtonText: 'Confirm',
                     cancelButtonText: 'Cancel',
                     type: 'warning'
                 }).then(() => {
@@ -27,7 +28,6 @@
             }
         }
     }
-
 </script>
 
 <style scoped>

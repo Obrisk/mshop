@@ -33,8 +33,8 @@
         },
         methods: {
             logout() {
-                this.$confirm('是否要Exit?', '提示', {
-                    confirmButtonText: '确定',
+                this.$confirm('Confirm Logout?', 'Prompt', {
+                    confirmButtonText: 'Confirm',
                     cancelButtonText: 'Cancel',
                     type: 'warning',
                     center: true

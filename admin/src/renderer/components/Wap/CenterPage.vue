@@ -28,20 +28,20 @@
             <div></div>
             <div class="form-table-box">
                 <el-table :data="tableData" style="width: 100%" stripe>
-                    <el-table-column prop="list_pic_url" label="图片" width="80">
+                    <el-table-column prop="list_pic_url" label="Photo" width="80">
                         <template scope="scope">
                             <img :src="scope.row.list_pic_url" alt="" style="width: 60px;height: 60px">
                         </template>
                     </el-table-column>
                     <el-table-column prop="name" label="Product名称">
                     </el-table-column>
-                    <el-table-column prop="retail_price" label="售价" width="90" sortable>
+                    <el-table-column prop="retail_price" label="Retail Price" width="140" sortable>
                         <template scope="scope">
-                            <el-input v-model="scope.row.retail_price" placeholder="售价"
+                            <el-input v-model="scope.row.retail_price" placeholder="Price"
                                       @blur="submit(scope.$index, scope.row)"></el-input>
                         </template>
                     </el-table-column>
-                    <el-table-column label="上架" width="60">
+                    <el-table-column label="Selling" width="90">
                         <template scope="scope">
                             <el-switch
                                     v-model="tableData[scope.$index].is_on_sale"
@@ -71,8 +71,8 @@
         methods: {
 
             logout() {
-                this.$confirm('是否要Exit?', '提示', {
-                    confirmButtonText: '确定',
+                this.$confirm('Confirm Logout?', 'Prompt', {
+                    confirmButtonText: 'Confirm',
                     cancelButtonText: 'Cancel',
                     type: 'warning',
                     center: true

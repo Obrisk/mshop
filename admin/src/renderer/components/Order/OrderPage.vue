@@ -7,26 +7,26 @@
 		</div>
 		<div class="content-main">
 			<el-tabs v-model="activeName" @tab-click="handleClick">
-				<el-tab-pane label="待付款" name="first"></el-tab-pane>
-				<el-tab-pane label="待发货" name="second"></el-tab-pane>
-				<el-tab-pane label="待收货" name="third"></el-tab-pane>
-				<el-tab-pane label="已收货" name="fourth"></el-tab-pane>
-				<el-tab-pane label="已关闭" name="fifth"></el-tab-pane>
-				<el-tab-pane label="全部订单" name="sixth"></el-tab-pane>
+				<el-tab-pane label="Pending Payment" name="first"></el-tab-pane>
+				<el-tab-pane label="Arrange Delivery" name="second"></el-tab-pane>
+				<el-tab-pane label="Pending Receipt" name="third"></el-tab-pane>
+				<el-tab-pane label="Received" name="fourth"></el-tab-pane>
+				<el-tab-pane label="Closed" name="fifth"></el-tab-pane>
+				<el-tab-pane label="All Orders" name="sixth"></el-tab-pane>
 			</el-tabs>
 			<div class="filter-box">
 				<el-form :inline="true" :model="filterForm" class="demo-form-inline">
-					<el-form-item label="订单号">
-						<el-input class="filter-input" v-model="filterForm.order_sn" placeholder="请输入订单号"></el-input>
+					<el-form-item label="Order No.">
+					    <el-input class="filter-input" v-model="filterForm.order_sn" placeholder="Enter Order No."></el-input>
 					</el-form-item>
-					<el-form-item label="收货人">
-						<el-input class="filter-input" v-model="filterForm.consignee" placeholder="请输入收货人"></el-input>
+					<el-form-item label="Receiver">
+					    <el-input class="filter-input" v-model="filterForm.consignee" placeholder="Enter Receiver"></el-input>
 					</el-form-item>
-					<el-form-item label="快递号">
-						<el-input class="filter-input" v-model="filterForm.logistic_code" placeholder="请输入快递单号"></el-input>
+					<el-form-item label="Courier No.">
+					    <el-input class="filter-input" v-model="filterForm.logistic_code" placeholder="Courier No."></el-input>
 					</el-form-item>
 					<el-form-item>
-						<el-button type="primary" @click="onSubmitFilter">查询</el-button>
+						<el-button type="primary" @click="onSubmitFilter">Search</el-button>
 					</el-form-item>
 				</el-form>
 			</div>
@@ -35,18 +35,18 @@
 					<div v-for="item in tableData" class="list-wrap clearfix">
 						<div class="header clearfix">
 							<div class="left">
-								<div class="off-text" v-if="item.offline_pay">线下支付订单</div>
+								<div class="off-text" v-if="item.offline_pay">Offline Order</div>
 								<div class="status-text">{{item.order_status_text}}</div>
-								<div class="add-time">下单时间：{{item.add_time}}</div>
-								<div class="pay-time" v-if="item.pay_time != 0">付款时间：{{item.pay_time}}</div>
-								<div class="order-id">订单号：{{item.order_sn}}</div>
+								<div class="add-time">Created Time：{{item.add_time}}</div>
+								<div class="pay-time" v-if="item.pay_time != 0">Payment Time：{{item.pay_time}}</div>
+								<div class="order-id">Order No.：{{item.order_sn}}</div>
 							</div>
 							<div class="right">
-								<div class="goods-num">共{{item.goodsCount}}件Product</div>
+								<div class="goods-num">{{item.goodsCount}} Products</div>
 								<div v-if="item.change_price!= item.actual_price" class="price-change">
-									改价前{{item.change_price}}元
+									Original Price{{item.change_price}}元
 								</div>
-								<div class="price-wrap">当前合计{{item.actual_price}}元（含运费{{item.freight_price}}元）</div>
+								<div class="price-wrap">Total{{item.actual_price}}元（Shipping{{item.freight_price}}元）</div>
 							</div>
 						</div>
 						<div class="content-wrap clearfix">
@@ -54,7 +54,7 @@
 								<div class="goods-list" v-for="iitem in item.goodsList">
 									<img :src="iitem.list_pic_url" class="goods-img">
 									<div class="goods-name">{{iitem.goods_aka}}</div>
-									<div class="goods-number"><label>数量：</label>{{iitem.number}}</div>
+									<div class="goods-number"><label>Quantity：</label>{{iitem.number}}</div>
 								</div>
 							</div>
 							<div class="user-wrap">
@@ -62,8 +62,8 @@
 									<img :src="item.userInfo.avatar" class="avatar-img">
 									<div class="nickname">{{item.userInfo.nickname}}</div>
 								</div>
-								<div class="name">姓名：{{item.userInfo.name}}</div>
-								<div class="mobile">手机：{{item.userInfo.mobile}}</div>
+								<div class="name">Name：{{item.userInfo.name}}</div>
+								<div class="mobile">Phone：{{item.userInfo.mobile}}</div>
 							</div>
 							<div class="main">
 								<div v-if="item.expressInfo != ''" class="express-info">{{item.expressInfo}}</div>
@@ -72,20 +72,20 @@
 									<div class="user-mobile">{{item.mobile}}</div>
 								</div>
 								<div class="user-address">{{item.full_region}}{{item.address}}</div>
-								<div v-if="item.postscript != ''" class="user-post">留言：{{item.postscript}}</div>
+								<div v-if="item.postscript != ''" class="user-post">Notes：{{item.postscript}}</div>
 								<el-input class="admin-memo" type="textarea" @blur='changeMemo(item.id,item.admin_memo)' v-model="item.admin_memo"
-								 placeholder="备注"></el-input>
+								 placeholder="Remarks"></el-input>
 							</div>
 							<div class="right">
 								<el-button v-if="item.print_status == 1 && item.order_status == 300" class="d-btn" type="primary" @click="deliveryConfirm(item.id)"
-								 size="mini">发货
+								 size="mini">Sent
 								</el-button>
-								<el-button v-if="item.order_status == 101" size="mini" @click="orderEdit(item)">修改价格
+								<el-button v-if="item.order_status == 101" size="mini" @click="orderEdit(item)">Modify Price
 								</el-button>
-								<el-button v-else-if="item.order_status == 300 || item.order_status == 301" size="mini" @click="orderEdit(item)">打印快递单
+								<el-button v-else-if="item.order_status == 300 || item.order_status == 301" size="mini" @click="orderEdit(item)">Print Order
 								</el-button>
 								<el-button class="right-detail" type="text" @click="viewDetail(item.id)" size="mini">
-									查看详情
+									Details
 								</el-button>
 							</div>
 						</div>
@@ -98,21 +98,21 @@
 				</el-pagination>
 			</div>
 		</div>
-		<el-dialog title="提示" :visible.sync="dialogVisible" width="30%">
-			<span>确定打包备货</span>
+		<el-dialog title="Hint" :visible.sync="dialogVisible" width="30%">
+			<span>Confirm Action</span>
 			<span slot="footer" class="dialog-footer">
-				<el-button @click="dialogVisible = false">取 消</el-button>
-				<el-button type="primary" @click="confirm">确 定</el-button>
+				<el-button @click="dialogVisible = false">Select Cancel</el-button>
+				<el-button type="primary" @click="confirm">Confirm</el-button>
 			</span>
 		</el-dialog>
-		<el-dialog title="提示" :visible.sync="dialogVisible2">
-			<span>确定收货？</span>
+		<el-dialog title="Hint" :visible.sync="dialogVisible2">
+			<span>Confirm Receipt?</span>
 			<span slot="footer" class="dialog-footer">
-				<el-button @click="dialogVisible2 = false">取 消</el-button>
-				<el-button type="primary" @click="receiveConfirm">确 定</el-button>
+				<el-button @click="dialogVisible2 = false">Select Cancel</el-button>
+				<el-button type="primary" @click="receiveConfirm">Confirm</el-button>
 			</span>
 		</el-dialog>
-		<el-dialog title="打印快递单" :visible.sync="dialogFormVisible">
+		<el-dialog title="Print Delivery Info" :visible.sync="dialogFormVisible">
 			<el-form :model="dform">
 				<div class="dialog-wrap">
 					<div class="list-wrap">
@@ -121,83 +121,83 @@
 							<div class="goods-name">{{ditem.goods_name}}</div>
 							<div class="goods-name">{{ditem.goods_aka}}</div>
 							<div class="goods-spec">{{ditem.goods_specifition_name_value}}</div>
-							<div class="goods-number"><label>数量：</label>{{ditem.number}}</div>
+							<div class="goods-number"><label>Quantity：</label>{{ditem.number}}</div>
 						</div>
 					</div>
 					<div class="dialog-main" v-if="dform.method == 1">
 						<div class="l">
-							<div class="title">寄件人</div>
+							<div class="title">Sender</div>
 							<div class="detail">
 								<div class="m1">
 									<div class="user-name">
-										<el-input size="mini" class="senderInput" v-model="sender.name" placeholder="寄件人姓名"></el-input>
+										<el-input size="mini" class="senderInput" v-model="sender.name" placeholder="Sender Name"></el-input>
 									</div>
 									<div class="user-mobile">
-										<el-input size="mini" class="senderInput" v-model="sender.mobile" placeholder="寄件人手机"></el-input>
+										<el-input size="mini" class="senderInput" v-model="sender.mobile" placeholder="Sender Phone"></el-input>
 									</div>
 								</div>
 								<div class="user-address">
-									<el-cascader style="width:200px;" size="mini" :options="options" placeholder="请选择地区" v-model="senderOptions">
+									<el-cascader style="width:200px;" size="mini" :options="options" placeholder="Select Region" v-model="senderOptions">
 									</el-cascader>
-									<el-input size="mini" class="address-input" v-model="sender.address" auto-complete="off" placeholder="请输入详细地"></el-input>
+									<el-input size="mini" class="address-input" v-model="sender.address" auto-complete="off" placeholder="Address Details"></el-input>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="dialog-main" v-if="dform.method == 1">
 						<div class="l">
-							<div class="title">收件人</div>
+							<div class="title">Recipient</div>
 							<div class="detail">
 								<div class="m1">
 									<div class="user-name">
-										<el-input size="mini" class="senderInput" v-model="receiver.name" placeholder="收件人姓名"></el-input>
+										<el-input size="mini" class="senderInput" v-model="receiver.name" placeholder="Recipient Name"></el-input>
 									</div>
 									<div class="user-mobile">
-										<el-input size="mini" class="senderInput" v-model="receiver.mobile" placeholder="收件人手机"></el-input>
+										<el-input size="mini" class="senderInput" v-model="receiver.mobile" placeholder="Recipient Phone"></el-input>
 									</div>
 								</div>
 								<div class="user-address">
-									<el-cascader style="width:200px;" size="mini" :options="options" placeholder="请选择地区" v-model="receiveOptions">
+									<el-cascader style="width:200px;" size="mini" :options="options" placeholder="Select Region" v-model="receiveOptions">
 									</el-cascader>
-									<el-input size="mini" class="address-input" v-model="receiver.address" auto-complete="off" placeholder="请输入详细地"></el-input>
+									<el-input size="mini" class="address-input" v-model="receiver.address" auto-complete="off" placeholder="Address Details"></el-input>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div v-if="orderInfo.postscript != ''" class="user-post-t">买家留言：{{orderInfo.postscript}}</div>
-					<div v-if="orderInfo.admin_memo != '' && orderInfo.admin_memo != null" class="user-admin-t">备注：{{orderInfo.admin_memo}}</div>
+					<div v-if="orderInfo.postscript != ''" class="user-post-t">Buyer's Remarks：{{orderInfo.postscript}}</div>
+					<div v-if="orderInfo.admin_memo != '' && orderInfo.admin_memo != null" class="user-admin-t">Remarks：{{orderInfo.admin_memo}}</div>
 				</div>
-				<el-form-item label="类型" style="margin-top:10px;">
+				<el-form-item label="Type" style="margin-top:10px;">
 					<el-radio-group v-model="dform.method" @change="deliveryMethodChange(dform.method)">
-						<el-radio :label="1">快递</el-radio>
-						<el-radio :label="2">手动输入快递</el-radio>
-						<el-radio :label="3">自提件</el-radio>
+						<el-radio :label="1">Express Delivery</el-radio>
+						<el-radio :label="2">Choose Courier Manually</el-radio>
+						<el-radio :label="3">Self Pickup</el-radio>
 					</el-radio-group>
 				</el-form-item>
 				<el-form-item label="选择快递" v-if="dform.method == 1">
 					<el-radio-group v-model="expressType">
-						<el-radio :label="1">顺丰(保价)</el-radio>
-						<el-radio :label="2">外省顺丰(不保价)</el-radio>
-						<el-radio :label="3">江浙沪皖顺丰(特惠)</el-radio>
-						<el-radio :label="4">圆通</el-radio>
+						<el-radio :label="1">SF Express(Insured)</el-radio>
+						<el-radio :label="2">SF Express(No Insurance)</el-radio>
+						<el-radio :label="3">Zhejiang Shanghai Jiangsu Anhui</el-radio>
+						<el-radio :label="4">YuanTong (YTO)</el-radio>
 					</el-radio-group>
 				</el-form-item>
-				<el-form-item label="保价金额及提醒" v-if="expressType == 1">
+				<el-form-item label="Insurance Amount" v-if="expressType == 1">
 					<el-input-number :mini="1" :max="9999" v-model="orderInfo.express_value" @change="changeExpressValue(orderInfo)"
-					 @blur="changeExpressValue(orderInfo)" placeholder="请输入保价金额"></el-input-number>
-					<el-input v-model="orderInfo.remark" @blur="changeRemarkInfo(orderInfo)" placeholder="快递单上的提醒"></el-input>
+					 @blur="changeExpressValue(orderInfo)" placeholder="Enter Insurance amount"></el-input-number>
+					<el-input v-model="orderInfo.remark" @blur="changeRemarkInfo(orderInfo)" placeholder="Enter Remarks"></el-input>
 				</el-form-item>
-				<el-form-item label="快递单上的提醒" v-if="expressType == 2">
-					<el-input v-model="orderInfo.remark" @blur="changeRemarkInfo(orderInfo)" placeholder="快递单上的提醒"></el-input>
+				<el-form-item label="Courier Notes" v-if="expressType == 2">
+					<el-input v-model="orderInfo.remark" @blur="changeRemarkInfo(orderInfo)" placeholder="Courier Notes"></el-input>
 				</el-form-item>
-				<el-form-item label="要在快递单上打印单发货内容" v-if="dform.method == 1">
-					<el-input type="textarea" v-model="orderInfo.print_info" @blur="changeInfo(orderInfo)" placeholder="请输入发货信息"></el-input>
+				<el-form-item label="Content Printed On Courier" v-if="dform.method == 1">
+					<el-input type="textarea" v-model="orderInfo.print_info" @blur="changeInfo(orderInfo)" placeholder="Enter Info"></el-input>
 				</el-form-item>
-				<el-form-item label="快递单号" v-if="dform.method == 2">
+				<el-form-item label="Tracking Number" v-if="dform.method == 2">
 					<el-input v-model="dform.logistic_code"></el-input>
 				</el-form-item>
-				<el-form-item label="选择快递" v-if="dform.method == 2">
-					<el-select v-model="nowDeliveryId" value-key="id" placeholder="请选择快递">
+				<el-form-item label="Choose Courier" v-if="dform.method == 2">
+					<el-select v-model="nowDeliveryId" value-key="id" placeholder="Select Courier">
 						<el-option v-for="item in deliveryCom" :key="item.id" :label="item.name" :value="item.id">
 						</el-option>
 					</el-select>
@@ -205,45 +205,45 @@
 			</el-form>
 			<div slot="footer" class="dialog-footer print-footer">
 				<div class="f-left">
-					<el-checkbox v-if="dform.method == 1 && orderInfo.order_status == 300" v-model="autoGoDelivery">打印完成后自动发货
+					<el-checkbox v-if="dform.method == 1 && orderInfo.order_status == 300" v-model="autoGoDelivery">Auto Shipped After Print
 					</el-checkbox>
 				</div>
 				<div class="f-right" v-if="dform.method != 1">
-					<el-button style="margin-right: 20px;" @click="hidePrintDialog">取 消</el-button>
-					<el-button type="primary" @click="deliveryGoGo">发货</el-button>
+					<el-button style="margin-right: 20px;" @click="hidePrintDialog">Select Cancel</el-button>
+					<el-button type="primary" @click="deliveryGoGo">Deliver</el-button>
 				</div>
 				<div class="f-right" v-if="dform.method == 1">
-					<el-button style="margin-right: 20px;" @click="hidePrintDialog">取 消</el-button>
+					<el-button style="margin-right: 20px;" @click="hidePrintDialog">Select Cancel</el-button>
 					<div v-if="rePrintStatus == 0">
-						<el-button v-if="autoGoDelivery" type="primary" @click="deliveyGoConfirm">打印快递单并发货</el-button>
-						<el-button v-if="!autoGoDelivery" type="primary" @click="deliveyGoConfirm">只打印快递单</el-button>
+						<el-button v-if="autoGoDelivery" type="primary" @click="deliveyGoConfirm">Print Courier and Ship</el-button>
+						<el-button v-if="!autoGoDelivery" type="primary" @click="deliveyGoConfirm">Print Courier</el-button>
 					</div>
 					<div v-if="rePrintStatus == 1">
-						<el-button v-if="autoGoDelivery" type="primary" @click="directPrintConfirm">打印快递单并发货</el-button>
-						<el-button v-if="!autoGoDelivery" type="primary" @click="directPrintConfirm">只打印快递单</el-button>
+						<el-button v-if="autoGoDelivery" type="primary" @click="directPrintConfirm">Print Courier and Ship</el-button>
+						<el-button v-if="!autoGoDelivery" type="primary" @click="directPrintConfirm">Print Courier</el-button>
 					</div>
 				</div>
 			</div>
 		</el-dialog>
-		<el-dialog title="提醒！" :visible.sync="dialogExpressVisible">
+		<el-dialog title="Reminder！" :visible.sync="dialogExpressVisible">
 			<div class="form-table-box">
-				该订单已经生成过一个快递单号，是否用该单号打印？
+				Express tracking number has been generated for the order, do you want to use tracking number to print?
 			</div>
 			<div slot="footer" class="dialog-footer">
 				<div class="f-right">
-					<el-button @click="dialogExpressVisible = false">取 消</el-button>
-					<el-button type="primary" @click="rePrintExpress">重新生成订单号打印</el-button>
-					<el-button type="success" @click="directPrintExpress">直接用该单号打印</el-button>
+					<el-button @click="dialogExpressVisible = false">Select Cancel</el-button>
+					<el-button type="primary" @click="rePrintExpress">Regenerate order print</el-button>
+					<el-button type="success" @click="directPrintExpress">Print with tracking number</el-button>
 				</div>
 			</div>
 		</el-dialog>
-		<el-dialog title="快递单预览" class="express-dialog" :visible.sync="printMiandan">
+		<el-dialog title="Preview Order" class="express-dialog" :visible.sync="printMiandan">
 			<div id="sfbj-block" v-if="expressType == 1 || expressType == 2" style="display: block;width: 400px; height: 500px; border: 1px solid #333; background: #fff;overflow: hidden;margin: 0 auto;">
 				<div style="display: flex; width: 100%; justify-content: space-between; border-bottom: 1px solid #333;">
 					<div style="border-right: 1px solid #333;width:300px;text-align: center;">
 						<barcode :value="sfHasValue.LogisticCode" height="40" display-value="false" tag="img"></barcode>
 						<div style="width: 100%; margin: 0 auto;text-align: center;font-size: 12px;padding-bottom: 2px;">
-							快递单号:{{sfHasValue.LogisticCode}}
+							Tracking Number:{{sfHasValue.LogisticCode}}
 						</div>
 					</div>
 					<div style="font-size: 16px;font-weight:bold;">{{sfHasValue.remark}}</div>
@@ -253,7 +253,7 @@
 				</div>
 				<div style="display: flex; justify-content: flex-start; border-bottom: 1px solid #333; position: relative;">
 					<div style="width: 12px; padding: 0 2px; text-align: center; font-size: 10px; border-right: 1px solid #333; margin-right: 10px;">
-						收件人
+						Recipient
 					</div>
 					<div style="display: flex; flex-direction: column;">
 						<div style="display: flex; justify-content: flex-start; font-size: 12px;">
@@ -267,7 +267,7 @@
 				</div>
 				<div style="display: flex; justify-content: flex-start; border-bottom: 1px solid #333; position: relative;">
 					<div style="width: 12px; padding: 0 2px; text-align: center; font-size: 10px; border-right: 1px solid #333; margin-right: 10px;">
-						寄件人
+						Sender
 					</div>
 					<div style="display: flex; flex-direction: column;">
 						<div style="display: flex; justify-content: flex-start; font-size: 10px;">
@@ -281,32 +281,32 @@
 				</div>
 				<div style="display: flex; justify-content: flex-start; border-bottom: 1px solid #333; position: relative;">
 					<div style=" width: 12px; padding: 0 2px; text-align: center; font-size: 10px; border-right: 1px solid #333; margin-right: 10px;">
-						托寄物
+						Consignment
 					</div>
-					<div style="font-size: 20px;width: 30%;border-right: 1px solid #333; margin-right: 4px;">海鲜</div>
+					<div style="font-size: 20px;width: 30%;border-right: 1px solid #333; margin-right: 4px;">Food</div>
 					<div style="width: 30%; display: flex; flex-direction: column; border-right: 1px solid #333; margin-right: 4px;">
-						<div style="height: 30px; font-size: 12px;">收件员</div>
-						<div style="height: 30px; font-size: 12px;">派件员</div>
+						<div style="height: 30px; font-size: 12px;">Recipient</div>
+						<div style="height: 30px; font-size: 12px;">Dispatcher</div>
 					</div>
 					<div style="width: 20%; display: flex; flex-direction: column;">
-						<div style="height: 30px; font-size: 12px;">收方签署</div>
-						<div style="height: 30px; font-size: 12px;">日期</div>
+						<div style="height: 30px; font-size: 12px;">Receiver Signature</div>
+						<div style="height: 30px; font-size: 12px;">Date</div>
 					</div>
 				</div>
 				<div style="width:100%;text-align:center;height: 16px; font-size: 10px;border-bottom: 1px solid #333;">
-					寄件时间:{{sfHasValue.send_time}},账号:{{sfHasValue.MonthCode}},<label v-if="sfHasValue.expressValue > 0">保价:{{sfHasValue.expressValue}}元</label>
+					Shipping Time:{{sfHasValue.send_time}},Account:{{sfHasValue.MonthCode}},<label v-if="sfHasValue.expressValue > 0">Insured:{{sfHasValue.expressValue}}元</label>
 				</div>
 				<div style="display: flex; width: 100%; border-bottom: 1px solid #333;">
 					<div style="width: 100%;text-align: center;">
 						<barcode :value="sfHasValue.LogisticCode" height="30" display-value="false" tag="img"></barcode>
 						<div style="width: 100%; margin: 0 auto;text-align: center;font-size: 12px;padding-bottom: 2px;">
-							快递单号:{{sfHasValue.LogisticCode}}
+							Tracking Number:{{sfHasValue.LogisticCode}}
 						</div>
 					</div>
 				</div>
 				<div style="display: flex; justify-content: flex-start; border-bottom: 1px solid #333; position: relative;">
 					<div style="width: 12px; padding: 0 2px; text-align: center; font-size: 10px; border-right: 1px solid #333; margin-right: 10px;">
-						收方
+						Receiver
 					</div>
 					<div style="display: flex; flex-direction: column;">
 						<div style="display: flex; justify-content: flex-start; font-size: 10px;">
@@ -320,7 +320,7 @@
 				</div>
 				<div style="display: flex; justify-content: flex-start; border-bottom: 1px solid #333; position: relative;">
 					<div style="width: 12px; padding: 0 2px; text-align: center; font-size: 10px; border-right: 1px solid #333; margin-right: 10px;">
-						寄方
+						Sender
 					</div>
 					<div style="display: flex; flex-direction: column;">
 						<div style="display: flex; justify-content: flex-start; font-size: 10px;">
@@ -341,7 +341,7 @@
 					<div style="width: 100%;text-align: center;">
 						<barcode :value="sfHasValue.LogisticCode" height="40" display-value="false" tag="img"></barcode>
 						<div style="width: 100%; margin: 0 auto;text-align: center;font-size: 12px;padding-bottom: 2px;">
-							快递单号:{{sfHasValue.LogisticCode}}
+							Tracking Number:{{sfHasValue.LogisticCode}}
 						</div>
 					</div>
 				</div>
@@ -350,7 +350,7 @@
 				</div>
 				<div style="display: flex; justify-content: flex-start; border-bottom: 1px solid #333; position: relative;">
 					<div style="width: 12px; padding: 0 2px; text-align: center; font-size: 10px; border-right: 1px solid #333; margin-right: 10px;">
-						收件人
+						Recipient
 					</div>
 					<div style="display: flex; flex-direction: column;">
 						<div style="display: flex; justify-content: flex-start; font-size: 12px;">
@@ -364,7 +364,7 @@
 				</div>
 				<div style="display: flex; justify-content: flex-start; border-bottom: 1px solid #333; position: relative;">
 					<div style="width: 12px; padding: 0 2px; text-align: center; font-size: 10px; border-right: 1px solid #333; margin-right: 10px;">
-						寄件人
+						Sender
 					</div>
 					<div style="display: flex; flex-direction: column;">
 						<div style="display: flex; justify-content: flex-start; font-size: 10px;">
@@ -378,32 +378,32 @@
 				</div>
 				<div style="display: flex; justify-content: flex-start; border-bottom: 1px solid #333; position: relative;">
 					<div style=" width: 12px; padding: 0 2px; text-align: center; font-size: 10px; border-right: 1px solid #333; margin-right: 10px;">
-						托寄物
+						Consignment
 					</div>
-					<div style="font-size: 20px;width: 30%;border-right: 1px solid #333; margin-right: 4px;">海干货</div>
+					<div style="font-size: 20px;width: 30%;border-right: 1px solid #333; margin-right: 4px;">Land Cargo</div>
 					<div style="width: 30%; display: flex; flex-direction: column; border-right: 1px solid #333; margin-right: 4px;">
-						<div style="height: 30px; font-size: 12px;">收件员</div>
-						<div style="height: 30px; font-size: 12px;">派件员</div>
+						<div style="height: 30px; font-size: 12px;">Receiver</div>
+						<div style="height: 30px; font-size: 12px;">Dispatcher</div>
 					</div>
 					<div style="width: 20%; display: flex; flex-direction: column;">
-						<div style="height: 30px; font-size: 12px;">收方签署</div>
-						<div style="height: 30px; font-size: 12px;">日期</div>
+						<div style="height: 30px; font-size: 12px;">Receiver's Signature</div>
+						<div style="height: 30px; font-size: 12px;">Date</div>
 					</div>
 				</div>
 				<div style="width:100%;text-align:center;height: 16px; font-size: 10px;border-bottom: 1px solid #333;">
-					寄件时间:{{sfHasValue.send_time}},账号:{{sfHasValue.MonthCode}},<label v-if="sfHasValue.expressValue > 0">保价:{{sfHasValue.expressValue}}元</label>
+					Shipping Time:{{sfHasValue.send_time}},Account:{{sfHasValue.MonthCode}},<label v-if="sfHasValue.expressValue > 0">Insured:{{sfHasValue.expressValue}}元</label>
 				</div>
 				<div style="display: flex; width: 100%; border-bottom: 1px solid #333;">
 					<div style="width: 100%;text-align: center;">
 						<barcode :value="sfHasValue.LogisticCode" height="30" display-value="false" tag="img"></barcode>
 						<div style="width: 100%; margin: 0 auto;text-align: center;font-size: 12px;padding-bottom: 2px;">
-							快递单号:{{sfHasValue.LogisticCode}}
+							Tracking Number:{{sfHasValue.LogisticCode}}
 						</div>
 					</div>
 				</div>
 				<div style="display: flex; justify-content: flex-start; border-bottom: 1px solid #333; position: relative;">
 					<div style="width: 12px; padding: 0 2px; text-align: center; font-size: 10px; border-right: 1px solid #333; margin-right: 10px;">
-						收方
+						Receiver
 					</div>
 					<div style="display: flex; flex-direction: column;">
 						<div style="display: flex; justify-content: flex-start; font-size: 10px;">
@@ -417,7 +417,7 @@
 				</div>
 				<div style="display: flex; justify-content: flex-start; border-bottom: 1px solid #333; position: relative;">
 					<div style="width: 12px; padding: 0 2px; text-align: center; font-size: 10px; border-right: 1px solid #333; margin-right: 10px;">
-						寄方
+						Sender
 					</div>
 					<div style="display: flex; flex-direction: column;">
 						<div style="display: flex; justify-content: flex-start; font-size: 10px;">
@@ -438,7 +438,7 @@
 					<div style="width: 100%;text-align: center;">
 						<barcode :value="sfHasValue.LogisticCode" height="50" display-value="false" tag="img"></barcode>
 						<div style="width: 100%; margin: 0 auto;text-align: center;font-size: 12px;padding-bottom: 2px;">
-							快递单号:{{sfHasValue.LogisticCode}}
+							Tracking Number:{{sfHasValue.LogisticCode}}
 						</div>
 					</div>
 				</div>
@@ -448,7 +448,7 @@
 				</div>
 				<div style="display: flex; justify-content: flex-start; border-bottom: 1px solid #333; position: relative;">
 					<div style="width: 12px; padding: 0 2px; text-align: center; font-size: 12px; border-right: 1px solid #333; margin-right: 10px;">
-						收件人
+						Recipient
 					</div>
 					<div style="display: flex; flex-direction: column;">
 						<div style="display: flex; justify-content: flex-start; font-size: 12px;">
@@ -462,7 +462,7 @@
 				</div>
 				<div style="display: flex; justify-content: flex-start; border-bottom: 1px solid #333; position: relative;">
 					<div style="width: 12px; padding: 0 2px; text-align: center; font-size: 12px; border-right: 1px solid #333; margin-right: 10px;">
-						寄件人
+						Sender
 					</div>
 					<div style="display: flex; flex-direction: column;">
 						<div style="display: flex; justify-content: flex-start; font-size: 12px;">
@@ -476,13 +476,13 @@
 				</div>
 				<div style="display: flex; justify-content: space-between; border-bottom: 1px solid #333; position: relative;">
 					<div style="width: 50%;height: 70px; border-right: 1px solid #333;">
-						<div style="height: 30px; font-size: 12px;">收件人/代收人：</div>
+						<div style="height: 30px; font-size: 12px;">Recipient</div>
 					</div>
 					<div style="width: 50%;height: 70px;">
-						<div style="height: 30px; font-size: 12px;">签收时间：</div>
+						<div style="height: 30px; font-size: 12px;">Submission Time：</div>
 					</div>
 				</div>
-				<div style="width:100%;text-align:center;height: 30px; font-size: 10px;">寄件时间：{{sfHasValue.send_time}}
+				<div style="width:100%;text-align:center;height: 30px; font-size: 10px;">Shipping Time：{{sfHasValue.send_time}}
 				</div>
 
 				<div style="width:100%;text-align:center;height: 60px; font-size: 10px;"></div>
@@ -490,7 +490,7 @@
 					<div style="width: 100%;text-align: center;">
 						<barcode :value="sfHasValue.LogisticCode" height="30" display-value="false" tag="img"></barcode>
 						<div style="width: 100%; margin: 0 auto;text-align: center;font-size: 12px;padding-bottom: 2px;">
-							快递单号:{{sfHasValue.LogisticCode}}
+							Tracking Number:{{sfHasValue.LogisticCode}}
 						</div>
 					</div>
 				</div>
@@ -510,7 +510,7 @@
 				</div>
 				<div style="display: flex; justify-content: flex-start; border-bottom: 1px solid #333; position: relative;">
 					<div style="width: 12px; padding: 0 2px; text-align: center; font-size: 10px; border-right: 1px solid #333; margin-right: 10px;">
-						寄方
+						Sender
 					</div>
 					<div style="display: flex; flex-direction: column;">
 						<div style="display: flex; justify-content: flex-start; font-size: 10px;">
@@ -527,30 +527,30 @@
 				</div>
 			</div>
 			<div slot="footer" class="dialog-footer">
-				<el-button @click="cancelPrint">取 消</el-button>
-				<el-button v-if="autoGoDelivery" type="primary" @click="printAndDeliveryConfirm">打印并发货</el-button>
-				<el-button v-else-if="!autoGoDelivery" type="primary" @click="printOnlyConfirm">只打印快递单</el-button>
+				<el-button @click="cancelPrint">Select Cancel</el-button>
+				<el-button v-if="autoGoDelivery" type="primary" @click="printAndDeliveryConfirm">Print and Ship</el-button>
+				<el-button v-else-if="!autoGoDelivery" type="primary" @click="printOnlyConfirm">Print Only</el-button>
 			</div>
 		</el-dialog>
-		<el-dialog title="修改价格" :visible.sync="dialogPriceVisible">
+		<el-dialog title="Modify Price" :visible.sync="dialogPriceVisible">
 			<el-form :model="orderInfo">
-				<el-form-item label="改价前总价:">
+				<el-form-item label="Original Price:">
 					<h2>¥{{orderInfo.change_price}}</h2>
 				</el-form-item>
 
-				<el-form-item label="修改Product价格:">
+				<el-form-item label="Modified Price:">
 					<el-input-number @change="goodsPriceChange" :min="0" :max="99999999" v-model="orderInfo.goods_price" auto-complete="off"
-					 placeholder="请输入Product价格"></el-input-number>
+					 placeholder="Enter Price"></el-input-number>
 				</el-form-item>
-				<el-form-item label="修改快递价格:">
+				<el-form-item label="Modify Shipping Price:">
 					<el-input-number @change="freightPriceChange" :min="0" :max="99999999" v-model="orderInfo.freight_price"
-					 auto-complete="off" placeholder="请输入修改后的快递"></el-input-number>
+					 auto-complete="off" placeholder="Enter Price"></el-input-number>
 				</el-form-item>
-				<el-form-item label="改价后总价:">
+				<el-form-item label="New Total Price:">
 					<h2>¥{{orderInfo.actual_price}}</h2>
 				</el-form-item>
 				<el-form-item label="">
-					{{orderInfo.change_price-orderInfo.actual_price>0?'优惠金额：'+(orderInfo.change_price-orderInfo.actual_price).toFixed(2):'涨价金额：'+(orderInfo.actual_price-
+					{{orderInfo.change_price-orderInfo.actual_price>0?'Discount：'+(orderInfo.change_price-orderInfo.actual_price).toFixed(2):'Price Change：'+(orderInfo.actual_price-
                     orderInfo.change_price).toFixed(2)}}
 				</el-form-item>
 				<!-- <el-form-item label="快递费用:">
@@ -558,8 +558,8 @@
                 </el-form-item> -->
 			</el-form>
 			<div slot="footer" class="dialog-footer">
-				<el-button @click="dialogPriceVisible = false">取 消</el-button>
-				<el-button type="primary" @click="priceChangeConfirm">确 定</el-button>
+				<el-button @click="dialogPriceVisible = false">Select Cancel</el-button>
+				<el-button type="primary" @click="priceChangeConfirm">Confirm </el-button>
 			</div>
 		</el-dialog>
 
@@ -660,7 +660,7 @@
 					if (this.dform.logistic_code == undefined || this.nowDeliveryId == '') {
 						this.$message({
 							type: 'error',
-							message: '请输入快递单号和快递公司'
+							message: 'Please Enter Courier and Tracking Number'
 						})
 						return false;
 					}
@@ -692,12 +692,12 @@
 						if (response.data.errno === 0) {
 							this.$message({
 								type: 'success',
-								message: '保存成功!'
+								message: 'Success!'
 							});
 						} else {
 							this.$message({
 								type: 'error',
-								message: '保存失败'
+								message: 'Request Failed'
 							})
 						}
 					})
@@ -721,12 +721,12 @@
 					if (response.data.errno === 0) {
 						this.$message({
 							type: 'success',
-							message: '保存成功!'
+							message: 'Success!'
 						});
 					} else {
 						this.$message({
 							type: 'error',
-							message: '保存失败'
+							message: 'Request Failed'
 						})
 					}
 				})
@@ -741,12 +741,12 @@
 					if (response.data.errno === 0) {
 						this.$message({
 							type: 'success',
-							message: '保存成功!'
+							message: 'Success!'
 						});
 					} else {
 						this.$message({
 							type: 'error',
-							message: '保存失败'
+							message: 'Request Failed'
 						})
 					}
 				})
@@ -759,12 +759,12 @@
 					if (response.data.errno === 0) {
 						this.$message({
 							type: 'success',
-							message: '保存成功!'
+							message: 'Success!'
 						});
 					} else {
 						this.$message({
 							type: 'error',
-							message: '保存失败'
+							message: 'Request Failed'
 						})
 					}
 				})
@@ -830,8 +830,8 @@
 			},
 			handleRowDelete(index, row) {
 
-				this.$confirm('确定要Delete?', '提示', {
-					confirmButtonText: '确定',
+				this.$confirm('Confirm Delete?', 'Prompt', {
+					confirmButtonText: 'Confirm',
 					cancelButtonText: 'Cancel',
 					type: 'warning'
 				}).then(() => {
@@ -843,7 +843,7 @@
 						if (response.data.errno === 0) {
 							this.$message({
 								type: 'success',
-								message: 'Delete成功!'
+								message: 'Deleted!'
 							});
 							this.getList();
 						}
@@ -932,7 +932,7 @@
 				if (expressType == 0) {
 					this.$message({
 						type: 'error',
-						message: '请选择一个快递免单模板!'
+						message: 'Choose Free Express Template'
 					});
 					return false;
 				}
@@ -972,13 +972,13 @@
 
 			deliveyGoConfirm() {
 				// 可以设置成不预览，那么直接打印了
-				// 逻辑：打印快递单，这时会向快递鸟发送请求，然后得到快递单号,
+				// 逻辑：打印快递单，这时会向快递鸟发送请求，然后得到Tracking Number,
 
 				let expressType = this.expressType;
 				if (expressType == 0) {
 					this.$message({
 						type: 'error',
-						message: '请选择一个快递免单模板!'
+						message: 'Choose Free Express Template'
 					});
 					return false;
 				}
@@ -1010,11 +1010,11 @@
 					} else if (response.data.data.latestExpressInfo.ResultCode == 105) {
 						this.$message({
 							type: 'error',
-							message: '操作超时，请重试!'
+							message: 'Timeout. Try Again Later'
 						});
 					}
 					// let newWindow = window.open("_blank");   //打开新窗口
-					// let codestr = this.rawHtml;   //获取需要生成pdf页面的div代码
+					// let codestr = this.rawHtml;   //获Select需要生成pdf页面的div代码
 					// newWindow.document.write(codestr);   //向文档写入HTML表达式或者JavaScript代码
 					// newWindow.document.close();     //关闭document的输出流, 显示选定的数据
 					// newWindow.print();   //打印当前窗口
@@ -1034,12 +1034,12 @@
 						this.getList();
 						this.$message({
 							type: 'success',
-							message: '发货成功!'
+							message: 'Success!'
 						});
 					} else {
 						this.$message({
 							type: 'error',
-							message: '失败了!'
+							message: 'Request Failed!'
 						});
 					}
 				});
@@ -1063,7 +1063,7 @@
 					} else {
 						this.$message({
 							type: 'error',
-							message: '失败了!'
+							message: 'Printing Failed!'
 						});
 					}
 				});
@@ -1088,7 +1088,7 @@
 					} else {
 						this.$message({
 							type: 'error',
-							message: '失败了!'
+							message: 'Printing Failed!'
 						});
 					}
 				});
@@ -1134,7 +1134,7 @@
 				if (this.orderInfo.actual_price == '' || this.orderInfo.actual_price == 0) {
 					this.$message({
 						type: 'error',
-						message: '总价不能为空!'
+						message: 'Request Failed'
 					});
 					return false;
 				}

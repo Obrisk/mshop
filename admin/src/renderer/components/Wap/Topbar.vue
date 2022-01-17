@@ -2,7 +2,7 @@
     <div class="top-box">
         <div class="top-wrap">
             <!--<img class="logo" src="static/images/logo.png"/>-->
-            汇鲜
+            WineDine
         </div>
     </div>
 

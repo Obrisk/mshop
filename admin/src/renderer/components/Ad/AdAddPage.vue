@@ -7,13 +7,13 @@
             </el-breadcrumb>
             <div class="operation-nav">
                 <!--<el-button type="primary" @click="test" icon="arrow-left">test</el-button>-->
-                <el-button type="primary" @click="goBackPage" icon="arrow-left">返回列表</el-button>
+                <el-button type="primary" @click="goBackPage" icon="arrow-left">Back</el-button>
             </div>
         </div>
         <div class="content-main">
             <div class="form-table-box">
                 <el-form ref="infoForm" :rules="infoRules" :model="infoForm" label-width="120px">
-					<el-form-item label="Ads图片" prop="image_url" v-if="infoForm.image_url" class="image-uploader-diy new-height">
+					<el-form-item label="Ads Photo" prop="image_url" v-if="infoForm.image_url" class="image-uploader-diy new-height">
 						<div class="index-image">
 							<el-image :preview-src-list="previewList" v-if="infoForm.image_url" :src="infoForm.image_url" @click="previewIndexImg"
 							 class="image-show" fit="cover"></el-image>
@@ -22,20 +22,20 @@
 							</div>
 						</div>
 					</el-form-item>
-					<el-form-item label="Ads图片" prop="image_url" v-if="!infoForm.image_url">
+					<el-form-item label="Ads Photo" prop="image_url" v-if="!infoForm.image_url">
 						<el-upload name="file" ref="upload" class="upload-demo" :action="qiniuZone" :on-success="handleSuccess"
 						 :before-upload="getQiniuToken" :auto-upload="true" list-type="picture-card" :data="picData" :http-request="uploadIndexImg">
-							<el-button size="small" type="primary">点击上传</el-button>
-							<div slot="tip" class="el-upload__tip">只能上传jpg/png文件</div>
+							<el-button size="small" type="primary">Upload</el-button>
+							<div slot="tip" class="el-upload__tip">Only jpg/png Files</div>
 						</el-upload>
 					</el-form-item>
                     <el-form-item label="Product Type">
                         <el-radio-group v-model="infoForm.link_type">
-                            <el-radio :label="0">Productid</el-radio>
-                            <el-radio :label="1">链接</el-radio>
+                            <el-radio :label="0">Product id</el-radio>
+                            <el-radio :label="1">Link</el-radio>
                         </el-radio-group>
                     </el-form-item>
-                    <el-form-item label="Ads链接" prop="link" v-if="infoForm.link_type == 1">
+                    <el-form-item label="Ads Link" prop="link" v-if="infoForm.link_type == 1">
                         <el-input class="link-input" v-model="infoForm.link"></el-input>
                     </el-form-item>
                     <el-form-item label="Productid" prop="link" v-if="infoForm.link_type == 0">
@@ -46,30 +46,30 @@
                         >
                             <el-table :data="chooseRelateGoods" stripe style="width: 100%">
                                 <el-table-column prop="id" label="id" width="100"></el-table-column>
-                                <el-table-column prop="list_pic_url" label="Product图片" width="120">
+                                <el-table-column prop="list_pic_url" label="Product Gallery" width="150">
                                     <template scope="scope">
                                         <img :src="scope.row.list_pic_url" alt="" style="width: 40px;height: 40px">
                                     </template>
                                 </el-table-column>
-                                <el-table-column prop="name" label="Product名称" width="300px"></el-table-column>
-                                <el-table-column label="操作">
+                                <el-table-column prop="name" label="Product Name" width="300px"></el-table-column>
+                                <el-table-column label="Action">
                                     <template scope="scope">
                                         <el-button
                                                 size="small"
                                                 type="danger"
-                                                @click="relateSelect(scope.row.id)">选择
+                                                @click="relateSelect(scope.row.id)">Choose
                                         </el-button>
                                     </template>
                                 </el-table-column>
                             </el-table>
-                            <el-button slot="reference" type="primary" @click="relateGoodsClick">Add New关联Product</el-button>
+                            <el-button slot="reference" type="primary" @click="relateGoodsClick">Add Linked Product</el-button>
                         </el-popover>
                     </el-form-item>
                     <el-form-item label="End Date" prop="end_time">
                         <el-date-picker
                                 v-model="infoForm.end_time"
                                 type="datetime"
-                                placeholder="选择日期"
+                                placeholder="Expiry Date"
                                 default-time="23:59:59">
                             >
                         </el-date-picker>
@@ -77,11 +77,11 @@
                     <el-form-item label="Sort" prop="sort_order">
                         <el-input-number v-model="infoForm.sort_order" :min="1" :max="999"></el-input-number>
                     </el-form-item>
-                    <el-form-item label="AdsTurn On">
+                    <el-form-item label="Turn On">
                         <el-switch active-value="1" inactive-value="0" v-model="infoForm.enabled"></el-switch>
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary" @click="onSubmitInfo">确定保存</el-button>
+                        <el-button type="primary" @click="onSubmitInfo">Save</el-button>
                         <el-button @click="goBackPage">Cancel</el-button>
                     </el-form-item>
                 </el-form>
@@ -111,10 +111,10 @@
                 },
                 infoRules: {
                     image_url: [
-                        {required: true, message: '请输入Ads图片', trigger: 'blur'},
+                        {required: true, message: 'Please Add the Picture', trigger: 'blur'},
                     ],
                     end_time: [
-                        {required: true, message: '请选择时间', trigger: 'blur'},
+                        {required: true, message: 'Please select Expiry Time', trigger: 'blur'},
                     ],
                 },
                 picData: {
@@ -135,8 +135,8 @@
 			},
 			delePicList() {
 				let that = this;
-				that.$confirm('确定Delete该图片?', '提示', {
-						confirmButtonText: '确定',
+				that.$confirm('Are you sure you want to Delete?', 'Prompt', {
+						confirmButtonText: 'Confirm',
 						cancelButtonText: 'Cancel',
 						type: 'warning'
 					})
@@ -185,7 +185,7 @@
                 console.log(this.infoForm.end_time);
             },
             beforeAdRemove() {
-                return this.$confirm(`确定移除？`);
+                return this.$confirm(`Are you sure you want to Delete?`);
             },
             adRemove(file, fileList) {
                 this.infoForm.image_url = '';
@@ -209,7 +209,7 @@
                 if (time == 0) {
                     this.$message({
                         type: 'error',
-                        message: '请选择时间'
+                        message: 'Please choose the Expiry Time'
                     });
                     return false;
                 }
@@ -217,7 +217,7 @@
                     if(this.infoForm.goods_id == 0 ){
                         this.$message({
                             type: 'error',
-                            message: '请选择Product'
+                            message: 'Please Choose Product'
                         });
                         return false;
                     }
@@ -226,7 +226,7 @@
                     if(this.infoForm.link == '' ){
                         this.$message({
                             type: 'error',
-                            message: '请输入链接'
+                            message: 'Please choose the link'
                         });
                         return false;
                     }
@@ -237,19 +237,19 @@
                             if (response.data.errno === 0) {
                                 this.$message({
                                     type: 'success',
-                                    message: '保存成功'
+                                    message: 'Uploaded Successfully'
                                 });
                                 this.$router.go(-1);
                             } else if (response.data.errno === 100) {
                                 this.$message({
                                     type: 'error',
-                                    message: '该Product已经有Ads关联'
+                                    message: 'This Product has an Ad already'
                                 })
                             }
                             else {
                                 this.$message({
                                     type: 'error',
-                                    message: '保存失败'
+                                    message: 'Failed to Save'
                                 })
                             }
                         })

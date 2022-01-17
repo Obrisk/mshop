@@ -14,31 +14,31 @@
                 <el-form ref="infoForm" :model="infoForm" label-width="120px">
                     <el-form-item label="Ads" prop="type">
                         <el-radio-group v-model="infoForm.banner">
-                            <el-radio :label="1">显示</el-radio>
-                            <el-radio :label="0">不显示</el-radio>
+                            <el-radio :label="1">Show</el-radio>
+                            <el-radio :label="0">Hide</el-radio>
                         </el-radio-group>
                     </el-form-item>
-                    <el-form-item label="公告">
+                    <el-form-item label="Notice">
                         <el-radio-group v-model="infoForm.notice">
-                            <el-radio :label="1">显示</el-radio>
-                            <el-radio :label="0">不显示</el-radio>
+                            <el-radio :label="1">Show</el-radio>
+                            <el-radio :label="0">Hide</el-radio>
                         </el-radio-group>
                     </el-form-item>
-                    <el-form-item label="Ads下的Icon">
+                    <el-form-item label="Ads Icon">
                         <el-radio-group v-model="infoForm.channel">
-                            <el-radio :label="1">显示</el-radio>
-                            <el-radio :label="0">不显示</el-radio>
+                            <el-radio :label="1">Show</el-radio>
+                            <el-radio :label="0">Hide</el-radio>
                         </el-radio-group>
-                        <div class="form-tip">那几个Icon</div>
+                        <div class="form-tip">Small Icon</div>
                     </el-form-item>
-                    <el-form-item label="首页Product Photo或文字">
+                    <el-form-item label="Homepage Products">
                         <el-radio-group v-model="infoForm.index_banner_img">
-                            <el-radio :label="1">图片</el-radio>
-                            <el-radio :label="0">文字</el-radio>
+                            <el-radio :label="1">Photo</el-radio>
+                            <el-radio :label="0">Text Only</el-radio>
                         </el-radio-group>
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary" @click="onSubmitInfo">确定保存</el-button>
+                        <el-button type="primary" @click="onSubmitInfo">Update</el-button>
                         <el-button @click="goBackPage">Cancel</el-button>
                     </el-form-item>
                 </el-form>
@@ -73,13 +73,13 @@
                             if (response.data.errno === 0) {
                                 this.$message({
                                     type: 'success',
-                                    message: '保存成功'
+                                    message: 'Saved Successfully'
                                 });
 //                                this.$router.go(-1)
                             } else {
                                 this.$message({
                                     type: 'error',
-                                    message: '保存失败'
+                                    message: 'Sorry Cannot Save, try later!'
                                 })
                             }
                         })

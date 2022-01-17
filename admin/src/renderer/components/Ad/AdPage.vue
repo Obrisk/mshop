@@ -6,7 +6,7 @@
 			</el-breadcrumb>
 			<div class="operation-nav">
 				<router-link to="/dashboard/ad/add">
-					<el-button type="primary" icon="plus">Add NewAds</el-button>
+					<el-button type="primary" icon="plus">Add New Ads</el-button>
 				</router-link>
 			</div>
 		</div>
@@ -19,19 +19,19 @@
                             <img  :src="scope.row.image_url" alt="" style="width: 90px;height: 50px">
                         </template>
 					</el-table-column>
-					<el-table-column prop="goods_id" label="关联Product"></el-table-column>
+					<el-table-column prop="goods_id" label="Product"></el-table-column>
 					<el-table-column prop="end_time" label="End Date"></el-table-column>
 					<el-table-column prop="sort_order" label="Sort" width="100" sortable>
 						<template scope="scope">
 							<el-input v-model="scope.row.sort_order" placeholder="Sort" @blur="submitSort(scope.$index, scope.row)"></el-input>
 						</template>
 					</el-table-column>
-                    <el-table-column prop="enabled" label="状态" width="80px">
+                    <el-table-column prop="enabled" label="Ad Switch" width="120px">
                         <template scope="scope">
-                            {{ scope.row.enabled == 1 ? 'Turn On' : '禁用' }}
+                            {{ scope.row.enabled == 1 ? 'Turned On' : 'Disabled' }}
                         </template>
 					</el-table-column>
-					<el-table-column label="开启状态" width="80">
+					<el-table-column label="Switch" width="80">
 						<template scope="scope">
 							<el-switch
 									v-model="scope.row.enabled"
@@ -41,7 +41,7 @@
 							</el-switch>
 						</template>
 					</el-table-column>
-					<el-table-column label="操作" width="170">
+					<el-table-column label="Action" width="170">
 						<template scope="scope">
 							<el-button size="small" @click="handleRowEdit(scope.$index, scope.row)">Edit</el-button>
 							<el-button size="small" type="danger" @click="handleRowDelete(scope.$index, scope.row)">Delete</el-button>
@@ -100,8 +100,8 @@ export default {
 		},
 		handleRowDelete(index, row) {
 
-			this.$confirm('确定要Delete?', '提示', {
-				confirmButtonText: '确定',
+			this.$confirm('Are you sure you want to Delete?', 'Prompt', {
+				confirmButtonText: 'Confirm',
 				cancelButtonText: 'Cancel',
 				type: 'warning'
 			}).then(() => {
@@ -111,7 +111,7 @@ export default {
 					if (response.data.errno === 0) {
 						this.$message({
 							type: 'success',
-							message: 'Delete成功!'
+							message: 'Deleted Successfully!'
 						});
 
 						this.getList();

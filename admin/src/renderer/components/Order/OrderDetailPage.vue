@@ -2,19 +2,19 @@
     <div class="content-page">
         <div class="content-nav">
             <el-breadcrumb class="breadcrumb" separator="/">
-                <!--<el-breadcrumb-item :to="{ name: 'dashboard' }">首页</el-breadcrumb-item>-->
-                <el-breadcrumb-item :to="{ name: 'order' }">订单管理</el-breadcrumb-item>
-                <el-breadcrumb-item>{{infoForm.order_sn ? '订单详情' : 'Add New订单'}}</el-breadcrumb-item>
+                <!--<el-breadcrumb-item :to="{ name: 'dashboard' }">Homepage</el-breadcrumb-item>-->
+                <el-breadcrumb-item :to="{ name: 'order' }">Manage Orders</el-breadcrumb-item>
+                <el-breadcrumb-item>{{infoForm.order_sn ? 'Details' : 'New Order'}}</el-breadcrumb-item>
             </el-breadcrumb>
             <div class="operation-nav">
-                <el-button type="primary" @click="goBackPage" size="small" icon="arrow-left">返回列表</el-button>
+                <el-button type="primary" @click="goBackPage" size="small" icon="arrow-left">Back</el-button>
                 <!--<el-button type="primary" @click="test" size="small" icon="arrow-left">test</el-button>-->
             </div>
         </div>
         <div class="order-status-text">
             <label>{{infoForm.order_status_text}}</label>
             <div>
-                <el-button type="danger" plain @click="changeStatus">变更状态</el-button>
+                <el-button type="danger" plain @click="changeStatus">Change Status</el-button>
                 <!--<el-button v-if="infoForm.order_status == 201" type="danger" @click="goPackage">备货</el-button>-->
                 <!--<el-button v-if="infoForm.order_status == 300" type="primary" @click="goPackage">发货</el-button>-->
             </div>
@@ -22,46 +22,46 @@
         <div class="content-main">
             <div class="form-table-box">
                 <el-tabs v-model="activeName" @tab-click="handleClick">
-                    <el-tab-pane label="订单信息" name="first">
-                        <div class="content-title marginTop">买家信息：</div>
+                    <el-tab-pane label="Order Info" name="first">
+                        <div class="content-title marginTop">Buyer Info：</div>
                         <el-table :data="addressData" style="width: 100%" border stripe>
-                            <el-table-column prop="user_id" label="用户id" width="70"></el-table-column>
-                            <el-table-column prop="nickname" label="昵称" width="100"></el-table-column>
-                            <el-table-column prop="avatar" label="头像" width="80">
+                            <el-table-column prop="user_id" label="User Id" width="70"></el-table-column>
+                            <el-table-column prop="nickname" label="Name" width="100"></el-table-column>
+                            <el-table-column prop="avatar" label="Photo" width="80">
                                 <template scope="scope">
                                     <img :src="scope.row.avatar" alt="" style="width: 60px;height: 60px">
                                 </template>
                             </el-table-column>
-                            <el-table-column prop="name" label="客户名" width="100"></el-table-column>
-                            <el-table-column prop="mobile" label="客户手机" width="120"></el-table-column>
-                            <el-table-column prop="address" label="客户地址"></el-table-column>
-                            <el-table-column prop="postscript" label="买家备注" width="300"></el-table-column>
-                            <el-table-column label="操作">
+                            <el-table-column prop="name" label="Name" width="100"></el-table-column>
+                            <el-table-column prop="mobile" label="Phone" width="120"></el-table-column>
+                            <el-table-column prop="address" label="Address"></el-table-column>
+                            <el-table-column prop="postscript" label="Notes" width="300"></el-table-column>
+                            <el-table-column label="Action">
                                 <template scope="scope">
                                     <el-button size="small" @click="addressEdit(scope.$index, scope.row)">Edit
                                     </el-button>
                                 </template>
                             </el-table-column>
                         </el-table>
-                        <div class="content-title marginTop">货物信息：</div>
+                        <div class="content-title marginTop">Package Info：</div>
                         <el-table :data="infoForm.goodsList" style="width: 100%" border stripe>
-                            <el-table-column prop="goods_sn" label="ProductSKU" width="120"></el-table-column>
-                            <el-table-column prop="list_pic_url" label="Product图" width="120">list_pic_url
+                            <el-table-column prop="goods_sn" label="Product SKU" width="120"></el-table-column>
+                            <el-table-column prop="list_pic_url" label="Photo" width="120">list_pic_url
                                 <template scope="scope">
                                     <img :src="scope.row.list_pic_url" alt="" style="width: 60px;height: 60px">
                                 </template>
                             </el-table-column>
-                            <el-table-column prop="goods_name" label="Product名"></el-table-column>
-                            <el-table-column prop="goods_specifition_name_value" label="型号"
+                            <el-table-column prop="goods_name" label="Name"></el-table-column>
+                            <el-table-column prop="goods_specifition_name_value" label="Type"
                                              width="100"></el-table-column>
-                            <el-table-column prop="retail_price" label="售价" width="100"></el-table-column>
-                            <el-table-column prop="number" label="购买数量" width="100"></el-table-column>
-                            <el-table-column label="小计" width="100">
+                            <el-table-column prop="retail_price" label="Retail Price" width="100"></el-table-column>
+                            <el-table-column prop="number" label="Quantity" width="100"></el-table-column>
+                            <el-table-column label="Total" width="100">
                                 <template scope="scope">
                                     <label>{{scope.row.retail_price * scope.row.number }}</label>
                                 </template>
                             </el-table-column>
-                            <el-table-column label="操作">
+                            <el-table-column label="Action">
                                 <template scope="scope">
                                     <el-button size="small" @click="goodsListEdit(scope.$index, scope.row)">Edit
                                     </el-button>
@@ -72,39 +72,39 @@
                             </el-table-column>
                         </el-table>
                         <div class="detail-wrap">
-                            <div class="total-price"> 优惠：¥{{infoForm.promotions_price}}</div>
-                            <div class="total-price"> 合计：¥{{infoForm.actual_price}}（含运费：¥{{infoForm.freight_price}}）</div>
-                            <div class="total-price"> 改价前：¥{{infoForm.change_price}}（含运费：¥{{infoForm.freight_price}}）</div>
-                            <div class="total-price"> {{infoForm.change_price-infoForm.actual_price>0?'优惠金额：'+(infoForm.change_price-infoForm.actual_price).toFixed(2):'涨价金额：'+(infoForm.actual_price- infoForm.change_price).toFixed(2)}}</div>
+                            <div class="total-price"> Discount：¥{{infoForm.promotions_price}}</div>
+                            <div class="total-price"> Total：¥{{infoForm.actual_price}}（Include Delivery：¥{{infoForm.freight_price}}）</div>
+                            <div class="total-price"> Default Price：¥{{infoForm.change_price}}（Include Delivery：¥{{infoForm.freight_price}}</div>
+                            <div class="total-price"> {{infoForm.change_price-infoForm.actual_price>0?'Discount：'+(infoForm.change_price-infoForm.actual_price).toFixed(2):'Added Amount：'+(infoForm.actual_price- infoForm.change_price).toFixed(2)}}</div>
                         </div>
                         <div class="memo-wrap">
-                            <div class="content-title">卖家备注：</div>
+                            <div class="content-title">Seller Notes：</div>
                             <el-input
                                     class="memo-input"
                                     type="textarea"
                                     autosize
-                                    placeholder="请输入内容"
+                                    placeholder="Add notes"
                                     v-model="infoForm.admin_memo">
                             </el-input>
-                            <el-button size="small" type="primary" @click="saveAdminMemo">保存
+                            <el-button size="small" type="primary" @click="saveAdminMemo">Save
                             </el-button>
                         </div>
 
                         <div class="footer">
                             <div class="item">
-                                <div class="t">订单ID：</div>
+                                <div class="t">Order ID：</div>
                                 <div class="c">{{infoForm.id}}</div>
                             </div>
                             <div class="item">
-                                <div class="t">订单号：</div>
+                                <div class="t">Order No.：</div>
                                 <div class="c">{{infoForm.order_sn}}</div>
                             </div>
                             <div class="item">
-                                <div class="t">加入时间：</div>
+                                <div class="t">Added Time：</div>
                                 <div class="c">{{infoForm.add_time}}</div>
                             </div>
                             <div class="item" v-if="infoForm.pay_time">
-                                <div class="t">付款时间：</div>
+                                <div class="t">Pay Time：</div>
                                 <div class="c">{{infoForm.pay_time}}</div>
                             </div>
                             <div class="item" v-if="infoForm.shipping_time">

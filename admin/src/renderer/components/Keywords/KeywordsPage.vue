@@ -2,24 +2,24 @@
 	<div class="content-page">
 		<div class="content-nav">
 			<el-breadcrumb class="breadcrumb" separator="/">
-				<el-breadcrumb-item :to="{ path: '/dashboard' }">首页</el-breadcrumb-item>
-				<el-breadcrumb-item>数据管理</el-breadcrumb-item>
-				<el-breadcrumb-item>热门搜索</el-breadcrumb-item>
+				<el-breadcrumb-item :to="{ path: '/dashboard' }">Homepage</el-breadcrumb-item>
+				<el-breadcrumb-item>Manage Data</el-breadcrumb-item>
+				<el-breadcrumb-item>Keywords</el-breadcrumb-item>
 			</el-breadcrumb>
 			<div class="operation-nav">
 				<router-link to="/dashboard/keywords/add">
-					<el-button type="primary" icon="plus">Add New热门搜索</el-button>
+					<el-button type="primary" icon="plus">Add Keyword</el-button>
 				</router-link>
 			</div>
 		</div>
 		<div class="content-main">
 			<div class="filter-box">
 				<el-form :inline="true" :model="filterForm" class="demo-form-inline">
-					<el-form-item label="关键词">
-						<el-input v-model="filterForm.name" placeholder="搜索关键词"></el-input>
+					<el-form-item label="Keywords">
+						<el-input v-model="filterForm.name" placeholder="Search Keyword"></el-input>
 					</el-form-item>
 					<el-form-item>
-						<el-button type="primary" @click="onSubmitFilter">查询</el-button>
+						<el-button type="primary" @click="onSubmitFilter">Search</el-button>
 					</el-form-item>
 				</el-form>
 			</div>
@@ -27,7 +27,7 @@
 				<el-table :data="tableData" style="width: 100%" border stripe>
 					<el-table-column prop="id" label="ID" width="100px">
 					</el-table-column>
-					<el-table-column prop="keyword" label="关键词">
+					<el-table-column prop="keyword" label="Keywords">
 					</el-table-column>
 					<el-table-column prop="is_hot" label="is_hot">
 					</el-table-column>
@@ -79,8 +79,8 @@ export default {
 		},
 		handleRowDelete(index, row) {
 
-			this.$confirm('确定要Delete?', '提示', {
-				confirmButtonText: '确定',
+			this.$confirm('Confirm Delete?', 'Prompt', {
+				confirmButtonText: 'Confirm',
 				cancelButtonText: 'Cancel',
 				type: 'warning'
 			}).then(() => {
@@ -90,7 +90,7 @@ export default {
 					if (response.data.errno === 0) {
 						this.$message({
 							type: 'success',
-							message: 'Delete成功!'
+							message: 'Deleted Successfully!'
 						});
 
 						this.getList();

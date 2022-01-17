@@ -20,7 +20,7 @@
             // },
             endText: {
                 type: String,
-                default: '已结束'
+                default: 'Finished'
             },
             callback: {
                 type: Function,
