@@ -1,8 +1,9 @@
 {
   "name": "hioshop-admin",
-  "version": "0.0.0",
-  "author": "sligxl@163.com",
-  "description": "An electron-vue project",
+  "productName": "WineAndDine",
+  "version": "1.0.1",
+  "author": "Elisha Kingdom el@obrisk.com",
+  "description": "Admin Dashboard for the Wine-and-dine.cn Shop",
   "license": null,
   "main": "./dist/electron/main.js",
   "scripts": {
@@ -14,10 +15,14 @@
     "pack": "npm run pack:main && npm run pack:renderer",
     "pack:main": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.main.config.js",
     "pack:renderer": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.renderer.config.js",
-    "postinstall": ""
+    "postinstall": "",
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "make-mac": "electron-forge make --platform darwin"
   },
   "build": {
-    "productName": "hioshop-admin",
+    "productName": "WineAndDine",
     "appId": "org.simulatedgreg.electron-vue",
     "directories": {
       "output": "build"
@@ -55,6 +60,7 @@
     "bootstrap": "^3.4.1",
     "clipboard": "^2.0.4",
     "codemirror": "^5.49.0",
+    "electron-squirrel-startup": "^1.0.0",
     "element-ui": "^2.12.0",
     "font-awesome": "^4.7.0",
     "jquery": "^3.4.1",
@@ -73,6 +79,11 @@
     "vuex": "^2.5.0"
   },
   "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.63",
+    "@electron-forge/maker-deb": "^6.0.0-beta.63",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.63",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.63",
+    "@electron-forge/maker-zip": "^6.0.0-beta.63",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-plugin-transform-runtime": "^6.22.0",
@@ -88,7 +99,6 @@
     "del": "^2.2.1",
     "devtron": "^1.1.0",
     "electron": "^3.1.13",
-    "electron-builder": "^20.44.4",
     "electron-debug": "^1.5.0",
     "electron-devtools-installer": "^2.2.4",
     "extract-text-webpack-plugin": "^2.0.0-rc.3",
@@ -106,5 +116,34 @@
     "webpack": "^2.7.0",
     "webpack-dev-server": "^2.11.5",
     "webpack-hot-middleware": "^2.25.0"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {
+	"icon": "./static/icon"
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "hioshop_admin"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
   }
 }
