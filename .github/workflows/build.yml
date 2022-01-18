@@ -1,5 +1,9 @@
 name: Build
-on: [push, pull_request]
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   build_on_mac:
@@ -9,6 +13,7 @@ jobs:
     - uses: actions/setup-node@master
       with:
         node-version: 14
+        cache: 'npm'
     - name: install dependencies
       run: npm install
     - name: build
