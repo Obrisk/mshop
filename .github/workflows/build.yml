@@ -5,19 +5,20 @@ on:
   pull_request:
     branches: [ master ]
 
-defaults:
-  run:
-    working-directory: admin
-
 jobs:
   build_on_mac:
     runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: 'admin'
+
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-node@master
       with:
         node-version: 14
         cache: 'npm'
+        cache-dependency-path: '**/package-lock.json' #Get dependencies inside admin folder 
     - name: install dependencies
       run: npm install
     - name: build
