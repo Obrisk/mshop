@@ -1,7 +1,7 @@
 {
   "name": "hioshop-admin",
   "productName": "WineAndDine",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Elisha Kingdom el@obrisk.com",
   "description": "Admin Dashboard for the Wine-and-dine.cn Shop",
   "license": null,
@@ -19,6 +19,7 @@
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
+    "publish": "electron-forge publish",
     "make-mac": "electron-forge make --platform darwin"
   },
   "build": {
