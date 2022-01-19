@@ -5,7 +5,7 @@
   "author": "Elisha Kingdom el@obrisk.com",
   "description": "Admin Dashboard for the Wine-and-dine.cn Shop",
   "license": null,
-  "main": ".src/main/index.js",
+  "main": "src/main/index.js",
   "scripts": {
     "build": "node .electron-vue/build.js && electron-builder",
     "build:dir": "node .electron-vue/build.js && electron-builder --dir",
